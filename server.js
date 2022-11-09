@@ -40,19 +40,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 process.env.APIkey
-app.get('/getnews', function(req, res) {
+app.get('/tester', function(req, res) {
   // var qParams = [];
   // for (var p in req.query) {
   //   qParams.push({'name':p, 'value':req.query[p]})
   //   }http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=XXXXXXXXXXXXXXXXXXXXXXX&steamids=76561197960435530
               
-    var url = ''
+    var url = 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key='+process.env.APIkey+'&steamid=76561198134108288&format=json'
     request(url, function(err, response, body) {
       if(!err && response.statusCode < 400) {
         console.log(body);
         res.json(body);
-        const userBlogs =  JSON.parse(body)
-        console.log(userBlogs.games)
+        const userRecentlyPlayed =  JSON.parse(body)
+        // console.log(userRecentlyPlayed)
+        console.log(userRecentlyPlayed.response.games[0].appid)
+        console.log(userRecentlyPlayed.response.games[0].name)
+        console.log(userRecentlyPlayed.response.games[0].playtime_forever)
       }
     });	
   }); 
