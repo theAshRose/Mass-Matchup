@@ -16,13 +16,13 @@ User.belongsToMany(User, {
 
 User.belongsToMany(User, {
     through: FriendReq,
-    foreignKey: "friend_id",
-    as: "link_id"
+    foreignKey: "friend_id_req",
+    as: "link_id_req"
 });
 
 User.belongsToMany(User, {
     through: FriendReq,
-    foreignKey: "link_id",
-    as: "friend_id"
+    foreignKey: "link_id_req",
+    as: "friend_id_req"
 });
 module.exports = { Friend, User, FriendReq };
