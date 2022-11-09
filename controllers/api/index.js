@@ -2,6 +2,6 @@ const router = require("express").Router();
 
 const userRoutes = require("./login.js");
 
-router.use("/login", userRoutes);
+router.use("/", userRoutes);
 
 module.exports = router;
