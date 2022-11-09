@@ -8,9 +8,10 @@ const { parse } = require("handlebars");
 
 let temp1;
 let temp2;
+let temp3
 let newsArray = [];
 let newsPerGame = []
-let start; 
+let start;
 let games
 router.get('/', async (req, res) => {
     if (!req.session.loggedIn) {
@@ -24,6 +25,7 @@ router.get('/', async (req, res) => {
             })
             temp1;
             temp2;
+            temp3;
             newsArray = [];
             newsPerGame = []
             const user = userData.get({ plain: true });
@@ -68,9 +70,9 @@ router.get('/', async (req, res) => {
                             }
                             // console.log(newsArray[0].appnews.newsitems[0].title) title of article
                             // res.send(newsArray[0].appnews.newsitems[0].title)
-                            
-                            
-                            console.log("START!!!"+newsPerGame+"END!!!!")
+
+
+                            console.log("START!!!" + newsPerGame + "END!!!!")
                             console.log(games.length)
                             return newsPerGame
                         }
@@ -78,10 +80,26 @@ router.get('/', async (req, res) => {
                         console.log(start)
                         start = start + 1
                         if (start < games.length) {
-                            
+
                             getNews()
                         } else {
-                            res.send(content)
+                            rp('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.APIkey + '&steamids=' + steam, async function (err, response, body) {
+                                
+                                temp3 = JSON.parse(body)
+                                let userInfo = temp3.response.players[0]
+                                const userSummary = await temp3
+                                console.log(temp3.response.players[0].personaname + "USER DATA HERE")
+                                return(userInfo)
+                            }).then(function (userContent) {
+                                res.render('dashboard',
+                                {
+                                    userContent,
+                                    content,
+                                    games,
+                                    loggedIn: req.session.loggedIn
+                                })
+                            }
+                            )
                         }
                     })
                 }
