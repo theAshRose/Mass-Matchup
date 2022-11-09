@@ -1,6 +1,6 @@
 const User = require("./User");
 const Friend = require("./Friend");
-
+const FriendReq = require("./FriendReq");
 
 User.belongsToMany(User, {
     through: Friend,
@@ -14,4 +14,15 @@ User.belongsToMany(User, {
     as: "friend_id"
 });
 
-module.exports = { Friend, User };
+User.belongsToMany(User, {
+    through: FriendReq,
+    foreignKey: "friend_id_req",
+    as: "link_id_req"
+});
+
+User.belongsToMany(User, {
+    through: FriendReq,
+    foreignKey: "link_id_req",
+    as: "friend_id_req"
+});
+module.exports = { Friend, User, FriendReq };
