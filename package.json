@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "seed": "node seeds/index.js",
-    "develop":"nodemon server.js"
+    "develop": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.20",
     "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "sequelize": "^6.3.5"
   },
   "repository": {
