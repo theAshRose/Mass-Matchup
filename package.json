@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seeds/index.js"
+    "seed": "node seeds/index.js",
+    "develop":"nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,10 +20,10 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
     "mysql2": "^2.2.5",
+    "nodemon": "^2.0.20",
     "request": "^2.88.2",
     "sequelize": "^6.3.5"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theDomConrad/project2group12.git"
