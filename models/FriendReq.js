@@ -11,7 +11,7 @@ FriendReq.init(
         primaryKey: true,
         autoIncrement: true,
       },
-      friend_id: {
+      friend_id_req: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -19,7 +19,7 @@ FriendReq.init(
           key: "id",
         },
       },
-      link_id: {
+      link_id_req: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -33,7 +33,7 @@ FriendReq.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "friend",
+    modelName: "friendReq",
 })
 
 module.exports = FriendReq;
