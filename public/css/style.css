@@ -10,18 +10,22 @@ header {
     height: 150px;
 }
 
-.card-header {
-    color: var(--light);
+.card {
+    background-color: transparent;
 }
 
-.card-body {
-    background-color: var(--light);
+.card-title,
+.card-text { 
+    text-shadow:
+  0 0 5px #0161E8, 0 0 10px #0161E8,
+  0 0 20px #0161E8, 0 0 40px #0161E8;
+    color: white;
 }
 
-/* .login {
-    background-image: url(../../assets/logobg.png);
-    
-} */
+body {
+    background-image: url(../images/reworkedbg.png);
+    background-position: center center;
+}
 
 .text-primary {
     font-family: 'Press Start 2P';
