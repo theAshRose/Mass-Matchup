@@ -14,6 +14,7 @@ header {
     color: var(--light);
 }
 
+
 .steam-user-image {
     height: 184px;
     width: 184px;
@@ -33,9 +34,6 @@ nav {
     }
 }
 
-.logo {
-    width: 
-}
 
 /* Color Theme Swatches in Hex */
 .Synthwave-1-hex { color: #00F1FF; }
