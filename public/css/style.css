@@ -1,0 +1,19 @@
+:root {
+    --light: aliceblue;
+    --dark: darkslateblue;
+    --tertiary: slateblue;
+    --sunset-yellow: #ffd319;
+    --sunset-orange: #ff901f;
+}
+
+header {
+    height: 150px;
+}
+
+.card-header {
+    color: var(--light);
+}
+
+.card-body {
+    background-color: var(--light);
+}
