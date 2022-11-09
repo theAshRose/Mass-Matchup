@@ -17,3 +17,20 @@ header {
 .card-body {
     background-color: var(--light);
 }
+
+/* .login {
+    background-image: url(../../assets/logobg.png);
+    
+} */
+
+.text-primary {
+    font-family: 'Press Start 2P';
+    background: linear-gradient(#0161E8, #ff5bbe);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+
+}
+
+.card-title {
+    font-family: 'Press Start 2P';
+}
