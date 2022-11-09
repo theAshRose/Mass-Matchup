@@ -1,0 +1,40 @@
+:root {
+    --light: aliceblue;
+    --dark: darkslateblue;
+    --tertiary: slateblue;
+    --sunset-yellow: #ffd319;
+    --sunset-orange: #ff901f;
+}
+
+header {
+    height: 150px;
+}
+
+.card-header {
+    color: var(--light);
+}
+
+.card-body {
+    background-color: var(--light);
+}
+
+/* Color Theme Swatches in Hex */
+.Synthwave-1-hex { color: #00F1FF; }
+.Synthwave-2-hex { color: #0161E8; }
+.Synthwave-3-hex { color: #290CFF; }
+.Synthwave-4-hex { color: #9B00E8; }
+.Synthwave-5-hex { color: #FF019A; }
+
+/* Color Theme Swatches in RGBA */
+.Synthwave-1-rgba { color: rgba(0, 240, 255, 1); }
+.Synthwave-2-rgba { color: rgba(1, 96, 232, 1); }
+.Synthwave-3-rgba { color: rgba(40, 11, 255, 1); }
+.Synthwave-4-rgba { color: rgba(155, 0, 232, 1); }
+.Synthwave-5-rgba { color: rgba(255, 1, 154, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Synthwave-1-hsla { color: hsla(183, 100, 50, 1); }
+.Synthwave-2-hsla { color: hsla(215, 98, 45, 1); }
+.Synthwave-3-hsla { color: hsla(247, 100, 52, 1); }
+.Synthwave-4-hsla { color: hsla(280, 100, 45, 1); }
+.Synthwave-5-hsla { color: hsla(323, 100, 50, 1); }
