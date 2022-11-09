@@ -14,8 +14,23 @@ header {
     color: var(--light);
 }
 
-.card-body {
-    background-color: var(--light);
+.steam-user-image {
+    height: 184px;
+    width: 184px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+nav {
+    font-size: 28px;
+}
+
+@media (max-width: 992px) {
+    nav {
+        font-size: 26px;
+    }
 }
 
 .logo {
