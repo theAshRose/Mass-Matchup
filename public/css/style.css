@@ -34,3 +34,8 @@ header {
 .card-title {
     font-family: 'Press Start 2P';
 }
+
+.user-search-image {
+    height: 100px;
+    width: 100px;
+}

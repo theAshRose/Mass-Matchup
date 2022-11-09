@@ -34,6 +34,10 @@ nav {
     }
 }
 
+.user-search-image {
+    height: 100px;
+    width: 100px;
+}
 
 /* Color Theme Swatches in Hex */
 .Synthwave-1-hex { color: #00F1FF; }
