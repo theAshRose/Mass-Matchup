@@ -105,6 +105,11 @@ body {
     
 }
 
+.sidebar-user-image {
+    height: 45px;
+    width: 45px;
+}
+
 @media (max-width: 992px) {
     nav {
         font-size: 26px;
