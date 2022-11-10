@@ -80,9 +80,21 @@
                         <div class="card-body">
                             <div class="container-fluid">
                                 <div class="row">
-                                    {{!-- {{#each userResults}}
-                                    {{>userSearch}}
-                                    {{/each}}    --}}
+                                    {{#each userResults}}
+                                    <div class="col-lg-6 col-xl-4 mb-3">
+                                        <div class="card shadow-lg d-flex flex-row" data-user-id="{{id}}">
+                                            <img
+                                            src=""
+                                            class="img-fluid user-search-image rounded"
+                                            alt="..."
+                                            />
+                                            <div class="card-body p-2">
+                                            <p class="card-text mb-0">Username:</p>
+                                            <p class="card-text">{{username}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}   
                                     
                                 </div>
                             </div>
@@ -94,6 +106,6 @@
   
 
    
-    <script src="./js/user-search.js"></script>
+    <script src="/js/user-search.js"></script>
 </body>
 </html>
