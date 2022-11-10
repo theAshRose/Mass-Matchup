@@ -79,8 +79,17 @@ body {
     color:white;
 }
 
-.card-title {
+.card-title,
+.news-title,
+.dash-line {
     font-family: 'Press Start 2P';
+}
+
+.dash-line {
+    font-size: 12px;
+    color: white;
+    text-shadow:
+    0 0 20px #580084, 0 0 40px #580084;
 }
 
 .user-search-image {
@@ -99,7 +108,8 @@ body {
 
 .news-title {
     text-shadow:
-    0 0 5px #aa00ff, 0 0 10px #aa00ff;
+    0 0 5px #580084, 0 0 10px #580084,
+    0 0 20px #580084, 0 0 40px #580084;
     color: #ffffff;
     font-size: 15px;
     
