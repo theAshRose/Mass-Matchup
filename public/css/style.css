@@ -10,22 +10,61 @@ header {
     height: 150px;
 }
 
-.card {
-    background-color: transparent;
+/*background image*/
+body {
+    background-image: url(../images/newestbg.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-.card-title,
-.card-text { 
+/*card transparency*/
+.card {
+    background-color: transparent;
+    border: 1px solid #9B00E8;
+  box-shadow: 0 0 20px #9B00E8;
+}
+
+
+/*Login animation*/ 
+@keyframes flicker {
+    from {
+      text-shadow:
+      0 0 5px #00dcff,0 0 10px #00dcff,
+      0 0 20px #00dcff, 0 0 40px #00dcff;
+    }
+    to {
+      text-shadow:
+      0 0 5px #09889c, 0 0 10px #09889c,
+      0 0 20px #09889c, 0 0 40px #09889c;
+    }
+  }
+  .login { animation: flicker 1s ease-in-out infinite alternate; 
+}
+
+/*login form*/
+.login,
+.login-text { 
     text-shadow:
   0 0 5px #0161E8, 0 0 10px #0161E8,
   0 0 20px #0161E8, 0 0 40px #0161E8;
     color: white;
 }
 
-body {
-    background-image: url(../images/reworkedbg.png);
-    background-position: center center;
+/*dashboard styling*/
+
+.card-title {
+    text-shadow:
+    0 0 5px #ab02ff, 0 0 10px #ab02ff,
+    0 0 20px #ab02ff, 0 0 40px #ab02ff;
+      color: rgb(105, 50, 161);
 }
+
+.card-text {
+    color:white;
+}
+
 
 .text-primary {
     font-family: 'Press Start 2P';
