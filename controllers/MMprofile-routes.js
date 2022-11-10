@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
                 // console.log(parsedData.response.games[0].appid + "first.then HERE");
                 games = parsedData.response.games
                 
-                console.log(games[0].name+"line 49")
+                console.log(JSON.stringify(games[0])+"line 49")
                 // var url = ;
 
                 function getNews() {
