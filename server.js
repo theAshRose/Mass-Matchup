@@ -41,7 +41,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 process.env.APIkey
 
-
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
