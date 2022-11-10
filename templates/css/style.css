@@ -50,6 +50,11 @@ nav {
     width: 45px;
 }
 
+#logo-image {
+    height: 184px;
+    width: 184px;
+}
+
 @media (max-width: 992px) {
     nav {
         font-size: 26px;
