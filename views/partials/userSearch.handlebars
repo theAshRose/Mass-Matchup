@@ -1,0 +1,20 @@
+<div class="card shadow-lg d-flex flex-row">
+  <img
+    src="{{response.players.[0].avatarfull}}"
+    class="img-fluid user-search-image rounded"
+    alt="..."
+  />
+  <div class="card-body p-2">
+    <p class="card-text mb-0">Username:</p>
+    <p class="card-text">{{response.players.[0].personaname}}</p>
+  </div>
+</div>
+
+
+{{response.players.[0].personaname}}
+{{response.players.[0].avatarfull}}
+
+
+{{#each userResults}}
+                                    {{>userSearch}}
+                                    {{/each}}   

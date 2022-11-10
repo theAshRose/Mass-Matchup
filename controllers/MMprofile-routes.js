@@ -115,5 +115,21 @@ router.get('/', async (req, res) => {
 })
 
 
+router.get('/search', async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        try {
+            res.render('search',
+            {
+                loggedIn: req.session.loggedIn
+            })
+        } catch (err) {
+            console.log(err)
+            res.status(500).json(err)
+        }
+    }
+
+})
 
 module.exports = router;

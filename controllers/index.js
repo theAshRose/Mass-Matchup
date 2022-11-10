@@ -4,7 +4,10 @@ const apiRoutes = require("./api");
 const dash = require("./MMprofile-routes.js");
 const friendRoutes = require("./friend-routes");
 const login = require("./login");
+const results = require("./user-search");
 
+
+router.use("/user", results);
 
 router.use("/", dash);
 router.use("/api", apiRoutes);
