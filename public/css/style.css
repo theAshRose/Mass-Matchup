@@ -43,3 +43,17 @@ body {
     height: 100px;
     width: 100px;
 }
+
+#stat-dropdown {
+    z-index: 2;
+}
+
+#graph-box {
+    height: 400px;
+}
+
+@media (max-width: 992px) {
+    nav {
+        font-size: 26px;
+    }
+}
