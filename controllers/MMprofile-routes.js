@@ -45,32 +45,34 @@ router.get('/', async (req, res) => {
                 let parsedData = JSON.parse(playedData)
                 // console.log(parsedData.response.games[0].appid + "first.then HERE");
                 games = parsedData.response.games
-
-
+                
+                console.log(JSON.stringify(games[0])+"line 49")
                 // var url = ;
 
                 function getNews() {
                     rp('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=' + parsedData.response.games[start].appid + '&count=3&maxlength=300&format=json)', async function (err, response, body) {
                         if (!err && response.statusCode < 400) {
                             temp2 = JSON.parse(body)
-                            // console.log(temp2)
-                            // res.send(temp1)
+                            
                             const recentlyPlayedNews = await temp2
-                            // console.log(temp2.appnews.newsitems[0] + "LOOK HERE")
+                            
                             newsArray = [];
+                            newsTemp = []
                             newsArray.push(recentlyPlayedNews)
                             let parsedArray = JSON.stringify(newsArray)
-                            // console.log(parsedArray + "news ARRAY HERE")
-                            // console.log(newsArray[0].appnews.newsitems[0].title)
-                            // console.log(newsArray[0].appnews.newsitems[0].url)
-                            // console.log(newsArray[0].appnews.newsitems[0].contents)
-                            for (i = 0; i < 3; i++) {
-                                newsPerGame.push(newsArray[0].appnews.newsitems[i])
-                                // newsPerGame.push(newsArray[0].appnews.newsitems[i].url)
-                            }
-                            // console.log(newsArray[0].appnews.newsitems[0].title) title of article
-                            // res.send(newsArray[0].appnews.newsitems[0].title)
+                            
 
+                            for (i = 0; i < 3; i++) {
+                                newsTemp.push(newsArray[0].appnews.newsitems[i])
+                                
+                               
+                            }
+                            let gameNews = {
+                                name : games[start].name,
+                                news : newsTemp
+                            }
+                            newsPerGame.push(gameNews)
+                           
 
                             console.log("START!!!" + newsPerGame + "END!!!!")
                             console.log(games.length)
@@ -79,7 +81,7 @@ router.get('/', async (req, res) => {
                     }).then(function (content) {
                         console.log(start)
                         start = start + 1
-                        if (start < games.length) {
+                        if (start < games.length) { 
 
                             getNews()
                         } else {
@@ -91,10 +93,12 @@ router.get('/', async (req, res) => {
                                 console.log(temp3.response.players[0].personaname + "USER DATA HERE")
                                 return(userInfo)
                             }).then(function (userContent) {
+                                let testerrr = JSON.stringify(newsPerGame[0].news[0])
+                                console.log(testerrr+"MY STRING")
                                 res.render('dashboard',
                                 {
                                     userContent,
-                                    content,
+                                    newsPerGame,
                                     games,
                                     loggedIn: req.session.loggedIn
                                 })

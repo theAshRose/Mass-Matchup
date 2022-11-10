@@ -54,6 +54,7 @@ router.post("/signup", async (req, res) => {
     const dbUserData = await User.create({
       username: req.body.username,
       password: req.body.password,
+      steam_id: req.body.steam_id,
     });
     req.session.user = dbUserData.id;
     req.session.save(() => {

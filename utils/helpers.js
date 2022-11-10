@@ -5,5 +5,10 @@ const withAuth = (req, res, next) => {
       next();
     }
   };
+
+  function to_hours (min) {
+    let hours = min / 60
+    return Math.trunc(hour);
+  }
   
-  module.exports = withAuth;
+  module.exports = {to_hours, withAuth};
