@@ -74,12 +74,12 @@ router.get('/', async (req, res) => {
                             newsPerGame.push(gameNews)
                            
 
-                            console.log("START!!!" + newsPerGame + "END!!!!")
-                            console.log(games.length)
+                            // console.log("START!!!" + newsPerGame + "END!!!!")
+                            // console.log(games.length)
                             return newsPerGame
                         }
                     }).then(function (content) {
-                        console.log(start)
+                        // console.log(start)
                         start = start + 1
                         if (start < games.length) { 
 
@@ -90,7 +90,7 @@ router.get('/', async (req, res) => {
                                 temp3 = JSON.parse(body)
                                 let userInfo = temp3.response.players[0]
                                 const userSummary = await temp3
-                                console.log(temp3.response.players[0].personaname + "USER DATA HERE")
+                                // console.log(temp3.response.players[0].personaname + "USER DATA HERE")
                                 return(userInfo)
                             }).then(function (userContent) {
                                 res.render('dashboard',
@@ -115,5 +115,38 @@ router.get('/', async (req, res) => {
 })
 
 
+router.get('/search', async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        try {
+            res.render('search',
+            {
+                loggedIn: req.session.loggedIn
+            })
+        } catch (err) {
+            console.log(err)
+            res.status(500).json(err)
+        }
+    }
+
+})
+
+// router.get('/search/results', async (req, res) => {
+//     if (!req.session.loggedIn) {
+//         res.redirect("/login");
+//     } else {
+//         try {
+//             res.render('search2',
+//             {
+//                 loggedIn: req.session.loggedIn
+//             })
+//         } catch (err) {
+//             console.log(err)
+//             res.status(500).json(err)
+//         }
+//     }
+
+// })
 
 module.exports = router;

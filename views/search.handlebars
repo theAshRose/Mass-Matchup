@@ -1,0 +1,111 @@
+       <div class="container-fluid">
+            <div class="row d-flex flex-row-reverse">
+                <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+                    <div class="card shadow-lg p-0 d-flex flex-row justify-content-between align-items-center h-100">
+                        <h1 class="m-3 m-md-5">Logo</h1>
+                        <nav>
+                            <ul class="p-0 m-0">
+                                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Home</li>
+                                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Dashboard</li>
+                                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Logout</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
+                    <div class="card shadow-lg p-0 d-flex flex-row">
+                        <img src="https://avatars.akamai.steamstatic.com/9684c19be46eb8889669c0c791ddcb5c509838f6_full.jpg" class="img-fluid steam-user-image rounded" alt="...">
+                        <div class="card-body d-flex flex-column justify-content-between" data-user-id="1">
+                            <div>
+                                <p class="card-text mb-1">Username:</p>
+                                <p class="card-text">Reverend Richard Wayne Gary Wayne</p>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile settings
+                                </button>
+                                <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Friends</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
+                    <div class="card shadow-lg mb-2">
+                        <div class="card-header text-dark">
+                            <h4>User Search</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="username-steamid-input-form" class="p-2">
+                                <label for="username-steamid-input" class="form-label card-text">Username: </label>
+                                <input type="text" class="form-control shadow" id="username-input">
+                                <div id="button-row" class="d-flex justify-content-between">
+                                    <button class="btn btn-primary shadow mt-3"
+                                        id="search-user-button">Search </button>
+                                    <button class="btn btn-primary shadow mt-3"
+                                        id="search-all-users-button" type="button">Search All</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg p-0 d-flex flex-column">
+                        <div class="d-flex flex-row">
+                        <img src="https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg" class="img-fluid steam-user-image rounded" alt="...">
+                        <div class="card-body d-flex flex-column justify-content-between" data-user-id="3">
+                            <div>
+                                <p class="card-text mb-1">Username:</p>
+                                <p class="card-text">Chairman Miao</p>
+                            </div>
+                        </div>
+                        </div>
+                        <div id="user-search-button-bar" class="d-flex justify-content-between m-2">
+                            <button class="btn btn-sm btn-primary shadow"
+                                id="add-friend-button" type="button">Add Friend</button>
+                            <button class="btn btn-sm btn-primary shadow"
+                                id="recently-played-button" type="button">Recently Played</button>
+                            <button class="btn btn-sm btn-primary shadow"
+                                id="compare-stats-button" type="button">Compare Stats</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+                    <div class="card shadow-lg">
+                        <div class="card-header">
+                            <h2 class="card-title text-dark">Search Results</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    {{#each userResults}}
+                                    <div class="col-lg-6 col-xl-4 mb-3">
+                                        <div class="card shadow-lg d-flex flex-row" data-user-id="{{id}}">
+                                            <img
+                                            src=""
+                                            class="img-fluid user-search-image rounded"
+                                            alt="..."
+                                            />
+                                            <div class="card-body p-2">
+                                            <p class="card-text mb-0">Username:</p>
+                                            <p class="card-text">{{username}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}   
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+
+   
+    <script src="/js/user-search.js"></script>
+</body>
+</html>
