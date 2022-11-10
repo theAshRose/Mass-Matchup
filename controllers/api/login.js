@@ -32,17 +32,17 @@ router.post("/login", async (req, res) => {
         .status(200)
         .json({ user: dbUserData, message: "You are now logged in!" });
     });
-    // res.redirect('/dashboard')
+    // res.redirect('/')
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.post("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
-      res.status(204).end();
+      res.status(204).redirect('/');
     });
   } else {
     res.status(404).end();

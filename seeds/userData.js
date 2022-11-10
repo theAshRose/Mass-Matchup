@@ -12,8 +12,8 @@ const UserData = [{
   },
   {
     username: "davinchi",
-    password: "trolip1010",
-    steam_id: '76561198134108288'
+    password: "davinchi",
+    steam_id: '76561197961411971'
   },
   {
     username: "teslaMan",
@@ -24,6 +24,11 @@ const UserData = [{
     username: "Angel",
     password: "vengence84",
     steam_id: '76561198259999820'
+  },
+  {
+    username: "Olo",
+    password: "killCSTG",
+    steam_id: '76561198006651484'
   },]
 
 

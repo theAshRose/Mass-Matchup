@@ -10,4 +10,5 @@ router.use("/", dash);
 router.use("/api", apiRoutes);
 router.use("/friends", friendRoutes);
 router.use("/login", login);
+//          /login/signup for signup
 module.exports = router;
