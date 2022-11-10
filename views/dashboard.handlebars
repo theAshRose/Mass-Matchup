@@ -15,7 +15,7 @@
             <div class="row d-flex flex-row-reverse">
                 <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
                     <div class="card shadow-lg p-0 d-flex flex-row justify-content-between align-items-center h-100">
-                        <h1 class="m-3 m-md-5">Logo</h1>
+                        <img src="/images/GIRTHCHECKER.png" class="img-fluid rounded" alt="..." id="logo-image">
                         <nav>
                             <ul class="p-0 m-0">
                                 <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Home</li>
@@ -39,7 +39,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Friends</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#friendsSidebar" role="button" aria-controls="friendsSidebar">Friends</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -50,9 +50,9 @@
                 <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
                     <div class="card shadow-lg">
                         <div class="card-header">
-                            <h4 class="card-title text-dark m-0">Recently Played Games</h4>
+                            <h4 class="dash-title m-0">Recently Played Games</h4>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body ">
                             {{#each games}}
                             {{>recentGames}}
                             {{/each}}
@@ -63,7 +63,7 @@
                 <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
                     <div class="card shadow-lg">
                         <div class="card-header">
-                            <h4 class="card-title text-dark m-0">Game News</h4>
+                            <h4 class=" dash-title m-0">Game News</h4>
                         </div>
                         <div class="card-body">
                             {{#each newsPerGame}}
@@ -78,6 +78,42 @@
                                 </div>
                             </div>
                             {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="friendsSidebar" aria-labelledby="friendsSidebarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="friendsSidebarLabel">Friends</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body container-fluid mt-0">
+                <div class="row">
+                    <div class="card p-0 mb-1">
+                        <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-1" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="https://technical.ly/wp-content/uploads/2013/11/EdgarAllanBro.jpg" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
+                            <p class="card-text me-2">Edgar Allen Bro</p>
+                        </button>
+                        <div class="collapse" id="sidebar-user-id-1">
+                            <div class="card-body p-1 pt-2 d-flex justify-content-between">
+                                <button type="button" class="btn btn-primary btn-sm">See stats</button>
+                                <button type="button" class="btn btn-success btn-sm">Compare stats</button>
+                                <button type="button" class="btn btn-danger btn-sm">Remove Friend</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-0 mb-1">
+                        <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-2" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
+                            <p class="card-text me-2">Chairman Miao</p>
+                        </button>
+                        <div class="collapse" id="sidebar-user-id-2">
+                            <div class="card-body p-1 pt-2 d-flex justify-content-between">
+                                <button type="button" class="btn btn-primary btn-sm">See stats</button>
+                                <button type="button" class="btn btn-success btn-sm">Compare stats</button>
+                                <button type="button" class="btn btn-danger btn-sm">Remove Friend</button>
+                            </div>
                         </div>
                     </div>
                 </div>

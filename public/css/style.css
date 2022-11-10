@@ -52,26 +52,31 @@ body {
     color: white;
 }
 
-/*dashboard styling*/
-
-.card-title {
-    text-shadow:
-    0 0 5px #ab02ff, 0 0 10px #ab02ff,
-    0 0 20px #ab02ff, 0 0 40px #ab02ff;
-      color: rgb(105, 50, 161);
-}
-
-.card-text {
-    color:white;
-}
-
-
 .text-primary {
     font-family: 'Press Start 2P';
     background: linear-gradient(#0161E8, #ff5bbe);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+}
 
+
+/*dashboard styling*/
+
+.dash-title {
+    text-shadow:
+    0 0 5px #aa00ff, 0 0 10px #aa00ff,
+    0 0 20px #aa00ff, 0 0 40px #aa00ff;
+      color: rgb(254, 252, 255);
+    font-family: 'Press Start 2P'
+}
+
+/* .logo {
+    height: 200px;
+    width: auto;
+} */
+
+.card-text {
+    color:white;
 }
 
 .card-title {
@@ -89,6 +94,25 @@ body {
 
 #graph-box {
     height: 400px;
+}
+
+
+.news-title {
+    text-shadow:
+    0 0 5px #aa00ff, 0 0 10px #aa00ff;
+    color: #ffffff;
+    font-size: 15px;
+    
+}
+
+.sidebar-user-image {
+    height: 45px;
+    width: 45px;
+}
+
+#logo-image {
+    height: 184px;
+    width: 184px;
 }
 
 @media (max-width: 992px) {
