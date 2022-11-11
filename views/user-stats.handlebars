@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/normalize.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="./css/style.css" rel="stylesheet" />
+    <title>Mass Matchup</title>
+</head>
+
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="row d-flex flex-row-reverse">
+                <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+                    <div class="card shadow-lg p-0 d-flex flex-row justify-content-between align-items-center h-100">
+                        <h1 class="m-3 m-md-5">Logo</h1>
+                        <nav>
+                            <ul class="p-0 m-0">
+                                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Home</li>
+                                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Dashboard</li>
+                                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start">Logout</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
+                    <div class="card shadow-lg p-0 d-flex flex-row">
+                        <img src="https://avatars.akamai.steamstatic.com/9684c19be46eb8889669c0c791ddcb5c509838f6_full.jpg"
+                            class="img-fluid steam-user-image rounded" alt="...">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <p class="card-text mb-1">Username:</p>
+                                <p class="card-text">Reverend Richard Wayne Gary Wayne</p>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Profile settings
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Friends</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
+                    <div class="card shadow-lg">
+                        <div class="card-header">
+                            <h4 class="card-title text-dark m-0">Owned Games: </h4>
+                        </div>
+                        <div class="card-body">
+                            {{#each Data}}
+                            {{>ownedGamesS}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="card shadow-lg mt-2">
+                        <div class="card-header">
+                            <h4 class="card-title text-dark m-0">Recently Played Games</h4>
+                        </div>
+                        <div class="card-body">
+                            <button
+                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://avatars.akamai.steamstatic.com/ac3ebd0dd8f4244545ca18091b23f60de42d7ade.jpg"
+                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
+                                    <p class="card-text">Captain of Industry</p>
+                                </div>
+                                <p class="card-text me-2">3014 minutes</p>
+                            </button>
+                            <button
+                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://avatars.akamai.steamstatic.com/399859f8bdaeef066f14029d5f1910960545fbd9.jpg"
+                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
+                                    <p class="card-text">Conan Exiles</p>
+                                </div>
+                                <p class="card-text me-2">600 minutes</p>
+                            </button>
+                            <button
+                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://avatars.akamai.steamstatic.com/9b9e1838838c21ee443359efe30b6a56cf0531dd.jpg"
+                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
+                                    <p class="card-text">Baba Is You</p>
+                                </div>
+                                <p class="card-text me-2">586 minutes</p>
+                            </button>
+                            <button
+                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://avatars.akamai.steamstatic.com/3cf19bc8fa3bc953d68a9b46b0a7555839188da0.jpg"
+                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
+                                    <p class="card-text">FINAL FANTASY VII REMAKE INTERGRADE</p>
+                                </div>
+                                <p class="card-text me-2">705 hours</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+                    <div class="card shadow-lg" id="stat-results-display-box">
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <div class="row d-flex flex-row justify-content-between">
+                                    <div class="col-xl-4 mb-3 m-xl-0 p-0">
+                                        <input type="text" class="form-control" id="manual-search-input"
+                                            placeholder="Manual search">
+                                    </div>
+                                    <h4 class="col-auto text-center">Showing results for Left 4 Dead 2</h4>
+                                </div>
+                            </div>
+                            <ul class="list-group col-12 mt-3">
+                                <li class="list-group-item">Stat.GamesPlayed.Total: 1481</li>
+                                <li class="list-group-item">Stat.FinaleFinished.Total: 488</li>
+                                <li class="list-group-item">Stat.TotalPlayTime.Total: 3258985</li>
+                                <li class="list-group-item">Stat.InfectedKilled.Total: 367064</li>
+                                <li class="list-group-item">Stat.KitsUsed.Total: 3267</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+   
+</body>
+
+</html>
