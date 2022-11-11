@@ -34,8 +34,8 @@ router.get('/', async (req, res) => {
                     //"playtime_mac_forever":0,"playtime_linux_forever":0,
                     //"rtime_last_played":1513845169}
                     // gamesData = JSON.stringify(parsedGames.response.games[0])
-                    
-                    
+
+
                     return gamesData
                 }
             }).then(function (Data1) {
@@ -61,50 +61,127 @@ router.get('/', async (req, res) => {
     }
 });
 /////////////////////////////////////////////////////////////////////////
-router.post(`/ownedGameStats`, async (req, res) => {
+router.post('/ownedGameStats', async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
-        try { 
+        try {
+            req.session.appid = req.body.appId
+            res.send('yes')
+            // const userData = await User.findByPk(req.session.user, {
+            //     where: {
+            //         id: req.params.id
+            //     }
+
+            // })
+
+            // const user = userData.get({ plain: true });
+            // const steam = user.steam_id
+            // var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.body.appId + '&key=' + process.env.APIkey + '&steamid=' + steam + ''
+            // rp(url, async function (err, res, body) {
+            //     if (!err && res.statusCode < 400) {
+            //         console.log(body)
+            //         let elparso = JSON.parse(body)
+            //         let temp1 = Object.keys(elparso)
+            //         let no = "elparso." + temp1[0]
+            //         let temp2 = eval(no)
+            //         let temp3 = Object.keys(temp2)
+            //         let no2 = 'temp2.' + temp3[2]
+            //         let temp4 = eval(no2)
+            //         let iAmAwesome = []
+            //         for (i = 0; i < temp4.length; i++) {
+            //             let noYeah = Object.values(temp4[i])
+            //             let temp69 = {
+            //                 [noYeah[0]]: Math.trunc(noYeah[1])
+            //             }
+            //             iAmAwesome.push(temp69)
+
+            //         }
+
+            //         console.log(iAmAwesome, "IM TEMP 4")
+            //     }
+            // })
+            // res.render('user-stats',
+            //     {
+            //         Data,
+            //         loggedIn: req.session.loggedIn
+            //     })
+
+        } catch (err) {
+            console.log(err)
+            res.status(500).json(err)
+        }
+    }
+});
+
+router.get('/ownedGameStats', async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
+        try {
             const userData = await User.findByPk(req.session.user, {
                 where: {
                     id: req.params.id
                 }
 
             })
-
+            console.log(req.session.appid)
             const user = userData.get({ plain: true });
-            const steam = user.steam_id           
-            var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid='+req.body.appId+'&key=' + process.env.APIkey + '&steamid='+ steam+''
+            const steam = user.steam_id
+            var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam + ''
             rp(url, async function (err, res, body) {
                 if (!err && res.statusCode < 400) {
-                   console.log(body)
-                   let elparso = JSON.parse(body)
-                   let temp1 = Object.keys(elparso)
-                   let no = "elparso."+temp1[0]
-                   let temp2 = eval(no)
-                   let temp3 = Object.keys(temp2)
-                   let no2 = 'temp2.'+temp3[2]
-                   let temp4 = eval(no2)
-                   let iAmAwesome = []
-                    for(i=0;i<temp4.length;i++){
+                    console.log(body)
+                    let elparso = JSON.parse(body)
+                    let temp1 = Object.keys(elparso)
+                    let no = "elparso." + temp1[0]
+                    let temp2 = eval(no)
+                    let temp3 = Object.keys(temp2)
+                    let no2 = 'temp2.' + temp3[2]
+                    let temp4 = eval(no2)
+                    let iAmAwesome = []
+                    for (i = 0; i < temp4.length; i++) {
                         let noYeah = Object.values(temp4[i])
-                            let temp69 = {
-                                [noYeah[0]]: Math.trunc(noYeah[1])
-                            }
-                            iAmAwesome.push(temp69)
-
+                        let temp69 = {
+                            name: noYeah[0],
+                            score: Math.trunc(noYeah[1])
+                        }
+                        iAmAwesome.push(temp69)
                     }
 
-                   console.log(iAmAwesome, "IM TEMP 4")
+
+                    console.log(iAmAwesome, "IM TEMP 4")
+                    return iAmAwesome
                 }
-            })
-                // res.render('user-stats',
-                //     {
-                //         Data,
-                //         loggedIn: req.session.loggedIn
-                //     })
-            
+            }).then(function (data1) {
+                let elparso = JSON.parse(data1)
+                let temp1 = Object.keys(elparso)
+                let no = "elparso." + temp1[0]
+                let temp2 = eval(no)
+                let temp3 = Object.keys(temp2)
+                let no2 = 'temp2.' + temp3[2]
+                let temp4 = eval(no2)
+                let iAmAwesome = []
+                for (i = 0; i < temp4.length; i++) {
+                    let noYeah = Object.values(temp4[i])
+                    let temp69 = {
+                        name: noYeah[0],
+                        score: Math.trunc(noYeah[1])
+                    }
+                    iAmAwesome.push(temp69)
+                }
+
+                let data = JSON.parse(data1)
+                console.log(iAmAwesome)
+                res.render('user-stats',
+                    {
+                        iAmAwesome,
+                        loggedIn: req.session.loggedIn
+                    }
+                )
+            });
+
+
         } catch (err) {
             console.log(err)
             res.status(500).json(err)
