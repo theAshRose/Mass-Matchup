@@ -1,0 +1,10 @@
+        <div class="offcanvas-header pb-1">
+            <h5 class="offcanvas-title" id="friendRequestsSidebarLabel">Friend Requests</h5>
+        </div>
+        <div class="container-fluid mt-0 mb-1">
+            <div class="row">
+                {{#each friendRequests}}
+                {{>friend-request }}
+                {{/each}}
+            </div>
+        </div>

@@ -4,7 +4,7 @@ require('dotenv').config();
 const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
-
+const getFriendsAndFriendRequests = require('../utils/middleware');
 
 let temp1;
 let temp2;
@@ -13,7 +13,7 @@ let newsArray = [];
 let newsPerGame = []
 let start;
 let games
-router.get('/', async (req, res) => {
+router.get('/', getFriendsAndFriendRequests, async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
@@ -129,9 +129,13 @@ router.get('/', async (req, res) => {
                             }).then(function (userContent) {
                                 
                                 let friends = friendNames.map(userObj=> userObj.get({plain : true}))
+
+                                console.log(res.locals.friendRequests);
+                                //console.log(res.locals.friends);
                              
                                 res.render('dashboard',
-                                {friends,
+                                {friends: res.locals.friends,
+                                    friendRequests: res.locals.friendRequests,
                                     temp3,
                                     newsPerGame,
                                     games,
