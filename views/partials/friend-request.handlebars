@@ -1,0 +1,14 @@
+                <div class="col-12 p-1">
+                    <div class="card p-0">
+                        <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#friend-req-id-{{friendReq.id}}" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="{{steam_avatar_full}}" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
+                            <p class="card-text friend-text me-2">{{username}}</p>
+                        </button>
+                        <div class="collapse" id="friend-req-id-{{friendReq.id}}">
+                            <div class="card-body p-1 pt-2 d-flex justify-content-between">
+                                <button type="button" class="btn btn-success btn-sm">Accept</button>
+                                <button type="button" class="btn btn-danger btn-sm">Deny</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
