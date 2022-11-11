@@ -45,7 +45,13 @@ router.get('/', async (req, res) => {
                 res.render('user-stats',
                     {
                         Data,
-                        loggedIn: req.session.loggedIn
+                        user: {
+                            loggedIn: req.session.loggedIn,
+                            username: req.session.username,
+                            steam_username: req.session.steam_username,
+                            steam_avatar_full: req.session.steam_avatar_full,
+                            profile_url: req.session.profile_url
+                        }
                     })
             })
         } catch (err) {

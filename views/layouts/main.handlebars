@@ -18,11 +18,11 @@
     <header class="d-flex justify-content-center align-items-center">
         <h1 class="text-primary">Welcome to Mass Matchup</h1>
     </header>
-    {{#if loggedIn}}
+    {{#if user.loggedIn}}
     <div class="container-fluid">
         <div class="row d-flex flex-row-reverse">
             {{>navbar}}
-            {{>user temp3.response.players.[0]}}
+            {{>user user}}
         </div>
     </div>
     {{/if}}
@@ -32,7 +32,7 @@
         {{{body}}}
     </main>
 
-    {{#if loggedIn}}
+    {{#if user.loggedIn}}
     <div class="offcanvas offcanvas-start" tabindex="-1" id="friendsSidebar" aria-labelledby="friendsSidebarLabel">
         <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         <div class="offcanvas-header pb-1">

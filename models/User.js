@@ -28,9 +28,21 @@ User.init(
       },
     },
     steam_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    steam_avatar_full: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    steam_username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    profile_url: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   },
   {
     hooks: {

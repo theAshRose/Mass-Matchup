@@ -25,8 +25,14 @@ router.post("/login", async (req, res) => {
       return;
     }
 
+    console.log(dbUserData.steam_avatar_full);
+
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.username = dbUserData.username;
+      req.session.steam_username = dbUserData.steam_username;
+      req.session.steam_avatar_full = dbUserData.steam_avatar_full;
+      req.session.profile_url = dbUserData.profile_url;
 
       res
         .status(200)
