@@ -28,10 +28,6 @@ async function getFriendsAndFriendRequests(req, res, next) {
                 model: User,
                 as: "link_id_req"
             },
-            {
-                model: User,
-                as: "friend_id_req"
-            }
         ]
     })
 
@@ -41,7 +37,7 @@ async function getFriendsAndFriendRequests(req, res, next) {
 
     res.locals.friends = friends;
 
-    const rawFriendRequests = [...userData.link_id_req, ...userData.friend_id_req];
+    const rawFriendRequests = [...userData.link_id_req];
 
     const friendRequests = rawFriendRequests.map(rawFriendRequest => rawFriendRequest.get({ plain: true }));
 

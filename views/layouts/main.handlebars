@@ -38,10 +38,10 @@
         {{#if (has_friend_requests friendRequests)}}
         {{>friend-requests}}
         {{/if}}
-        <div class="offcanvas-header">
+        <div class="offcanvas-header pb-1">
             <h5 class="offcanvas-title" id="friendsSidebarLabel">Friends</h5>
         </div>
-        <div class="offcanvas-body container-fluid mt-0">
+        <div class="offcanvas-body container-fluid mt-0 pt-1">
             <div class="row">
                 {{#each friends }}
                 {{>friends}}
@@ -49,6 +49,9 @@
             </div>
         </div>
     </div>
+    {{/if}}
+    {{#if user.loggedIn}}
+        <script src="/js/friends-sidebar.js"></script>
     {{/if}}
 </body>
 </html>
