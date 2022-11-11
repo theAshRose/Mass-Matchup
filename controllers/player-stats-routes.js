@@ -6,46 +6,35 @@ var rp = require('request-promise');
 const { parse } = require("handlebars");
 const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
 
-let gamesData;
-let gamesObj = [];
+
+
 router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
         try {
             const userData = await User.findByPk(req.session.user, {
                 where: {
                     id: req.params.id
                 }
             })
-
             const user = userData.get({ plain: true });
             const steam = user.steam_id
             var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json&include_appinfo=true'
             rp(url, async function (err, res, body) {
-                if (!err && res.statusCode < 400) {
-                    // console.log(body.games[0], "STRANG")
-                    let parsedGames = JSON.parse(body)
-                    let gamesData1 = JSON.stringify(parsedGames.response.games)
-                    gamesData = JSON.parse(gamesData1)
-                    // {"appid":2600,
-                    // "name":"Vampire: The Masquerade - Bloodlines",
-                    // "playtime_forever":1813,
-                    //"img_icon_url":"9fd08d0034ba09d371e1f1a179a0a3af6c36d1f0",
-                    //"playtime_windows_forever":0,
-                    //"playtime_mac_forever":0,"playtime_linux_forever":0,
-                    //"rtime_last_played":1513845169}
-                    // gamesData = JSON.stringify(parsedGames.response.games[0])
-
-
-                    return gamesData
+                if (!err && res.statusCode < 400) {                                     
                 }
             }).then(function (Data1) {
                 let Data2 = JSON.parse(Data1)
-                let Data = (Data2.response.games)
-                console.log(Data, "STRANG2")
+                let temp20 = (Data2.response.games)
+                const Data =  temp20.sort(function(a, b) {
+                    return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
+                });               
                 res.render('user-stats',
-                    {
-                        Data,
+                    {   
                         friends: res.locals.friends,
                         friendRequests: res.locals.friendRequests,
+                        Data,
                         user: {
                             loggedIn: req.session.loggedIn,
                             username: req.session.username,
@@ -59,6 +48,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
             console.log(err)
             res.status(500).json(err)
         }
+    }
 });
 /////////////////////////////////////////////////////////////////////////
 router.post('/ownedGameStats', async (req, res) => {
@@ -114,7 +104,7 @@ router.post('/ownedGameStats', async (req, res) => {
     }
 });
 
-router.get('/ownedGameStats', async (req, res) => {
+router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
@@ -174,7 +164,9 @@ router.get('/ownedGameStats', async (req, res) => {
                 let data = JSON.parse(data1)
                 console.log(iAmAwesome)
                 res.render('user-stats',
-                    {
+                    {   
+                        friends: res.locals.friends,
+                        friendRequests: res.locals.friendRequests,
                         iAmAwesome,
                         loggedIn: req.session.loggedIn
                     }
