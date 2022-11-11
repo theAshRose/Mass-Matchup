@@ -90,32 +90,9 @@
             </div>
             <div class="offcanvas-body container-fluid mt-0">
                 <div class="row">
-                    <div class="card p-0 mb-1">
-                        <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-1" aria-expanded="false" aria-controls="collapseExample">
-                            <img src="https://technical.ly/wp-content/uploads/2013/11/EdgarAllanBro.jpg" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
-                            <p class="card-text me-2">Edgar Allen Bro</p>
-                        </button>
-                        <div class="collapse" id="sidebar-user-id-1">
-                            <div class="card-body p-1 pt-2 d-flex justify-content-between">
-                                <button type="button" class="btn btn-primary btn-sm">See stats</button>
-                                <button type="button" class="btn btn-success btn-sm">Compare stats</button>
-                                <button type="button" class="btn btn-danger btn-sm">Remove Friend</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card p-0 mb-1">
-                        <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-2" aria-expanded="false" aria-controls="collapseExample">
-                            <img src="https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
-                            <p class="card-text me-2">Chairman Miao</p>
-                        </button>
-                        <div class="collapse" id="sidebar-user-id-2">
-                            <div class="card-body p-1 pt-2 d-flex justify-content-between">
-                                <button type="button" class="btn btn-primary btn-sm">See stats</button>
-                                <button type="button" class="btn btn-success btn-sm">Compare stats</button>
-                                <button type="button" class="btn btn-danger btn-sm">Remove Friend</button>
-                            </div>
-                        </div>
-                    </div>
+                    {{#each friends }}
+                    {{>friends}}
+                    {{/each}}
                 </div>
             </div>
         </div>

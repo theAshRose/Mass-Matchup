@@ -23,6 +23,40 @@ router.get('/', async (req, res) => {
                     id: req.params.id
                 }
             })
+
+
+            const dbfriendData1 = await Friend.findAll({
+                where: {
+                    friend_id: req.session.user,
+                },
+            });
+            const dbfriendData2 = await Friend.findAll({
+                where: {
+                    link_id: req.session.user,
+                },
+            });
+            const friends = [];
+            const friendContent1 = dbfriendData1.map((friend) =>
+                friend.get({ plain: true })
+            );
+            const friendUserId1 = friendContent1.map((friend) =>
+                friends.push(friend.link_id)
+            );
+            const friendContent2 = dbfriendData2.map((friend) =>
+                friend.get({ plain: true })
+            );
+            const friendUserId2 = friendContent2.map((friend) =>
+                friends.push(friend.friend_id)
+            );
+
+            const friendNames = [];
+
+            for (i = 0; i < friends.length; i++) {
+                const dbfriendUsername = await User.findByPk(friends[i]);
+                friendNames.push(dbfriendUsername);
+            }
+
+
             temp1;
             temp2;
             temp3;
@@ -93,8 +127,11 @@ router.get('/', async (req, res) => {
                                 // console.log(temp3.response.players[0].personaname + "USER DATA HERE")
                                 return(userInfo)
                             }).then(function (userContent) {
+                                
+                                let friends = friendNames.map(userObj=> userObj.get({plain : true}))
+                             
                                 res.render('dashboard',
-                                {
+                                {friends,
                                     temp3,
                                     newsPerGame,
                                     games,
