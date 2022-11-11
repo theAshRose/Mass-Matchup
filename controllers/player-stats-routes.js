@@ -4,12 +4,11 @@ require('dotenv').config();
 const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
+const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
+
 let gamesData;
 let gamesObj = [];
-router.get('/', async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect("/login");
-    } else {
+router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
         try {
             const userData = await User.findByPk(req.session.user, {
                 where: {
@@ -45,6 +44,8 @@ router.get('/', async (req, res) => {
                 res.render('user-stats',
                     {
                         Data,
+                        friends: res.locals.friends,
+                        friendRequests: res.locals.friendRequests,
                         user: {
                             loggedIn: req.session.loggedIn,
                             username: req.session.username,
@@ -58,7 +59,6 @@ router.get('/', async (req, res) => {
             console.log(err)
             res.status(500).json(err)
         }
-    }
 });
 /////////////////////////////////////////////////////////////////////////
 router.post('/ownedGameStats', async (req, res) => {
