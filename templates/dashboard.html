@@ -165,11 +165,46 @@
             </div>
         </div>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="friendsSidebar" aria-labelledby="friendsSidebarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="friendsSidebarLabel">Friends</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="offcanvas-header py-1">
+                <h5 class="offcanvas-title" id="friendsSidebarLabel">Friend Requests</h5>
             </div>
-            <div class="offcanvas-body container-fluid mt-0">
+            <div class="container-fluid mt-0 mb-1">
+                <div class="row">
+                    <div class="col-12 p-1">
+                        <div class="card p-0">
+                            <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#friend-req-id-1" aria-expanded="false" aria-controls="collapseExample">
+                                <img src="https://avatars.akamai.steamstatic.com/2895415bdb1c49d92de43331bb74c965b68421f1_full.jpg" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
+                                <p class="card-text me-2">Marinara Sauce</p>
+                            </button>
+                            <div class="collapse" id="friend-req-id-1">
+                                <div class="card-body p-1 pt-2 d-flex justify-content-between">
+                                    <button type="button" class="btn btn-success btn-sm" id="friend-request-id-1-accept">Accept</button>
+                                    <button type="button" class="btn btn-danger btn-sm" id="friend-request-id-1-deny">Deny</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-1">
+                        <div class="card p-0">
+                            <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#friend-req-id-2" aria-expanded="false" aria-controls="collapseExample">
+                                <img src="https://avatars.akamai.steamstatic.com/98e9b72beb8d395ab02b9ba6d6c3c880c66d1163_full.jpg" class="img-fluid sidebar-user-image rounded p-0 me-3" alt="...">
+                                <p class="card-text me-2">Dunecat</p>
+                            </button>
+                            <div class="collapse" id="friend-req-id-2">
+                                <div class="card-body p-1 pt-2 d-flex justify-content-between">
+                                    <button type="button" class="btn btn-success btn-sm">Accept</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Deny</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="offcanvas-header pb-1">
+                <h5 class="offcanvas-title" id="friendsSidebarLabel">Friends</h5>
+            </div>
+            <div class="offcanvas-body container-fluid mt-0 pt-1">
                 <div class="row">
                     <div class="card p-0 mb-1">
                         <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-1" aria-expanded="false" aria-controls="collapseExample">
