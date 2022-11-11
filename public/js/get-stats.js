@@ -11,9 +11,9 @@ const getOwnedGameStats = async (event) => {
             body: JSON.stringify({ appId }),
             headers: { 'Content-Type': 'application/json' },
         });
-
+        console.log(response)
         if (response.ok) {
-            location.replace('/user-stats');
+            location.replace('/user-stats/ownedGameStats');
         } else {
 
             alert('Search failed! Twy again UwU');
