@@ -6,12 +6,13 @@ router.post("/request", async (req, res) => {
         res.redirect("/login");
     } else {
         try {
+            console.log(req.body.friend, "it is here ")
             const dbFriendData = await FriendReq.create({
-                link_id: req.session.user,
-                friend_id: req.body.friend,
+                link_id_req: req.session.user,
+                friend_id_req: req.body.friend,
             });
 
-            res.send(dbFriendData);
+            res.json(dbFriendData);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
