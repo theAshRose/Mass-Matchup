@@ -62,50 +62,6 @@
                             {{>ownedGamesS}}
                             {{/each}}
                         </div>
-                    </div>
-                    <div class="card shadow-lg mt-2">
-                        <div class="card-header">
-                            <h4 class="card-title text-dark m-0">Recently Played Games</h4>
-                        </div>
-                        <div class="card-body">
-                            <button
-                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://avatars.akamai.steamstatic.com/ac3ebd0dd8f4244545ca18091b23f60de42d7ade.jpg"
-                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
-                                    <p class="card-text">Captain of Industry</p>
-                                </div>
-                                <p class="card-text me-2">3014 minutes</p>
-                            </button>
-                            <button
-                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://avatars.akamai.steamstatic.com/399859f8bdaeef066f14029d5f1910960545fbd9.jpg"
-                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
-                                    <p class="card-text">Conan Exiles</p>
-                                </div>
-                                <p class="card-text me-2">600 minutes</p>
-                            </button>
-                            <button
-                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://avatars.akamai.steamstatic.com/9b9e1838838c21ee443359efe30b6a56cf0531dd.jpg"
-                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
-                                    <p class="card-text">Baba Is You</p>
-                                </div>
-                                <p class="card-text me-2">586 minutes</p>
-                            </button>
-                            <button
-                                class="btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
-                                <div class="d-flex align-items-center">
-                                    <img src="https://avatars.akamai.steamstatic.com/3cf19bc8fa3bc953d68a9b46b0a7555839188da0.jpg"
-                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
-                                    <p class="card-text">FINAL FANTASY VII REMAKE INTERGRADE</p>
-                                </div>
-                                <p class="card-text me-2">705 hours</p>
-                            </button>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
                     <div class="card shadow-lg" id="stat-results-display-box">
@@ -119,7 +75,14 @@
                                     <h4 class="col-auto text-center">Showing results for Left 4 Dead 2</h4>
                                 </div>
                             </div>
-                            <ul class="list-group col-12 mt-3">
+                            <ul class="list-group col-6 mt-3">
+                                <li class="list-group-item">Stat.GamesPlayed.Total: 1481</li>
+                                <li class="list-group-item">Stat.FinaleFinished.Total: 488</li>
+                                <li class="list-group-item">Stat.TotalPlayTime.Total: 3258985</li>
+                                <li class="list-group-item">Stat.InfectedKilled.Total: 367064</li>
+                                <li class="list-group-item">Stat.KitsUsed.Total: 3267</li>
+                            </ul>
+                            <ul class="list-group col-6 mt-3">
                                 <li class="list-group-item">Stat.GamesPlayed.Total: 1481</li>
                                 <li class="list-group-item">Stat.FinaleFinished.Total: 488</li>
                                 <li class="list-group-item">Stat.TotalPlayTime.Total: 3258985</li>
@@ -131,9 +94,9 @@
                 </div>
             </div>
         </div>
-    </main>
+    </main>  
 
-   
+    <script src="/js/get-stats.js"></script>
 </body>
 
 </html>
