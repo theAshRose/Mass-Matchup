@@ -64,7 +64,6 @@ router.post("/signup", async (req, res) => {
       rp(fetchURL)
       .then(async (body) => {
         const response = JSON.parse(body).response;
-        console.log(response.players[0]);
 
         const dbUserData = await User.create({
           username: req.body.username,
