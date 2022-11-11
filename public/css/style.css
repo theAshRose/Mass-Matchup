@@ -125,6 +125,10 @@ body {
     width: 184px;
 }
 
+.friend-text {
+    color: black;
+}
+
 @media (max-width: 992px) {
     nav {
         font-size: 26px;
