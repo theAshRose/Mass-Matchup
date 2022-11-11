@@ -4,7 +4,7 @@ require('dotenv').config();
 const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
-const getFriendsAndFriendRequests = require('../utils/middleware');
+const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
 
 let temp1;
 let temp2;
@@ -13,10 +13,7 @@ let newsArray = [];
 let newsPerGame = []
 let start;
 let games
-router.get('/', getFriendsAndFriendRequests, async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect("/login");
-    } else {
+router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
         try {
             const userData = await User.findByPk(req.session.user, {
                 where: {
@@ -130,7 +127,7 @@ router.get('/', getFriendsAndFriendRequests, async (req, res) => {
                                 
                                 let friends = friendNames.map(userObj=> userObj.get({plain : true}))
 
-                                console.log(res.locals.friendRequests);
+                                //console.log(res.locals.friendRequests);
                                 //console.log(res.locals.friends);
                              
                                 res.render('dashboard',
@@ -158,17 +155,14 @@ router.get('/', getFriendsAndFriendRequests, async (req, res) => {
             console.log(err)
             res.status(500).json(err)
         }
-    }
 })
 
-
-router.get('/search', async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect("/login");
-    } else {
+router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
         try {
             res.render('search',
             {
+                friends: res.locals.friends,
+                friendRequests: res.locals.friendRequests,
                 user: {
                     loggedIn: req.session.loggedIn,
                     username: req.session.username,
@@ -181,7 +175,6 @@ router.get('/search', async (req, res) => {
             console.log(err)
             res.status(500).json(err)
         }
-    }
 
 })
 

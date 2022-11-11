@@ -1,11 +1,15 @@
 const { User, Friend, FriendReq } = require("../models");
 
-async function getFriendsAndFriendRequests(req, res, next) {
-    //console.log("TEST");
-
+function authorizeUser(req, res, next) {
     if (!req.session.loggedIn) {
         res.redirect("/login");
     } else {
+        next();
+    }
+}
+
+async function getFriendsAndFriendRequests(req, res, next) {
+    //console.log("TEST");
 
     const userData = await User.findByPk(req.session.user, {
         where: {
@@ -44,7 +48,6 @@ async function getFriendsAndFriendRequests(req, res, next) {
     res.locals.friendRequests = friendRequests;
 
     next();
-    }
 }
 
-module.exports = getFriendsAndFriendRequests;
+module.exports = { getFriendsAndFriendRequests, authorizeUser};
