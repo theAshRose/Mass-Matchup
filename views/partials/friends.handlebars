@@ -1,12 +1,12 @@
 <div class="card p-0 mb-1">
     <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center"
-        type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-1" aria-expanded="false"
+        type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-{{id}}" aria-expanded="false"
         aria-controls="collapseExample">
-        <img src="{{img}}"
+        <img src="{{steam_avatar_full}}"
             class="img-fluid sidebar-user-image rounded p-0 me-3" alt="..." />
         <p class="me-2 card-text friend-text">{{username}}</p>
     </button>
-    <div class="collapse" id="sidebar-user-id-1">
+    <div class="collapse" id="sidebar-user-id-{{id}}">
         <div class="card-body p-1 pt-2 d-flex justify-content-between">
             <button type="button" class="btn btn-primary btn-sm">See stats</button>
             <button type="button" class="btn btn-success btn-sm">Compare stats</button>
