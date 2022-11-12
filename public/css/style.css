@@ -17,7 +17,9 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: auto;
-    background-position: center;
+    background-position: top;
+
+    min-height: 100vh;
 }
 
 /*card transparency*/
