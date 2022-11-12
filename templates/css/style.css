@@ -55,6 +55,26 @@ nav {
     width: 184px;
 }
 
+#privacy-settings-image {
+    height: 300px;
+    width: 150px;
+}
+
+#edit-profile-image {
+    height: 100px;
+    width: 220px;
+}
+
+#profile-public-setting-image {
+    height: 40px;
+    width: 200px;
+}
+
+#account-details-image {
+    height: 165px;
+    width: 266px;
+}
+
 @media (max-width: 992px) {
     nav {
         font-size: 26px;
