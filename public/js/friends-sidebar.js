@@ -9,6 +9,7 @@
  *      4. Remove the friend request card from the sidebar HTML.
  *      5. Add the HTML of the friend on the sidebar HTML.
  *      6. If there are no more friend requests, remove the friend requests header.
+ *      7. Add logic to the buttons of the created friend element.
  */
 async function friendRequestAcceptButtonOnClick(event) {
     /* 1. Get the id of the friend request. */
@@ -29,6 +30,12 @@ async function friendRequestAcceptButtonOnClick(event) {
         headers: { 'Content-Type': 'application/json' }
     });
 
+    let friendRelationshipID;
+
+    await response1.json().then((response) => {
+        friendRelationshipID = response.id;
+    });
+
     /* 3. Make a DELETE request to the friends request route to delete the friend request. */
     const response2 = await fetch(`friends/request/${friendRequestID}`, {
         method: 'DELETE',
@@ -46,7 +53,7 @@ async function friendRequestAcceptButtonOnClick(event) {
     /* 5. Add the HTML of the friend on the sidebar HTML. */
     const friendsList = $('#sidebar-friends-list');
 
-    const divToAdd = $('<div class="card p-0 mb-1">');
+    const divToAdd = $(`<div class="card p-0 mb-1" id="friend-element-${friendRelationshipID}">`);
 
     divToAdd.html(`<button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center"
     type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-${friendID}" aria-expanded="false"
@@ -55,11 +62,11 @@ async function friendRequestAcceptButtonOnClick(event) {
         class="img-fluid sidebar-user-image rounded p-0 me-3" alt="..." />
     <p class="me-2 card-text friend-text">${username}</p>
 </button>
-<div class="collapse" id="sidebar-user-id-${friendID}">
+<div class="collapse" id="sidebar-user-id-${friendID}" data-friend-id="${friendRelationshipID}">
     <div class="card-body p-1 pt-2 d-flex justify-content-between">
         <button type="button" class="btn btn-primary btn-sm">See stats</button>
         <button type="button" class="btn btn-success btn-sm">Compare stats</button>
-        <button type="button" class="btn btn-danger btn-sm">Remove Friend</button>
+        <button type="button" class="btn btn-danger btn-sm remove-friend-button">Remove Friend</button>
     </div>
 </div>`);
 
@@ -71,6 +78,11 @@ async function friendRequestAcceptButtonOnClick(event) {
         const friendRequestsHeader = $('#friend-requests-header');
         friendRequestsHeader.remove();
     }
+
+    /* 7. Add logic to the buttons of the created friend element. */
+    const createdFriendElement = $(`#friend-element-${friendRelationshipID}`);
+    const removeFriendButton = createdFriendElement.find(`.remove-friend-button`);
+    removeFriendButton.on('click', removeFriendButtonOnClick);
 }
 
 /* 
@@ -109,5 +121,30 @@ async function friendRequestDenyButtonOnClick(event) {
     }
 }
 
+/*
+ *  Holds the logic for the remove friend button on click.
+ *  When the remove friend button is clicked we must:
+ *      1.  Get the ID of the friend relationship we want to remove.
+ *      2.  Remove the element from the DOM.
+ *      3.  Make a DELETE request to the server to delete the friend relationship.
+ */
+async function removeFriendButtonOnClick(event) {
+    const buttonClicked = event.target;
+    
+    /* 1.  Get the ID of the friend relationship we want to remove. */
+    const friendID = parseInt(buttonClicked.closest('.collapse').getAttribute('data-friend-id'));
+
+    /* 2.  Remove the element from the DOM. */
+    const friendElement = $(`#friend-element-${friendID}`);
+    friendElement.remove();
+
+    /* 3.  Make a DELETE request to the server to delete the friend relationship.  */
+    const response = await fetch(`/friends/${friendID}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
+
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);
 $('.friend-request-deny-button').on('click ', friendRequestDenyButtonOnClick);
+$('.remove-friend-button').on('click', removeFriendButtonOnClick);
