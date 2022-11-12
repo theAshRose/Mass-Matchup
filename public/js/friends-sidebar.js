@@ -145,6 +145,45 @@ async function removeFriendButtonOnClick(event) {
     });
 }
 
+///////////////////////doms work below////////
+const compareStats = async (event) => {
+    event.preventDefault();
+    let clickedBtn = $(event.target)
+    const splitMe = clickedBtn.parents().eq(1).attr("id").split("")
+    const flipMe = splitMe.reverse()
+    const finishMe = flipMe.join("")
+    let friend = parseInt(finishMe)
+   console.log(friend);
+   if (!friend) {
+       alert("please try again")
+   } else {
+       const response = await fetch('/compare', {
+           method: 'POST',
+           body: JSON.stringify({ friend }),
+           headers: { 'Content-Type': 'application/json' },
+       });
+       console.log(response)
+       if (response.ok) {
+           const response = await fetch('/compare/sharedGames', {
+               method: 'GET',
+               headers: { 'Content-Type': 'application/json' },
+           });
+           if (response.ok) {
+               window.location.replace('/compare/sharedGames')
+               // alert("am i the working?")
+           }
+       } else {
+
+           alert('Search failed! Twy again UwU');
+       }
+   }
+};
+
+
+$(".compareStatsLaunch").on("click", compareStats)
+///////////////////end doms work//
+
+
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);
 $('.friend-request-deny-button').on('click ', friendRequestDenyButtonOnClick);
 $('.remove-friend-button').on('click', removeFriendButtonOnClick);
