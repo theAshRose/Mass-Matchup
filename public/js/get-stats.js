@@ -19,7 +19,7 @@ const getOwnedGameStats = async (event) => {
             });
             if (response.ok) {
                 window.location.replace('/user-stats/ownedGameStats')
-                alert("am i the working?")
+                // alert("am i the working?")
             }
         } else {
 
