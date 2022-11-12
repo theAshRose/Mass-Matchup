@@ -29,17 +29,12 @@ async function friendRequestAcceptButtonOnClick(event) {
         headers: { 'Content-Type': 'application/json' }
     });
 
-    console.log(response1);
-
     /* 3. Make a DELETE request to the friends request route to delete the friend request. */
     const response2 = await fetch(`friends/request/${friendRequestID}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     });
 
-    console.log(response2);
-
-    
     const username = $(`#friend-req-username-${friendRequestID}`).html();
 
     const friendAvatar = $(`#friend-req-image-${friendRequestID}`).attr('src');
@@ -78,4 +73,41 @@ async function friendRequestAcceptButtonOnClick(event) {
     }
 }
 
+/* 
+ *  Logic for the friend request deny button on click. 
+ *  When the friend request deny button is clicked we must:
+ *      1. Get the id of the friend request.
+ *      2. Make a DELETE request to delete the friend request.
+ *      3. Remove the friend request element from the DOM.
+ *      4. If there are no more friend requests, remove the friend request header element.
+ */
+async function friendRequestDenyButtonOnClick(event) {
+    /* 1. Get the id of the friend request. */
+    const buttonClicked = event.target;
+
+    const friendRequestCard = buttonClicked.closest('.collapse');
+
+    const friendRequestIDString = friendRequestCard.getAttribute('id');
+
+    const friendRequestID = parseInt(friendRequestIDString.match(/\d+/g)[0]);
+
+    /* 2. Make a DELETE request to delete the friend request. */
+    const response = await fetch(`friends/request/${friendRequestID}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    /* 3. Remove the friend request element from the DOM. */
+    const friendRequestElement = $(`#friend-request-element-${friendRequestID}`);
+    friendRequestElement.remove();
+
+    /* 4. If there are no more friend requests, remove the friend request header element. */
+    const friendRequests = $('.friend-request-element');
+    if (!friendRequests.length) {
+        const friendRequestsHeader = $('#friend-requests-header');
+        friendRequestsHeader.remove();
+    }
+}
+
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);
+$('.friend-request-deny-button').on('click ', friendRequestDenyButtonOnClick);
