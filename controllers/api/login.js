@@ -27,19 +27,36 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    console.log(dbUserData.steam_avatar_full);
+    const fetchURL = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.APIkey}&steamids=${dbUserData.steam_id}`;
+    console.log(fetchURL);
+    rp(fetchURL)
+    .then(async (body) => {
+      const playerData = JSON.parse(body).response.players[0];
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
-      req.session.username = dbUserData.username;
-      req.session.steam_username = dbUserData.steam_username;
-      req.session.steam_avatar_full = dbUserData.steam_avatar_full;
-      req.session.profile_url = dbUserData.profile_url;
+      console.log(playerData);
 
-      res
-        .status(200)
-        .json({ user: dbUserData, message: "You are now logged in!" });
-    });
+      await User.update({
+        steam_avatar_full: playerData.avatarfull,
+        steam_username: playerData.personaname,
+        profile_url: playerData.profileurl
+      }, {
+        where: {
+          id: dbUserData.id
+        }
+      });
+
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        req.session.username = dbUserData.username;
+        req.session.steam_username = playerData.personaname;
+        req.session.steam_avatar_full = playerData.avatarfull;
+        req.session.profile_url = playerData.profileurl
+
+        res
+          .status(200)
+          .json({ user: dbUserData, message: "You are now logged in!" });
+      });
+    })
     // res.redirect('/')
   } catch (err) {
     console.log(err);
