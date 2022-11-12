@@ -65,7 +65,7 @@ async function friendRequestAcceptButtonOnClick(event) {
 <div class="collapse" id="sidebar-user-id-${friendID}" data-friend-id="${friendRelationshipID}">
     <div class="card-body p-1 pt-2 d-flex justify-content-between">
         <button type="button" class="btn btn-primary btn-sm">See stats</button>
-        <button type="button" class="btn btn-success btn-sm">Compare stats</button>
+        <button type="button" class="btn btn-success btn-sm compare-stats-button">Compare stats</button>
         <button type="button" class="btn btn-danger btn-sm remove-friend-button">Remove Friend</button>
     </div>
 </div>`);
@@ -82,7 +82,10 @@ async function friendRequestAcceptButtonOnClick(event) {
     /* 7. Add logic to the buttons of the created friend element. */
     const createdFriendElement = $(`#friend-element-${friendRelationshipID}`);
     const removeFriendButton = createdFriendElement.find(`.remove-friend-button`);
+    const createdCompareStatsButton = createdFriendElement.find(`.compare-stats-button`);
+
     removeFriendButton.on('click', removeFriendButtonOnClick);
+    createdCompareStatsButton.on('click', compareStats);
 }
 
 /* 
@@ -180,8 +183,9 @@ const compareStats = async (event) => {
 };
 
 
-$(".compareStatsLaunch").on("click", compareStats)
 ///////////////////end doms work//
+$(".compare-stats-button").on("click", compareStats)
+
 
 
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);
