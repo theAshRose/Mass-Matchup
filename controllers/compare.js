@@ -75,7 +75,7 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
                     // console.log(mutGames, "IM A STRING")
                     return mutGames;
                 }).then(async function (sharedGames) {
-
+                    req.session.sharedTemp = sharedGames
                     res.render('compare-stats',
                         {
 
@@ -293,7 +293,7 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                 console.log(goodData)
                 
                 res.render('compare-stats',
-                    {
+                    {sharedGames : req.session.sharedTemp,
                         goodData,
                         userStats,
                         friends: res.locals.friends,
