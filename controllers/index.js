@@ -7,9 +7,10 @@ const login = require("./login");
 const results = require("./user-search");
 const userStats = require("./player-stats-routes")
 const logOut = require("./logout")
+const compare = require("./compare")
 
 router.use("/user", results);
-
+router.use("/compare", compare);
 router.use("/user-stats", userStats)
 
 router.use("/logout", logOut);

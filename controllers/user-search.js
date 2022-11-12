@@ -4,6 +4,7 @@ require("dotenv").config();
 const request = require("request");
 var rp = require("request-promise");
 const { parse } = require("handlebars");
+const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
 
 const { Op } = require("sequelize");
 
@@ -52,7 +53,7 @@ router.post("/results", async (req, res) => {
 //     }
 //   }
 // });
-router.get("/content", async (req, res) => {
+router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect("/login");
   } else {
@@ -67,8 +68,17 @@ router.get("/content", async (req, res) => {
       let userResults = dataVal.map(userObj=> userObj.get({plain : true}))
       console.log(userResults,"here");
       res.render("search", {
+        friends: res.locals.friends,
+        friendRequests: res.locals.friendRequests,
         userResults,
         loggedIn: req.session.loggedIn,
+        user: {
+          loggedIn: req.session.loggedIn,
+          username: req.session.username,
+          steam_username: req.session.steam_username,
+          steam_avatar_full: req.session.steam_avatar_full,
+          profile_url: req.session.profile_url
+      }
       });
     } catch (err) {
       console.log(err);
