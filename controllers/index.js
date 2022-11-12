@@ -6,11 +6,13 @@ const friendRoutes = require("./friend-routes");
 const login = require("./login");
 const results = require("./user-search");
 const userStats = require("./player-stats-routes")
+const logOut = require("./logout")
 
 router.use("/user", results);
 
 router.use("/user-stats", userStats)
 
+router.use("/logout", logOut);
 router.use("/", dash);
 router.use("/api", apiRoutes);
 router.use("/friends", friendRoutes);

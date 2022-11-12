@@ -64,16 +64,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).redirect('/');
-    });
-  } else {
-    res.status(404).end();
-  }
-});
-
 router.post("/signup", async (req, res) => {
   try {
       const fetchURL = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.APIkey}&steamids=${req.body.steam_id}`;
