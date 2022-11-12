@@ -129,7 +129,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                 if (res.statusCode > 400) {
                     res.redirect('/user-search/')
                     alert("Search did not yield fruit. Pluck again")
-                } 
+                }
                 if (!err && res.statusCode < 400) {
                     console.log(body, "naraka")
 
@@ -174,17 +174,17 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                 let iAmAwesome = []
                 if (temp4) {
                     goodData = true
-                for (i = 0; i < temp4.length; i++) {
-                    let noYeah = Object.values(temp4[i])
-                    let temp69 = {
-                        name: noYeah[0],
-                        score: Math.trunc(noYeah[1])
+                    for (i = 0; i < temp4.length; i++) {
+                        let noYeah = Object.values(temp4[i])
+                        let temp69 = {
+                            name: noYeah[0],
+                            score: Math.trunc(noYeah[1])
+                        }
+                        iAmAwesome.push(temp69)
                     }
-                    iAmAwesome.push(temp69)
+                } else {
+                    goodData = false
                 }
-            } else {
-                goodData = false
-            }
 
                 // console.log(iAmAwesome)
                 const userData = await User.findByPk(req.session.user, {
@@ -210,7 +210,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     });
                     console.log(iAmAwesome, "i am the best")
                     res.render('user-stats',
-                        {   
+                        {
                             goodData,
                             iAmAwesome,
                             friends: res.locals.friends,
@@ -385,3 +385,6 @@ module.exports = router;
 //{"name":"equip_all_exotic_quality","achieved":1},
 //{"name":"equip_veteran_quality","achieved":1},
 //{"name":"complete_level_all","achieved":1}]}}
+
+// let arr3 = iAmawesome.map(
+//     (item, i) => Object.assign({}, item, userStats[i]));
