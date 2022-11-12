@@ -127,7 +127,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
             rp(url, async function (err, res, body) {
                 if (res.statusCode > 400) {
-                    res.redirect('/user-search/ownedGameStats')
+                    res.redirect('/user-search/')
                     alert("Search did not yield fruit. Pluck again")
                 } 
                 if (!err && res.statusCode < 400) {

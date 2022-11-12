@@ -2,7 +2,8 @@
     <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
         <div class="card shadow-lg p-0 d-flex flex-column">
             <div class="d-flex flex-row">
-                <img src="https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg" class="img-fluid steam-user-image rounded" alt="...">
+                <img src="https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg"
+                    class="img-fluid steam-user-image rounded" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <p class="card-text mb-1">Username:</p>
@@ -13,52 +14,74 @@
         </div>
         <div class="container-fluid">
             <div class="row d-flex flex-row justify-content-between">
-                <div class="dropdown mt-2 col-3 p-0">
-                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Select game
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Dead By Daylight</a></li>
-                        <li><a class="dropdown-item" href="#">Left 4 Dead 2</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="col-8 col-sm-7 col-md-8 p-0">
-                    <div class="card shadow mt-2">
-                        <input type="text" class="form-control form-control-sm" placeholder="Search game" aria-label="Search game">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card shadow-lg mt-2">
-                    <div class="card-header">
-                        <h3 class="card-title text-dark mb-1">Search results</h3>
-                        <h5 class="card-subtitle text-muted">for Team Fortress 2</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text mb-2">Reverend Richard Wayne Gary Wayne has more kills than Chairman Miao!</p>
-                        <p class="card-text">Chairman Miao has more teabags than Reverend Richard Wayne Gary Wayne!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
-                <div class="dropdown position-absolute m-2" id="stat-dropdown">
-                    <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Statistic
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Kills</a></li>
-                          <li><a class="dropdown-item" href="#">Knife kills</a></li>
-                          <li><a class="dropdown-item" href="#">Bomb defuses</a></li>
-                        </ul>
-                    </div>
+
+                {{!-- <div class="card-header">
+                    <h4 class="card-title dash-title m-0">Owned Games: </h4>
+                </div> --}}
+
+                <div class="col-12 p-1">
                     <div class="card shadow-lg">
-                        <div class="card-header d-flex justify-content-center">
-                            <h2 class="card-title text-dark">MASS MATCHUP</h2>
+                        <div class="card-header">
+                            <h4 class="card-title dash-title m-0">Owned Games: </h4>
+                            <br>
+                            <h5 class="card-title dash-title m-0"><sm><i>(click to compare)</i></sm></h5>
+
                         </div>
-                        <div class="card-body d-flex justify-content-center align-items-center" id="graph-box">
-                            <h2>GRAPH OF RESULTS</h2>
+                        <div class="card-body">
+                            {{#each sharedGames}}
+                            <button ownedGameAppId="{{appid}}"
+                                class="sharedGameBtn btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{appid}}/{{img_icon_url}}.jpg"
+                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
+                                    <p class="card-text">{{name}}</p>
+                                </div>
+                                <p class="card-text me-2"></p>
+                            </button>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
+                {{!-- <div class="col-8 col-sm-7 col-md-8 p-0">
+                    <div class="card shadow mt-2">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search game"
+                            aria-label="Search game">
+                    </div>
+                </div> --}}
             </div>
+        </div>
+        {{!-- <div class="card shadow-lg mt-2">
+            <div class="card-header">
+                <h3 class="card-title text-dark mb-1">Search results</h3>
+                <h5 class="card-subtitle text-muted">for Team Fortress 2</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-2">Reverend Richard Wayne Gary Wayne has more kills than Chairman Miao!</p>
+                <p class="card-text">Chairman Miao has more teabags than Reverend Richard Wayne Gary Wayne!</p>
+            </div>
+        </div> --}}
+    </div>
+    <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+        <div class="dropdown position-absolute m-2" id="stat-dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Statistic
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Kills</a></li>
+                <li><a class="dropdown-item" href="#">Knife kills</a></li>
+                <li><a class="dropdown-item" href="#">Bomb defuses</a></li>
+            </ul>
+        </div>
+        <div class="card shadow-lg">
+            <div class="card-header d-flex justify-content-center">
+                <h2 class="card-title text-dark">MASS MATCHUP</h2>
+            </div>
+            <div class="card-body d-flex justify-content-center align-items-center" id="graph-box">
+                <h2>GRAPH OF RESULTS</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/compare-stats.js"></script>
