@@ -18,7 +18,7 @@ const friendData = [
         link_id: 1,  
     },
     {
-        friend_id: 7,
+        friend_id: 4,
         link_id: 3
     }
 ]

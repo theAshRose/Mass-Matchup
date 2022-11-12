@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Friend, FriendReq } = require("../models");
+const { authorizeUser } = require('../utils/middleware');
 
 router.post("/request", async (req, res) => {
     if (!req.session.loggedIn) {
@@ -82,5 +83,26 @@ router.get("/",async (req, res) => {
     }
     }
 );
+
+/* Route to DELETE a friend request */
+router.delete('/request/:id', authorizeUser, async (req, res) => {
+    FriendReq.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then((numDestroyedRows) => {
+        /* If the number of destroyed rows is 0, there's a problem with the request. */
+        if (!numDestroyedRows) {
+            res.status(400).json({ message: "No requests deleted!" });
+        } else {
+            res.status(200).json(numDestroyedRows);
+        }
+    })
+    .catch((error) => {
+        console.log(error);
+        res.status.json(error);
+    });
+});
 
 module.exports = router;
