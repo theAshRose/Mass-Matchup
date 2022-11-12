@@ -126,6 +126,10 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             console.log(req.session.appid, "why are you bug?")
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
             rp(url, async function (err, res, body) {
+                if (res.statusCode > 400) {
+                    res.redirect('/user-search/ownedGameStats')
+                    alert("Search did not yield fruit. Pluck again")
+                } 
                 if (!err && res.statusCode < 400) {
                     console.log(body, "naraka")
 
@@ -225,7 +229,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
 
 
         } catch (err) {
-            console.log(err)
+            console.log(err, "yes of course")
             res.status(500).json(err)
         }
     }

@@ -1,40 +1,41 @@
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
-                    <div class="card shadow-lg">
-                        <div class="card-header">
-                            <h4 class="card-title text-dark m-0">Owned Games: </h4>
-                        </div>
-                        <div class="card-body">
-                            {{#each Data}}
-                            {{>ownedGamesS}}
-                            {{/each}}
-                        </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
+            <div class="card shadow-lg">
+                <div class="card-header">
+                    <h4 class="card-title dash-title m-0">Owned Games: </h4>
                 </div>
-                <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
-                    <div class="card shadow-lg" id="stat-results-display-box">
-                        <div class="card-body">
-                            <div class="container-fluid">
-                                <div class="row d-flex flex-row justify-content-between">
-                                    <div class="col-xl-4 mb-3 m-xl-0 p-0">
-                                        <input type="text" class="form-control" id="manual-search-input"
-                                            placeholder="Manual search">
-                                    </div>
-                                    <h4 class="col-auto text-center">Showing results for Left 4 Dead 2</h4>
-                                </div>
-                            </div>
-                            <ul class="list-group col-6 mt-3">
-                                {{#if goodData}}
-                                {{#each iAmAwesome}}
-                                <li class="list-group-item">{{name}}: {{score}}</li>
-                                {{/each}}
-                                {{/if}}
-                            </ul>
+                <div class="card-body">
+                    {{#each Data}}
+                    {{>ownedGamesS}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+            <div class="card shadow-lg" id="stat-results-display-box">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row d-flex flex-row justify-content-between">
+                            {{!-- <div class="col-xl-4 mb-3 m-xl-0 p-0">
+                                <input type="text" class="form-control" id="manual-search-input"
+                                    placeholder="Manual search">
+                            </div> --}}
+                            <h4 class="dash-title col-auto text-center">Results: </h4>
                         </div>
                     </div>
+                    <ul class="list-group col-6 mt-3">
+                        {{#if goodData}}
+                        {{#each iAmAwesome}}
+                        <li class="list-group-item">{{name}}: {{score}}</li>
+                        {{/each}}
+                        {{/if}}
+                    </ul>
                 </div>
             </div>
         </div>
 
-    <script src="/js/get-stats.js"></script>
+    </div>
+</div>
+
+<script src="/js/get-stats.js"></script>
