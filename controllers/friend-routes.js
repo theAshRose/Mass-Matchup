@@ -105,4 +105,28 @@ router.delete('/request/:id', authorizeUser, async (req, res) => {
     });
 });
 
+/* 
+ *  Route to DELETE a friend relationship. 
+ *  @param id:  The ID of the of the friend relationship in the friend table to delete.
+ */
+router.delete('/:id', authorizeUser, (req, res) => {
+    Friend.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then((numDestroyedRows) => {
+        /* If the number of destroyed rows is 0, there's a problem with the request. */
+        if (!numDestroyedRows) {
+            res.status(400).json({ message: "No friends deleted!" });
+        } else {
+            res.status(200).json(numDestroyedRows);
+        }
+    })
+    .catch((error) => {
+        console.log(error);
+        res.status(500).json(error);
+    });
+});
+
 module.exports = router;

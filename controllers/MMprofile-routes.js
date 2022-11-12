@@ -128,7 +128,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                                 let friends = friendNames.map(userObj=> userObj.get({plain : true}))
 
                                 // console.log(res.locals.friendRequests);
-                                //console.log(res.locals.friends);
+                                // console.log(res.locals.friends);
                              
                                 res.render('dashboard',
                                 {friends: res.locals.friends,
