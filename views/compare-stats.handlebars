@@ -3,12 +3,12 @@
     <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
         <div class="card shadow-lg p-0 d-flex flex-column">
             <div class="d-flex flex-row">
-                <img src="https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg"
+                <img src="{{friendData.steam_avatar_full}}"
                     class="img-fluid steam-user-image rounded" alt="...">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <div>
                         <p class="card-text mb-1">Username:</p>
-                        <p class="card-text">Chairman Miao</p>
+                        <p class="card-text">{{friendData.steam_username}}</p>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     <h4 class="card-title dash-title m-0">Owned Games: </h4>
                 </div> --}}
 
-                <div class="col-12 p-1">
+                <div class="col-12 pt-1 px-0">
                     <div class="card shadow-lg">
                         <div class="card-header">
                             <h4 class="card-title dash-title m-0">Owned Games:</h4>

@@ -36,6 +36,7 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
             const friendProfile = friendData.get({ plain: true });
             const steam = user.steam_id
             const steamFriend = friendProfile.steam_id
+
             console.log(steamFriend, "steamfriend")
             var urlUser = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json&include_appinfo=true'
             var urlFriend = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid='+steamFriend+'&format=json&include_appinfo=true'
@@ -97,7 +98,8 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
                                 steam_username: req.session.steam_username,
                                 steam_avatar_full: req.session.steam_avatar_full,
                                 profile_url: req.session.profile_url
-                            }
+                            },
+                            friendData: friendProfile
                         })
                 })
             })
@@ -370,7 +372,8 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                             steam_username: req.session.steam_username,
                             steam_avatar_full: req.session.steam_avatar_full,
                             profile_url: req.session.profile_url
-                        }
+                        },
+                        friendData: friendProfile
                     })
                 // console.log(iAmAwesome, "target 200")
             })//.then goes here?
