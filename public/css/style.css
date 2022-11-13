@@ -121,8 +121,6 @@ a:hover {
     width: 100px;
 }
 
-
-
 .news-title {
     text-shadow:
     0 0 5px #580084, 0 0 10px #580084,
@@ -297,6 +295,7 @@ a:hover {
     0 0 5px #580084, 0 0 10px #580084,
     0 0 20px #580084, 0 0 40px #580084;
     color: #ffffff;
+    /* background-color: rgba(0,0,0,0); */
 }
 
 .offcanvas {
@@ -312,8 +311,15 @@ a:hover {
     background-color: rgba(0,0,0,.75);
 }
 
-.offcanvas-header {
-    background-color: rgba(0,0,0,.80);
+.offcanvas-body {
+    position: relative;
+    z-index: 1100;
+}
+
+.sidebar-button:hover {
+    background: #ab04ff;
+    color: #050801;
+    box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff;
 }
 
 @media (max-width: 992px) {
