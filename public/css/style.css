@@ -104,12 +104,12 @@ body {
 }
 
 /*game news*/
-a {
+.game-news-link {
     color:#aa00ff;
     text-decoration: none;
 }
 
-a:hover {
+.game-news-link:hover {
     text-shadow:
     0 0 5px #aa00ff, 0 0 10px #aa00ff,
     0 0 20px #aa00ff, 0 0 40px #aa00ff;
@@ -161,10 +161,26 @@ a:hover {
 }
 
 .profile-button:focus {
-    background: #ab04ff;
-    border: 1px solid #ab04ff;
-    color: white;
-    box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
+    background: #04d9ff;
+    border: none;
+    color: black;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
+}
+
+.profile-button:active:hover {
+    background: #04d9ff;
+    border: none;
+    color: black;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
+}
+
+.profile-button[aria-expanded="false"] {
+    position: relative;
+    color: #04d9ff;
+    background-color: rgba(0,0,0,0);
+    transition: 0.2s;
+    overflow: hidden;
+    border: solid 1px #04d9ff;
 }
 
 /*
@@ -324,13 +340,26 @@ a:hover {
     
 }
 
-.dropdown {
+.blue-dropdown {
+    /*
     --bs-dropdown-color: rgba(0, 0, 0, 0.125);
     --bs-dropdown-bg: rgba(171, 4, 255, .75); 
-    --bs-dropdown-link-hover-bg: rgba(171, 4, 255, .75);
+    --bs-dropdown-link-hover-bg: rgba(171, 4, 255, .75); 
+    */
+    background-color: rgba(0,0,0,.80);
     color:white;
-
 }
+
+.blue-dropdown-item {
+    color: #00dcff;
+}
+
+.blue-dropdown-item:hover {
+    background: #00dcff;
+    color: black;
+    box-shadow: 0 0 5px #00dcff, 0 0 25px #00dcff, 0 0 50px #00dcff, 0 0 200px #00dcff !important;
+}
+
 .steam-user-image {
     height: 184px;
     width: 184px;
