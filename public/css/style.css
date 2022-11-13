@@ -156,17 +156,16 @@ a:hover {
   
 .violet-glow-btn:hover {
     background: #ab04ff;
-    color: #050801;
+    color: white;
     box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
 }
 
-/*
-.violet-glow-btn:active {
+.violet-glow-btn:focus {
     background: #ab04ff;
     border: 1px solid #ab04ff;
-    color: #050801;
+    color: white;
     box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
-} */
+}
 
 /*
 .btn {
@@ -249,7 +248,7 @@ a:hover {
 
 .transparent-blue-glow-btn:hover {
     background: #04d9ff;
-    color: #050801;
+    color: black;
     box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
 }
