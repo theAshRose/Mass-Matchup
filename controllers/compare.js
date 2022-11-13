@@ -319,8 +319,10 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                         let friendScore = []
                         let indexArr = []
                         finalStats = []
+                        let friendScore2 = [];
                         for (i = 0; i < iAmAwesome.length; i++) {
                             userArr.push(iAmAwesome[i].name)
+                            friendScore2.push(iAmAwesome[i].score)
                         }
                         for(i = 0; i < userStats.length; i++) {
                             tempFriendArr.push(userStats[i].name)
@@ -332,7 +334,8 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                         }
                         for(i = 0; i < iAmAwesome.length; i++){
                             finalStats.push(iAmAwesome[i])
-                            finalStats[i].score2 = friendScore[indexArr[i]]
+                            finalStats[i].score2 = friendScore2[i]
+                            finalStats[i].score = friendScore[indexArr[i]]
                         }
                     }
 
