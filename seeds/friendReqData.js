@@ -10,9 +10,13 @@ const friendData1 = [
         link_id_req: 2, 
     },
     {
+        friend_id_req: 7,
+        link_id_req: 3, 
+    },
+    {
         friend_id_req: 3,
-        link_id_req: 7, 
-    }
+        link_id_req: 8, 
+    },
 ]
 
 const seedFriendsReq = () => FriendReq.bulkCreate(friendData1);
