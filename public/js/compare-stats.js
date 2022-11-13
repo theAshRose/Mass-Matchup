@@ -1,3 +1,8 @@
+
+
+const ctx = document.getElementById('graph-box');
+
+
 const doubleStats = async (event) => {
      event.preventDefault();
      event.preventDefault();
@@ -9,26 +14,100 @@ const doubleStats = async (event) => {
      } else {
          const response = await fetch(`/compare/sharedGames/${appId}`, {
              method: 'GET',
-            //  params: JSON.stringify({ appId }),
              headers: { 'Content-Type': 'application/json' },
          });
          console.log(response)
          if (response.ok) {
             console.log("response OK")
               window.location.replace(`/compare/sharedGames/${appId}`)
-            //  const response = await fetch('/user-stats/ownedGameStats', {
-            //      method: 'GET',
-            //      headers: { 'Content-Type': 'application/json' },
-            //  });
-            //  if (response.ok) {
-                //  window.location.replace(`/user-stats/ownedGameStats/`)
-            //      // alert("am i the working?")
-            //  }
          } else {
              alert('Search failed! Twy again UwU');
          }
      }
  };
+
+
+ const myChart = new Chart(ctx, {
+     type: 'bar',
+     data: {
+         labels: [' '],
+         datasets: [
+         {
+             label: 'You',
+             data: [0],
+             backgroundColor: [
+                 'rgba(54, 162, 235, 0.2)',
+                 //'rgba(255, 99, 132, 0.2)',
+             ],
+             borderColor: [
+                 'rgba(54, 162, 235, 1)',
+                 //'rgba(255, 99, 132, 1)',
+             ],
+             borderWidth: 1,
+             maxBarThickness: 150
+         },
+         {
+             label: 'Your Friend',
+             data: [0],
+             backgroundColor: [
+                 //'rgba(54, 162, 235, 0.2)',
+                 'rgba(255, 99, 132, 0.2)',
+             ],
+             borderColor: [
+                 //'rgba(54, 162, 235, 1)',
+                 'rgba(255, 99, 132, 1)',
+             ],
+             borderWidth: 1,
+             maxBarThickness: 150
+         }]
+     },
+     options: {
+         plugins: {
+ 
+         },
+         scales: {
+             x: {
+                 grid: {
+                     display: false
+                 }
+             },
+             y: {
+                 beginAtZero: true,
+                 grid: {
+                     display: false
+                 }
+             }
+         }
+     }
+ });
+
+
+ function updateChartData(event) {
+    event.preventDefault()
+    console.log('we in')
+    let clickedBtn = $(event.target);
+    myChart.data.labels.splice(0, 1, clickedBtn.text())
+
+    let userScore = parseInt(clickedBtn.attr("comparedstatsdata"))
+
+    const splitMe = clickedBtn.attr("comparedstatsdata").split("")
+    const flipMe = splitMe.reverse()
+    const finishMe = flipMe.join("")
+    let friendScore = parseInt(finishMe)
+
+
+    myChart.data.datasets[0].data.splice(0, 1, userScore)
+    myChart.data.datasets[1].data.splice(0, 1, friendScore)
+
+    myChart.update();
+}
+
+
+$(".comparedStat").on("click", updateChartData)
+
+
+
+
 
 
 $(".sharedGameBtn").on("click", doubleStats)

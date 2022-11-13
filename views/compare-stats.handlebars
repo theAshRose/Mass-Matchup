@@ -100,21 +100,24 @@
             <ul class="dropdown-menu">
                 {{#if goodData}}
                 {{#each userStats}}
-                <li><a comparedStatsData="{{score}}-{{score2}}" class="dropdown-item" href="#">{{name}}</a></li>
+                <li><a comparedStatsData="{{score}}-{{score2}}" class="comparedStat dropdown-item" href="#">{{name}}</a></li>
                 {{/each}}
                 {{/if}}
             </ul>
         </div>
         <div class="card shadow-lg">
             <div class="card-header d-flex justify-content-center">
-                <h2 class="card-title text-dark">MASS MATCHUP</h2>
+                <h2 class="card-title text-dark"></h2>
             </div>
-            <div class="card-body d-flex justify-content-center align-items-center" id="graph-box">
-                <h2>GRAPH OF RESULTS</h2>
+            <div class="card-body d-flex justify-content-center align-items-center">
+                <canvas id="graph-box"></canvas>
             </div>
         </div>
     </div>
 </div>
 </div>
 
+
+
+{{!-- <script src="../node_modules/chart.js/dist/chart.js"></script> --}}
 <script src="/js/compare-stats.js"></script>
