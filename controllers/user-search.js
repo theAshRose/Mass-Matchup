@@ -72,6 +72,8 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
         friendRequests: res.locals.friendRequests,
         userResults,
         loggedIn: req.session.loggedIn,
+        searchResults: true,
+        search: true,
         user: {
           loggedIn: req.session.loggedIn,
           username: req.session.username,
