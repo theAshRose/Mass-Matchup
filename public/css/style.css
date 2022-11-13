@@ -16,9 +16,9 @@ body {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: auto;
+    background-size: cover;
     background-position: top;
-
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
@@ -62,7 +62,7 @@ body {
     -webkit-background-clip: text;
 }
 
-
+/*overflow-y: scroll; */
 /*dashboard styling*/
 
 .dash-title {

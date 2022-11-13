@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <div class="row">
     <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
         <div class="card shadow-lg p-0 d-flex flex-column">
@@ -92,21 +93,18 @@
         </div> --}}
     </div>
     <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
-            {{#if goodData}}
-            {{#each userStats}}
-            <button comparedStatsData="{{score}}{{score2}}"
-                class="compareBtn btn btn-outline-primary btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
-                <div class="d-flex align-items-center">
-                    {{!-- <img
-                        src="http://media.steampowered.com/steamcommunity/public/images/apps/{{appid}}/{{img_icon_url}}.jpg"
-                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="..."> --}}
-                    <p class="card-text">{{name}}</p>
-                </div>
-                <p class="card-text me-2"></p>
+        <div class="dropdown position-absolute m-2" id="stat-dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Statistic
             </button>
-            {{/each}}
-            {{/if}}
-       
+            <ul class="dropdown-menu">
+                {{#if goodData}}
+                {{#each userStats}}
+                <li><a comparedStatsData="{{score}}-{{score2}}" class="dropdown-item" href="#">{{name}}</a></li>
+                {{/each}}
+                {{/if}}
+            </ul>
+        </div>
         <div class="card shadow-lg">
             <div class="card-header d-flex justify-content-center">
                 <h2 class="card-title text-dark">MASS MATCHUP</h2>
@@ -116,6 +114,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script src="/js/compare-stats.js"></script>
