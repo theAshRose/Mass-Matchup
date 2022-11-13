@@ -51,7 +51,7 @@ const UserData = [{
 {
   username: "EdgarAllenBro",
   password: "password",
-  steam_id: "76561197961411971",
+  steam_id: "76561197960434622",
   steam_avatar_full: "https://technical.ly/wp-content/uploads/2013/11/EdgarAllanBro.jpg",
   steam_username: 'Edgar Allen Bro',
   profile_url: "https://steamcommunity.com/profiles/76561197961411971/"

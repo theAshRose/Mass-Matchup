@@ -66,11 +66,34 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
       });
       
       let userResults = dataVal.map(userObj=> userObj.get({plain : true}))
-      console.log(userResults,"here");
+
+      /* Adam's work starts here. */
+      /* I want to filter out all users that are friends of the user and filter out the user from the returned results. */
+      /* 
+       *  To do that I must: 
+       *    1. Get a list of the user's friend usernames.
+       *    2. Filter out the returned results based on that list.
+       */
+      /* 1. Get a list of the user's friend usernames. */
+      const friendUsernames = res.locals.friends.map(friend => friend.username);
+
+      /* 2. Filter out the returned results based on that list. */
+      const nonFriendUsers = userResults.filter((user) => {
+          return !friendUsernames.includes(user.username);
+      });
+
+      const nonFriendNonUserResults = nonFriendUsers.filter((user) => {
+        return user.username != req.session.username;
+      });
+
+      /* End Adam's work. */
+
+      //console.log(userResults,"here");
+
       res.render("search", {
         friends: res.locals.friends,
         friendRequests: res.locals.friendRequests,
-        userResults,
+        userResults: nonFriendNonUserResults,
         loggedIn: req.session.loggedIn,
         searchResults: true,
         search: true,
