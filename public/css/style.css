@@ -146,13 +146,82 @@ a:hover {
     0 0 5px #ab04ff, 0 0 15px #ab04ff;
 }
 
-.btn {
+.violet-glow-btn {
     box-shadow:
     0 0 5px #ab04ff, 0 0 10px #ab04ff;
     --bs-btn-hover-bg: rgba(171, 4, 255, .75); 
 }
 
+/* .red-glow-btn {
+    color: #FF3131;
+    border: 1px solid #FF3131;
+    cursor: pointer;
+    font-weight: bold;
+    filter: drop-shadow(0 0 15px #FF3131) drop-shadow(0 0 50px #FF3131) contrast(2) brightness(2);
+    transition: .5s;
+} */
 
+/* .red-glow-btn:hover {
+    color: black;
+    background-color: #FF3131;
+    filter: drop-shadow(0 0 20px #FF3131) contrast(2) brightness(2);
+} */
+
+.red-glow-btn {
+    position: relative;
+    color: #FF3131;
+    background-color: black;
+    transition: 0.5s;
+    overflow: hidden;
+    border: 1px solid #FF3131;
+}
+  
+.red-glow-btn:hover {
+    background: #FF3131;
+    color: #050801;
+    box-shadow: 0 0 5px #FF3131, 0 0 25px #FF3131, 0 0 50px #FF3131, 0 0 150px #FF3131;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.green-glow-btn {
+    position: relative;
+    color: #0FFF50;
+    background-color: black;
+    transition: 0.5s;
+    overflow: hidden;
+    border: solid 1px #0FFF50;
+}
+  
+.green-glow-btn:hover {
+    background: #0FFF50;
+    color: #050801;
+    box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.blue-glow-btn {
+    position: relative;
+    color: #04d9ff;
+    background-color: black;
+    transition: 0.5s;
+    overflow: hidden;
+    border: solid 1px #04d9ff;
+}
+  
+.blue-glow-btn:hover {
+    background: #04d9ff;
+    color: #050801;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+  
+/* .red-glow-btn:nth-child(1) {
+    filter: hue-rotate(270deg);
+}
+  
+.red-glow-btn:nth-child(2) {
+    filter: hue-rotate(110deg);
+} */
 
 #stat-dropdown {
     z-index: 2;
@@ -220,6 +289,31 @@ a:hover {
 #account-details-image {
     height: 165px;
     width: 266px;
+}
+
+.offcanvas-header {
+    font-family: 'Press Start 2P';
+    text-shadow:
+    0 0 5px #580084, 0 0 10px #580084,
+    0 0 20px #580084, 0 0 40px #580084;
+    color: #ffffff;
+}
+
+.offcanvas {
+    background-color: rgba(0,0,0,.80);
+    /* opacity: .85; */
+}
+
+.friend-text {
+    color: white;
+}
+
+.friend-button {
+    background-color: rgba(0,0,0,.75);
+}
+
+.offcanvas-header {
+    background-color: rgba(0,0,0,.80);
 }
 
 @media (max-width: 992px) {

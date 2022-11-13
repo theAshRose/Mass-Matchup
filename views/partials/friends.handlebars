@@ -1,4 +1,4 @@
-<div class="card p-0 mb-1" id="friend-element-{{friend.id}}">
+<div class="card p-0 mb-1 friend-button opacity-100" id="friend-element-{{friend.id}}">
     <button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center"
         type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-{{id}}" aria-expanded="false"
         aria-controls="collapseExample">
@@ -8,9 +8,9 @@
     </button>
     <div class="collapse" id="sidebar-user-id-{{id}}" data-friend-id="{{friend.id}}">
         <div class="card-body p-1 pt-2 d-flex justify-content-between">
-            <button type="button" class="btn btn-primary btn-sm">See stats</button>
-            <button type="button" class="btn btn-success btn-sm compare-stats-button" >Compare stats</button>
-            <button type="button" class="btn btn-danger btn-sm remove-friend-button">Remove Friend</button>
+            <button type="button" class="btn blue-glow-btn btn-sm">See stats</button>
+            <button type="button" class="btn green-glow-btn btn-sm compare-stats-button" >Compare stats</button>
+            <button type="button" class="btn red-glow-btn btn-sm remove-friend-button">Remove Friend</button>
         </div>
     </div>
 </div>
