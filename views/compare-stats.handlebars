@@ -23,7 +23,7 @@
                 <div class="col-12 p-1">
                     <div class="card shadow-lg">
                         <div class="card-header">
-                            <h4 class="card-title dash-title m-0">Owned Games: </h4>
+                            <h4 class="card-title dash-title m-0">Owned Games:</h4>
                             <br>
                             <h5 class="card-title dash-title m-0">
                                 <sm><i>(click to compare)</i></sm>
@@ -65,25 +65,29 @@
         </div> --}}
     </div>
     <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
-        <div class="dropdown position-absolute m-2" id="stat-dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Statistic
-            </button>
-            <ul class="dropdown-menu">
-                {{#if goodData}}
-                {{#each finalStats}}
-                <li><a comparedStatsData="{{score}}-{{score2}}" class="comparedStat dropdown-item" href="#">{{name}}</a></li>
-                {{/each}}
-                {{/if}}
-            </ul>
-        </div>
         <div class="card shadow-lg">
+            {{#if goodData}}
+            <div class="dropdown position-absolute m-2" id="stat-dropdown">
+                <button class="btn yellow-glow-btn yellow-glow-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select statistic
+                </button>
+                <ul class="dropdown-menu">
+                    {{#each finalStats}}
+                        <li><a comparedStatsData="{{score}}-{{score2}}" class="comparedStat dropdown-item" href="#">{{name}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
             <div class="card-header d-flex justify-content-center">
                 <h2 class="card-title text-dark"></h2>
             </div>
             <div class="card-body d-flex justify-content-center align-items-center">
                 <canvas id="graph-box"></canvas>
             </div>
+            {{else}}
+            <div class="card-header d-flex justify-content-center">
+                <h4 class="card-title dash-title">Click on a game to compare stats</h4>
+            </div>
+            {{/if}}
         </div>
     </div>
 </div>

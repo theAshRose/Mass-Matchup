@@ -1,7 +1,7 @@
 
 
 const ctx = document.getElementById('graph-box');
-
+let myChart;
 
 const doubleStats = async (event) => {
      event.preventDefault();
@@ -26,8 +26,8 @@ const doubleStats = async (event) => {
      }
  };
 
-
- const myChart = new Chart(ctx, {
+ if (ctx !== null) {
+    myChart = new Chart(ctx, {
      type: 'bar',
      data: {
          labels: [' '],
@@ -80,6 +80,7 @@ const doubleStats = async (event) => {
          }
      }
  });
+}
 
 
  function updateChartData(event) {
