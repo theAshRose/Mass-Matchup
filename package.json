@@ -34,5 +34,6 @@
   "bugs": {
     "url": "https://github.com/theDomConrad/project2group12/issues"
   },
-  "homepage": "https://github.com/theDomConrad/project2group12#readme"
+  "homepage": "https://github.com/theDomConrad/project2group12#readme",
+  "devDependencies": {}
 }
