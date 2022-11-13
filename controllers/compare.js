@@ -7,6 +7,7 @@ const { parse } = require("handlebars");
 const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
 // let userGames
 let freshData = [];
+let finalStats = []
 let friendGames;
 router.post('/', async (req, res) => {
     if (!req.session.loggedIn) {
@@ -148,8 +149,8 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
         // console.log(steamFriend, "FRIEND1")
         // console.log(sharedAppId, "sharedAppID")
         // console.log(steam, "user steam ID")
-
-
+        console.log(steam)
+        console.log(steamFriend)
         const userUrl = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + sharedAppId + '&key=' + process.env.APIkey + '&steamid=' + steam
         const friendUrl = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + sharedAppId + '&key=' + process.env.APIkey + '&steamid=' + steamFriend
         /////////MESS STARTS HERE
@@ -162,7 +163,7 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
             if (!err && res.statusCode < 400) {
                 // console.log(body, "naraka")
 
-
+                console.log(body,"here here")
                 let elparso = JSON.parse(body)
                 // console.log(elparso + "elparso")
                 let temp1 = Object.keys(elparso)
@@ -224,16 +225,16 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
             // console.log(sharedAppId, "target1")
             // console.log(steamFriend, "target2")
             ///////////////////////////////////////////////MESS 2 starts here
-            rp(friendUrl, async function (err, res, body) {
+            rp(friendUrl, async function (err, res, body1) {
                 if (res.statusCode > 400) {
                     res.redirect('/user-search')
                     alert("Search did not yield fruit. Pluck again")
                 }
                 if (!err && res.statusCode < 400) {
                     // console.log(body, "naraka")
+                    console.log(body1, "here now")
 
-
-                    let elparso = JSON.parse(body)
+                    let elparso = JSON.parse(body1)
                     // console.log(elparso + "elparso")
                     let temp1 = Object.keys(elparso)
                     let no = "elparso." + temp1[0]
@@ -285,15 +286,73 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                         // console.log(iAmAwesome, "target 200")
                         // console.log(userStats, "target69000")
 
-                    } let friendStats = []
-                    for (i = 0; i < iAmAwesome.length; i++) {
-                        friendStats.push(iAmAwesome[i].score)
                     }
+                    
+                    console.log(iAmAwesome,"friend stats")
+                    console.log(userStats,"user stats")
+                    if(iAmAwesome.length >= userStats.length){
+                        let userArr = []
+                        let tempFriendArr = []
+                        let friendScore = []
+                        let indexArr = []
+                        finalStats = []
+                        for (i = 0; i < userStats.length; i++) {
+                            userArr.push(userStats[i].name)
+                        }
+                        for(i = 0; i < iAmAwesome.length; i++) {
+                            tempFriendArr.push(iAmAwesome[i].name)
+                            friendScore.push(iAmAwesome[i].score)
+                        }
+                        for(i = 0; i < userStats.length; i++){
+                            let tempind = tempFriendArr.indexOf(userArr[i])
+                            indexArr.push(tempind)
+                        }
+                        for(i = 0; i < userStats.length; i++){
+                            finalStats.push(userStats[i])
+                            finalStats[i].score2 = friendScore[indexArr[i]]
+                        }
+                    }else {
+                        let userArr = []
+                        let tempFriendArr = []
+                        let friendScore = []
+                        let indexArr = []
+                        finalStats = []
+                        for (i = 0; i < iAmAwesome.length; i++) {
+                            userArr.push(iAmAwesome[i].name)
+                        }
+                        for(i = 0; i < userStats.length; i++) {
+                            tempFriendArr.push(userStats[i].name)
+                            friendScore.push(userStats[i].score)
+                        }
+                        for(i = 0; i < iAmAwesome.length; i++){
+                            let tempind = tempFriendArr.indexOf(userArr[i])
+                            indexArr.push(tempind)
+                        }
+                        for(i = 0; i < iAmAwesome.length; i++){
+                            finalStats.push(iAmAwesome[i])
+                            finalStats[i].score2 = friendScore[indexArr[i]]
+                        }
+                    }
+
+                     console.log(finalStats, "YAY")
+
+
+                    //  let friendStats = []
+                    // for (i = 0; i < iAmAwesome.length; i++) {
+                    //     friendStats.push(iAmAwesome[i].score)
+                    // }
+
+
+
                     // console.log(friendStats)
-                    for (i = 0; i < userStats.length; i++) {
-                        userStats[i].score2 = friendStats[i]
-                    }
+                    // for (i = 0; i < userStats.length; i++) {
+                    //     userStats[i].score2 = friendStats[i]
+                    // }
                     // console.log(userStats)
+
+
+
+
 
                 } else {
                     goodData = false
@@ -303,7 +362,7 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                 res.render('compare-stats',
                     {sharedGames : req.session.sharedTemp,
                         goodData,
-                        userStats,
+                        finalStats,
                         friends: res.locals.friends,
                         friendRequests: res.locals.friendRequests,
                         user: {

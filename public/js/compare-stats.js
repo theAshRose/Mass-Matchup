@@ -89,12 +89,17 @@ const doubleStats = async (event) => {
     myChart.data.labels.splice(0, 1, clickedBtn.text())
 
     let userScore = parseInt(clickedBtn.attr("comparedstatsdata"))
-
+    console.log(userScore, "user")
     const splitMe = clickedBtn.attr("comparedstatsdata").split("")
     const flipMe = splitMe.reverse()
     const finishMe = flipMe.join("")
-    let friendScore = parseInt(finishMe)
-
+    const goAgain = parseInt(finishMe)
+    const stringUp = goAgain.toString()
+    const splitAgain = stringUp.split("")
+    const flipAgain = splitAgain.reverse()
+    const onceMoreWithFeeling = flipAgain.join("")
+    const friendScore = parseInt(onceMoreWithFeeling)
+    console.log(friendScore, "friend")
 
     myChart.data.datasets[0].data.splice(0, 1, userScore)
     myChart.data.datasets[1].data.splice(0, 1, friendScore)
