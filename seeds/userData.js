@@ -3,7 +3,7 @@ const { User } = require("../models");
 const UserData = [{
   username: "Carlos Erepo",
   password: "45walabee",
-  steam_id: '76561198134108288',
+  steam_id: '76561198028318138',
   steam_avatar_full: 'https://avatars.akamai.steamstatic.com/5a9b5198d6858953b772c86a9e52a6234d1b64e8_full.jpg',
   steam_username: 'Goose, papa?',
   profile_url: "https://steamcommunity.com/profiles/76561198134108288/",

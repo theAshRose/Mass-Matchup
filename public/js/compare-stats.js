@@ -25,7 +25,6 @@ const doubleStats = async (event) => {
             //      // alert("am i the working?")
             //  }
          } else {
- 
              alert('Search failed! Twy again UwU');
          }
      }

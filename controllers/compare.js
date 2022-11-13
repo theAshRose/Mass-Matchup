@@ -35,22 +35,30 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
             const friendProfile = friendData.get({ plain: true });
             const steam = user.steam_id
             const steamFriend = friendProfile.steam_id
-            // console.log(steamFriend, "steamfriend")
+            console.log(steamFriend, "steamfriend")
             var urlUser = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json&include_appinfo=true'
-            var urlFriend = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steamFriend + '&format=json&include_appinfo=true'
+            var urlFriend = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid='+steamFriend+'&format=json&include_appinfo=true'
             rp(urlUser, async function (err, res, body) {
                 if (!err && res.statusCode < 400) { }
                 return body
             }).then(async function (Data1) {
                 let Data2 = JSON.parse(Data1)
-                userGames = (Data2.response.games)
+                userGames = await (Data2.response.games)
+                if (!userGames) {                        
+                    res.redirect("/")                        
+                }
                 rp(urlFriend, async function (err, res, body) {
                     if (!err && res.statusCode < 400) { }
+                  
                     return body
                 }).then(async function (Data) {
                     // console.log(userGames, "HERE")
                     let DataTemp = JSON.parse(Data)
+                    // console.log(DataTemp, "random spelling")
                     friendGames = await (DataTemp.response.games)
+                    if (!friendGames) {                        
+                        res.redirect("/")                        
+                    }
                     // console.log(friendGames, "FRIEND ARRAY")
                     let appidArr1 = []
                     let appidArr2 = []
