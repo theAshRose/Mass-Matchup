@@ -148,7 +148,7 @@ a:hover {
     position: relative;
     color: #ab04ff;
     background-color: rgba(0,0,0,0);
-    transition: 0.4s;
+    transition: 0.2s;
     overflow: hidden;
     border: 1px solid #ab04ff;
     z-index: 500;
@@ -193,7 +193,7 @@ a:hover {
     position: relative;
     color: #FF3131;
     background-color: black;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow: hidden;
     border: 1px solid #FF3131;
 }
@@ -209,7 +209,7 @@ a:hover {
     position: relative;
     color: #0FFF50;
     background-color: black;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow: hidden;
     border: solid 1px #0FFF50;
 }
@@ -225,7 +225,7 @@ a:hover {
     position: relative;
     color: #04d9ff;
     background-color: black;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow: hidden;
     border: solid 1px #04d9ff;
 }
@@ -241,7 +241,7 @@ a:hover {
     position: relative;
     color: #04d9ff;
     background-color: rgba(0,0,0,0);
-    transition: 0.5s;
+    transition: 0.2s;
     overflow: hidden;
     border: solid 1px #04d9ff;
 }
@@ -261,7 +261,7 @@ a:hover {
     position: relative;
     color: #ccff15;
     background-color: rgba(0,0,0,0);
-    transition: 0.4s;
+    transition: 0.2s;
     overflow: hidden;
     border: solid 1px #ccff15;
 }
