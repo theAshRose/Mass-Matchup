@@ -1,17 +1,19 @@
 ///// /user/results
+const usernameInputForm = document.getElementById('username-input-form');
 
 const searchUsers = async (event) => {
     event.preventDefault();
     
     const username = document.querySelector("#username-input").value.trim();
-    console.log('VICTORY')
+    //console.log('VICTORY')
     if (username) {
+      usernameInputForm.reset();
       const response = await fetch("/user/results", {
         method: "POST",
         body: JSON.stringify({ username }),
         headers: { "Content-Type": "application/json" },
       });
-      console.log(response+"victory 2");
+      //console.log(response+"victory 2");
       if (response.ok) {
         document.location.replace("/user/content");
       } else {
@@ -28,7 +30,7 @@ const addFriend = async (event) => {
     let friend1 = friendId.parent().attr('dataUserId')
  
     let friend = parseInt(friend1)
-    
+    console.log(friend1)
 
     if (friend) {
         const response = await fetch("/friends/request", {
@@ -38,7 +40,7 @@ const addFriend = async (event) => {
         });
         console.log(response+"victory 2");
         if (response.ok) {
-          document.location.replace("/user/content");
+          //document.location.replace("/user/content");
         } else {
           alert("No results found");
         }
@@ -47,7 +49,8 @@ const addFriend = async (event) => {
 
 }
 
-  $("#search-user-button").on("click", searchUsers)
-  $("#search-all-users-button").on("click", searchUsers)
-  $(".addFriendBtn").on("click", addFriend)
+  $("#search-user-button").on("click", searchUsers);
+  $("#search-all-users-button").on("click", searchUsers);
+  $(".addFriendBtn").on("click", addFriend);
+  $('username-input-form').on('submit', searchUsers);
   

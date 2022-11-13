@@ -163,6 +163,7 @@ router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, re
             {
                 friends: res.locals.friends,
                 friendRequests: res.locals.friendRequests,
+                search: true,
                 user: {
                     loggedIn: req.session.loggedIn,
                     username: req.session.username,
