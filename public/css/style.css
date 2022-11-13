@@ -148,7 +148,7 @@ a:hover {
     position: relative;
     color: #ab04ff;
     background-color: rgba(0,0,0,0);
-    transition: 0.5s;
+    transition: 0.2s;
     overflow: hidden;
     border: 1px solid #ab04ff;
     z-index: 500;
@@ -160,7 +160,7 @@ a:hover {
     box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
 }
 
-.violet-glow-btn:focus {
+.profile-button:focus {
     background: #ab04ff;
     border: 1px solid #ab04ff;
     color: white;
@@ -193,14 +193,14 @@ a:hover {
     position: relative;
     color: #FF3131;
     background-color: black;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow: hidden;
     border: 1px solid #FF3131;
 }
   
 .red-glow-btn:hover {
     background: #FF3131;
-    color: #050801;
+    color: white;
     box-shadow: 0 0 5px #FF3131, 0 0 25px #FF3131, 0 0 50px #FF3131, 0 0 150px #FF3131;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
 }
@@ -209,7 +209,7 @@ a:hover {
     position: relative;
     color: #0FFF50;
     background-color: black;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow: hidden;
     border: solid 1px #0FFF50;
 }
@@ -225,7 +225,7 @@ a:hover {
     position: relative;
     color: #04d9ff;
     background-color: black;
-    transition: 0.5s;
+    transition: 0.3s;
     overflow: hidden;
     border: solid 1px #04d9ff;
 }
@@ -241,7 +241,7 @@ a:hover {
     position: relative;
     color: #04d9ff;
     background-color: rgba(0,0,0,0);
-    transition: 0.5s;
+    transition: 0.2s;
     overflow: hidden;
     border: solid 1px #04d9ff;
 }
@@ -251,6 +251,33 @@ a:hover {
     color: black;
     box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.transparent {
+    background-color: rgba(0,0,0,0);
+}
+
+.yellow-glow-btn {
+    position: relative;
+    color: #ccff15;
+    background-color: rgba(0,0,0,0);
+    transition: 0.2s;
+    overflow: hidden;
+    border: solid 1px #ccff15;
+}
+  
+.yellow-glow-btn:hover {
+    background: #ccff15;
+    color: #050801;
+    box-shadow: 0 0 5px #ccff15, 0 0 25px #ccff15, 0 0 50px #ccff15, 0 0 200px #ccff15;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.yellow-glow-dropdown:focus {
+    background: #ccff15;
+    border: solid 1px #ccff15;
+    color: black;
+    box-shadow: 0 0 5px #ccff15, 0 0 25px #ccff15, 0 0 50px #ccff15, 0 0 150px #ccff15;
 }
   
 /* .red-glow-btn:nth-child(1) {
@@ -355,6 +382,15 @@ a:hover {
     background: #ab04ff;
     color: #050801;
     box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff;
+}
+
+.user-stat-list-group-item {
+    color: #ccff15;
+    color:#ffffff;
+    text-shadow:
+    0 0 5px #ccff15, 0 0 10px #ccff15;
+    background-color: rgba(0,0,0,0);
+    border: none;
 }
 
 @media (max-width: 992px) {

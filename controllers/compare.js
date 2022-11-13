@@ -357,7 +357,6 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                 } else {
                     goodData = false
                 }
-                console.log(goodData)
                 
                 res.render('compare-stats',
                     {sharedGames : req.session.sharedTemp,

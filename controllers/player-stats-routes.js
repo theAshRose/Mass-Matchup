@@ -36,6 +36,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                         friends: res.locals.friends,
                         friendRequests: res.locals.friendRequests,
                         Data,
+                        stats: true,
                         user: {
                             loggedIn: req.session.loggedIn,
                             username: req.session.username,
@@ -216,6 +217,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                             friends: res.locals.friends,
                             friendRequests: res.locals.friendRequests,
                             Data,
+                            stats: true,
                             user: {
                                 loggedIn: req.session.loggedIn,
                                 username: req.session.username,
