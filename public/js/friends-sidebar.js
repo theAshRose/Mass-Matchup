@@ -24,7 +24,7 @@ async function friendRequestAcceptButtonOnClick(event) {
     const friendID = parseInt(friendRequestCard.getAttribute('data-friend-id'));
 
     /* 2. Send a POST request to the friends route to add a new friend. */
-    const response1 = await fetch(`friends/accept`, {
+    const response1 = await fetch(`/friends/accept`, {
         method: 'POST',
         body: JSON.stringify({ friend: friendID }),
         headers: { 'Content-Type': 'application/json' }
@@ -37,7 +37,7 @@ async function friendRequestAcceptButtonOnClick(event) {
     });
 
     /* 3. Make a DELETE request to the friends request route to delete the friend request. */
-    const response2 = await fetch(`friends/request/${friendRequestID}`, {
+    const response2 = await fetch(`/friends/request/${friendRequestID}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     });
@@ -55,7 +55,7 @@ async function friendRequestAcceptButtonOnClick(event) {
 
     const divToAdd = $(`<div class="card p-0 mb-1" id="friend-element-${friendRelationshipID}">`);
 
-    divToAdd.html(`<button type="button" class="btn btn-outline-primary col-12 p-0 d-flex justify-content-between align-items-center"
+    divToAdd.html(`<button type="button" class="btn sidebar-button col-12 p-0 d-flex justify-content-between align-items-center"
     type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-user-id-${friendID}" aria-expanded="false"
     aria-controls="collapseExample">
     <img src="${friendAvatar}"
@@ -64,9 +64,9 @@ async function friendRequestAcceptButtonOnClick(event) {
 </button>
 <div class="collapse" id="sidebar-user-id-${friendID}" data-friend-id="${friendRelationshipID}">
     <div class="card-body p-1 pt-2 d-flex justify-content-between">
-        <button type="button" class="btn btn-primary btn-sm">See stats</button>
-        <button type="button" class="btn btn-success btn-sm compare-stats-button">Compare stats</button>
-        <button type="button" class="btn btn-danger btn-sm remove-friend-button">Remove Friend</button>
+        <button type="button" class="btn blue-glow-btn btn-sm">See stats</button>
+        <button type="button" class="btn green-glow-btn btn-sm compare-stats-button">Compare stats</button>
+        <button type="button" class="btn red-glow-btn btn-sm remove-friend-button">Remove Friend</button>
     </div>
 </div>`);
 
@@ -107,7 +107,7 @@ async function friendRequestDenyButtonOnClick(event) {
     const friendRequestID = parseInt(friendRequestIDString.match(/\d+/g)[0]);
 
     /* 2. Make a DELETE request to delete the friend request. */
-    const response = await fetch(`friends/request/${friendRequestID}`, {
+    const response = await fetch(`/friends/request/${friendRequestID}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
     });
