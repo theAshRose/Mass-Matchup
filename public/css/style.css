@@ -384,6 +384,15 @@ a:hover {
     box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff;
 }
 
+.user-stat-list-group-item {
+    color: #ccff15;
+    color:#ffffff;
+    text-shadow:
+    0 0 5px #ccff15, 0 0 10px #ccff15;
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
 @media (max-width: 992px) {
     nav {
         font-size: 26px;

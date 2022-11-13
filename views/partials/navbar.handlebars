@@ -3,8 +3,10 @@
         <img src="/images/GIRTHCHECKER.png" class="img-fluid rounded" alt="..." id="logo-image">
         <nav>
             <ul class="p-0 m-0">
-                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line nav-class">Home</li>
-                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/" >Dashboard</a></li>
+                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/" >Home</a></li>
+                {{#unless stats}}
+                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/user-stats" >Stats</a></li>
+                {{/unless}}
                 <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/logout" >Logout</a></li>
             </ul>
         </nav>
