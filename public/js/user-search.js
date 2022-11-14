@@ -33,11 +33,9 @@ const addFriend = async (event) => {
     event.preventDefault();
 
     let friendId = $(event.target)
-    console.log(friendId)
     let friend1 = friendId.parent().attr('dataUserId')
  
     let friend = parseInt(friend1)
-    console.log(friend1)
 
     if (friend) {
         const response = await fetch("/friends/request", {
@@ -47,14 +45,13 @@ const addFriend = async (event) => {
         });
         console.log(response+"victory 2");
         if (response.ok) {
-          friendId.text("Friend added!");
+          friendId.text("Friend Request Sent!");
+          friendId.off("click", addFriend);
           //document.location.replace("/user/content");
         } else {
           alert("No results found");
         }
-      }
-
-
+    }
 }
 
   $("#search-user-button").on("click", searchUsers);

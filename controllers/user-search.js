@@ -47,14 +47,7 @@ router.get('/search/all', authorizeUser, getFriendsAndFriendRequests, async (req
 
     const friendUsernames = res.locals.friends.map(friend => friend.username);
 
-    const friendRequestUsernames = res.locals.friendRequests.map(friend => friend.username);
-
-    const nonFriendRequestUsers = userResults.filter((user) => {
-      return !friendRequestUsernames.includes(user.username);
-    });
-
-    /* 2. Filter out the returned results based on that list. */
-    const nonFriendUsers = nonFriendRequestUsers.filter((user) => {
+    const nonFriendUsers = userResults.filter((user) => {
         return !friendUsernames.includes(user.username);
     });
 
@@ -62,12 +55,11 @@ router.get('/search/all', authorizeUser, getFriendsAndFriendRequests, async (req
       return user.username != req.session.username;
     });
 
-    console.log(nonFriendNonUserResults);
-
     res.render('search', {
       friends: res.locals.friends,
       friendRequests: res.locals.friendRequests,
       userResults: nonFriendNonUserResults,
+      friendRequestsSent: res.locals.friendRequestsSent,
       loggedIn: req.session.loggedIn,
       searchResults: true,
       search: true,
@@ -134,6 +126,7 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
       res.render("search", {
         friends: res.locals.friends,
         friendRequests: res.locals.friendRequests,
+        friendRequestsSent: res.locals.friendRequestsSent,
         userResults: nonFriendNonUserResults,
         loggedIn: req.session.loggedIn,
         searchResults: true,
