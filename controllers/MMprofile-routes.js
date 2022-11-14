@@ -206,7 +206,7 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
     });
 
-    ownedGamesData = ownedGamesDataSorted
+    ownedGamesData = ownedGamesDataSorted;
 
     res.render('friend-stats', {
         friends: res.locals.friends,
@@ -227,7 +227,6 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
 router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendRequests, getFriendData, async (req, res) => {
 
     if (!ownedGamesData) {
-        console.log('TEST');
         const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}&format=json&include_appinfo=true`;
 
         const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
@@ -247,50 +246,83 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
 
     const gameStatsAPIURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=${req.params.appid}&key=${process.env.APIKey}&steamid=${res.locals.friendData.steam_id}`;
 
-    console.log(gameStatsAPIURL);
+    //console.log(gameStatsAPIURL);
+    //http://localhost:3001/friends/2/stats/834910
 
-    const rawGameStatsData = await rp(gameStatsAPIURL);
-    const gameStatsData = JSON.parse(rawGameStatsData);
-    const acheivementMap = gameStatsData.playerstats.achievements.map(achievement => {
-        const newAchievement = achievement;
-        newAchievement.value = achievement.achieved;
+    rp(gameStatsAPIURL)
+    .then((rawGameStatsData) => {
+        console.log(rawGameStatsData);
+        const gameStatsData = JSON.parse(rawGameStatsData);
 
-        return newAchievement;
-    });
-    //console.log(gameStatsData.playerstats.achievements);
-    //console.log(gameStatsData.playerstats.stats);
-    //console.log(acheivementMap);
-
-    /* For when the response nugget doesn't contain an array called 'stats, only 'achievements'' */
-    let rawGameStats;
-    if (!gameStatsData.playerstats.stats) {
-        rawGameStats = [];
-    } else {
-        rawGameStats = gameStatsData.playerstats.stats;
-    }
-
-    console.log(acheivementMap);
-    const gameStats = {
-        name: gameStatsData.playerstats.gameName,
-        stats: [...rawGameStats, ...acheivementMap]
-    };
-
-    console.log(gameStats.stats);
-
-    res.render('friend-stats', {
-        friends: res.locals.friends,
-        friendRequests: res.locals.friendRequests,
-        friendData: res.locals.friendData,
-        ownedGames: ownedGamesData,
-        hasStats: true,
-        gameStats,
-        user: {
-            loggedIn: req.session.loggedIn,
-            username: req.session.username,
-            steam_username: req.session.steam_username,
-            steam_avatar_full: req.session.steam_avatar_full,
-            profile_url: req.session.profile_url
+        let achievementMap;
+        let gameStats;
+    
+        if (gameStatsData.playerstats) {
+            console.log("RESPONSE");
+    
+            if (gameStatsData.playerstats.achievements) {
+                achievementMap = gameStatsData.playerstats.achievements.map(achievement => {
+                    const newAchievement = achievement;
+                    newAchievement.value = achievement.achieved;
+    
+                    return newAchievement;
+                });
+            } else {
+                achievementMap = [];
+            }
+    
+            /* For when the response nugget doesn't contain an array called 'stats, only 'achievements'' */
+            let rawGameStats;
+            if (!gameStatsData.playerstats.stats) {
+                rawGameStats = [];
+            } else {
+                rawGameStats = gameStatsData.playerstats.stats;
+            }
+    
+            //console.log(achievementMap);
+            gameStats = {
+                name: gameStatsData.playerstats.gameName,
+                stats: [...rawGameStats, ...achievementMap]
+            };
+        } else {
+            console.log("NO RESPONSE");
         }
+
+        res.render('friend-stats', {
+            friends: res.locals.friends,
+            friendRequests: res.locals.friendRequests,
+            friendData: res.locals.friendData,
+            ownedGames: ownedGamesData,
+            hasStats: true,
+            gameStats,
+            user: {
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+                steam_username: req.session.steam_username,
+                steam_avatar_full: req.session.steam_avatar_full,
+                profile_url: req.session.profile_url
+            }
+        });
+    })
+    .catch((error) => {
+        res.render('friend-stats', {
+            friends: res.locals.friends,
+            friendRequests: res.locals.friendRequests,
+            friendData: res.locals.friendData,
+            ownedGames: ownedGamesData,
+            hasStats: false,
+            gameStats: {
+                name: "",
+                stats: []
+            },
+            user: {
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+                steam_username: req.session.steam_username,
+                steam_avatar_full: req.session.steam_avatar_full,
+                profile_url: req.session.profile_url
+            }
+        });
     });
 });
 
