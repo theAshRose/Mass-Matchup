@@ -76,6 +76,10 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                 let parsedData = JSON.parse(playedData)
                 // console.log(parsedData.response.games[0].appid + "first.then HERE");
                 games = parsedData.response.games
+
+                if (parsedData.response.total_count === 0){
+                    res.redirect('user-stats')
+                }
                 
                 // console.log(JSON.stringify(games[0])+"line 49")
                 // var url = ;
@@ -158,9 +162,11 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
 })
 
 router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
+
         try {
             res.render('search',
-            {
+            {   
+                
                 friends: res.locals.friends,
                 friendRequests: res.locals.friendRequests,
                 search: true,
