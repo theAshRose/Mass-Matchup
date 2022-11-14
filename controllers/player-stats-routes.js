@@ -26,13 +26,17 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                 }
             }).then(function (Data1) {
                 let Data2 = JSON.parse(Data1)
+                console.log(Data2, "POTATOE")
+                if(!Data2.response.length){
+                    res.redirect("search")
+                }
                 let temp20 = (Data2.response.games)
                 const Data = temp20.sort(function (a, b) {
                     return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
                 });
+                
                 res.render('user-stats',
                     {
-
                         friends: res.locals.friends,
                         friendRequests: res.locals.friendRequests,
                         Data,
@@ -211,7 +215,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     });
                     console.log(iAmAwesome, "i am the best")
                     res.render('user-stats',
-                        {
+                        {   
                             goodData,
                             iAmAwesome,
                             friends: res.locals.friends,

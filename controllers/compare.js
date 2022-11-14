@@ -81,7 +81,9 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
                     for (i = 0; i < solution.length; i++) {
                         mutGames.push(friendGames[solution[i]])
                     }
-                    console.log(solution)
+                    console.log(solution, "solution")
+                    console.log(appidArr1, "appid1")
+                    console.log(appidArr2, "appid2")
                     // console.log(mutGames, "IM A STRING")
                     return mutGames;
                 }).then(async function (sharedGames) {
@@ -151,8 +153,8 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
         // console.log(steamFriend, "FRIEND1")
         // console.log(sharedAppId, "sharedAppID")
         // console.log(steam, "user steam ID")
-        console.log(steam)
-        console.log(steamFriend)
+        // console.log(steam, "res1")
+        // console.log(steamFriend, "res2")
         const userUrl = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + sharedAppId + '&key=' + process.env.APIkey + '&steamid=' + steam
         const friendUrl = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + sharedAppId + '&key=' + process.env.APIkey + '&steamid=' + steamFriend
         /////////MESS STARTS HERE
@@ -165,7 +167,7 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
             if (!err && res.statusCode < 400) {
                 // console.log(body, "naraka")
 
-                console.log(body,"here here")
+                // console.log(body,"here here")
                 let elparso = JSON.parse(body)
                 // console.log(elparso + "elparso")
                 let temp1 = Object.keys(elparso)
@@ -234,7 +236,7 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
                 }
                 if (!err && res.statusCode < 400) {
                     // console.log(body, "naraka")
-                    console.log(body1, "here now")
+                    // console.log(body1, "here now")
 
                     let elparso = JSON.parse(body1)
                     // console.log(elparso + "elparso")
