@@ -241,9 +241,11 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
 
         ownedGamesData = ownedGamesDataSorted
     }
-
+    console.log(process.env.APIkey, "ONE1")
+    require('dotenv').config();
+    console.log(process.env.APIkey, "TWO2")
     const gameStatsAPIURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=${req.params.appid}&key='${process.env.APIKey}'&steamid=${res.locals.friendData.steam_id}`;
-
+    console.log(process.env.APIkey, "THREE3")
     //console.log(gameStatsAPIURL);
     //http://localhost:3001/friends/2/stats/834910
 
