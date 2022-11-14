@@ -104,17 +104,18 @@ body {
 }
 
 /*game news*/
-.game-news-link {
-    color:#aa00ff;
+a[href^="https"] {
+    --bs-link-color:#aa00ff;
     text-decoration: none;
 }
 
-.game-news-link:hover {
+a[href^="https"]:hover {
     text-shadow:
-    0 0 5px #aa00ff, 0 0 10px #aa00ff,
-    0 0 20px #aa00ff, 0 0 40px #aa00ff;
-    color:white;
+    0 0 5px #aa00ff, 0 0 10px #aa00ff;
+    --bs-link-hover-color:white;
 }
+
+
 
 .user-search-image {
     height: 100px;
