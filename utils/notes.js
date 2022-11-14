@@ -19,9 +19,6 @@
 ////////console.log(userBlogs.games) route undetermined!
 
 
-////JAWSDB_URL
-////mysql://nubeog4x71j27473:uqxxo4tw0h34flvt@o2olb7w3xv09alub.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/u4l4oqwe1c8h1drk
-
 //////GET NEWS BY APP ID :::: http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440&count=3&maxlength=300&format=json
 
 
