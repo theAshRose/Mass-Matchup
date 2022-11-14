@@ -16,128 +16,130 @@ let newsPerGame = []
 let start;
 let games
 router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
-        try {
-            const userData = await User.findByPk(req.session.user, {
-                where: {
-                    id: req.params.id
-                }
-            })
+    try {
+        const userData = await User.findByPk(req.session.user, {
+            where: {
+                id: req.params.id
+            }
+        })
+        if (req.session.privateProfile == 1) {
+            res.redirect('403')
+        }
+        const dbfriendData1 = await Friend.findAll({
+            where: {
+                friend_id: req.session.user,
+            },
+        });
+        const dbfriendData2 = await Friend.findAll({
+            where: {
+                link_id: req.session.user,
+            },
+        });
+        const friends = [];
+        const friendContent1 = dbfriendData1.map((friend) =>
+            friend.get({ plain: true })
+        );
+        const friendUserId1 = friendContent1.map((friend) =>
+            friends.push(friend.link_id)
+        );
+        const friendContent2 = dbfriendData2.map((friend) =>
+            friend.get({ plain: true })
+        );
+        const friendUserId2 = friendContent2.map((friend) =>
+            friends.push(friend.friend_id)
+        );
+
+        const friendNames = [];
+
+        for (i = 0; i < friends.length; i++) {
+            const dbfriendUsername = await User.findByPk(friends[i]);
+            friendNames.push(dbfriendUsername);
+        }
 
 
-            const dbfriendData1 = await Friend.findAll({
-                where: {
-                    friend_id: req.session.user,
-                },
-            });
-            const dbfriendData2 = await Friend.findAll({
-                where: {
-                    link_id: req.session.user,
-                },
-            });
-            const friends = [];
-            const friendContent1 = dbfriendData1.map((friend) =>
-                friend.get({ plain: true })
-            );
-            const friendUserId1 = friendContent1.map((friend) =>
-                friends.push(friend.link_id)
-            );
-            const friendContent2 = dbfriendData2.map((friend) =>
-                friend.get({ plain: true })
-            );
-            const friendUserId2 = friendContent2.map((friend) =>
-                friends.push(friend.friend_id)
-            );
+        temp1;
+        temp2;
+        temp3;
+        newsArray = [];
+        newsPerGame = []
+        const user = userData.get({ plain: true });
+        const steam = user.steam_id
+        start = 0
 
-            const friendNames = [];
+        var url = 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json'
 
-            for (i = 0; i < friends.length; i++) {
-                const dbfriendUsername = await User.findByPk(friends[i]);
-                friendNames.push(dbfriendUsername);
+        rp(url, async function (err, res, body) {
+            if (!err && res.statusCode < 400) {
+                temp1 = JSON.parse(body)
+                //  console.log(temp1, "recentlyplayed")
+                const userRecentlyPlayed = await temp1
+                return temp1
+            }
+        }).then(function (playedData) {
+            let parsedData = JSON.parse(playedData)
+            // console.log(parsedData.response.games[0].appid + "first.then HERE");
+            games = parsedData.response.games
+
+            if (parsedData.response.total_count === 0) {
+                res.redirect('user-stats')
             }
 
+            // console.log(JSON.stringify(games[0])+"line 49")
+            // var url = ;
 
-            temp1;
-            temp2;
-            temp3;
-            newsArray = [];
-            newsPerGame = []
-            const user = userData.get({ plain: true });
-            const steam = user.steam_id
-            start = 0
+            function getNews() {
+                rp('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=' + parsedData.response.games[start].appid + '&count=3&maxlength=300&format=json)', async function (err, res, body) {
+                    if (!err && res.statusCode < 400) {
+                        temp2 = JSON.parse(body)
+                        // console.log(temp2, "news")
+                        const recentlyPlayedNews = await temp2
 
-            var url = 'http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json'
+                        newsArray = [];
+                        newsTemp = []
+                        newsArray.push(recentlyPlayedNews)
+                        let parsedArray = JSON.stringify(newsArray)
 
-            rp(url, async function (err, res, body) {
-                if (!err && res.statusCode < 400) {
-                    temp1 = JSON.parse(body)
-                    //  console.log(temp1, "recentlyplayed")
-                    const userRecentlyPlayed = await temp1
-                    return temp1
-                }
-            }).then(function (playedData) {
-                let parsedData = JSON.parse(playedData)
-                // console.log(parsedData.response.games[0].appid + "first.then HERE");
-                games = parsedData.response.games
 
-                if (parsedData.response.total_count === 0){
-                    res.redirect('user-stats')
-                }
-                
-                // console.log(JSON.stringify(games[0])+"line 49")
-                // var url = ;
+                        for (i = 0; i < 3; i++) {
+                            newsTemp.push(newsArray[0].appnews.newsitems[i])
 
-                function getNews() {
-                    rp('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=' + parsedData.response.games[start].appid + '&count=3&maxlength=300&format=json)', async function (err, res, body) {
-                        if (!err && res.statusCode < 400) {
-                            temp2 = JSON.parse(body)
-                            // console.log(temp2, "news")
-                            const recentlyPlayedNews = await temp2
-                            
-                            newsArray = [];
-                            newsTemp = []
-                            newsArray.push(recentlyPlayedNews)
-                            let parsedArray = JSON.stringify(newsArray)
-                            
 
-                            for (i = 0; i < 3; i++) {
-                                newsTemp.push(newsArray[0].appnews.newsitems[i])
-                                
-                               
-                            }
-                            let gameNews = {
-                                name : games[start].name,
-                                news : newsTemp
-                            }
-                            newsPerGame.push(gameNews)
-                           
-
-                            // console.log("START!!!" + newsPerGame + "END!!!!")
-                            // console.log(games.length)
-                            return newsPerGame
                         }
-                    }).then(function (content) {
-                        // console.log(start)
-                        start = start + 1
-                        if (start < games.length) { 
+                        let gameNews = {
+                            name: games[start].name,
+                            news: newsTemp
+                        }
+                        newsPerGame.push(gameNews)
 
-                            getNews()
-                        } else {
-                            rp('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.APIkey + '&steamids=' + steam, async function (err, res, body) {
-                                
-                                temp3 = JSON.parse(body)
-                                let userInfo = temp3.response.players[0]
-                                const userSummary = await temp3
-                                // console.log(temp3.response.players[0].personaname + "USER DATA HERE")
-                                return(userInfo)
-                            }).then(function (userContent) {
-                                
-                                let friends = friendNames.map(userObj=> userObj.get({plain : true}))
 
-                                // console.log(res.locals.friendRequests);
-                                // console.log(res.locals.friends);
-                             
-                                res.render('dashboard',
-                                {friends: res.locals.friends,
+                        // console.log("START!!!" + newsPerGame + "END!!!!")
+                        // console.log(games.length)
+                        return newsPerGame
+                    }
+                }).then(function (content) {
+                    // console.log(start)
+                    start = start + 1
+                    if (start < games.length) {
+
+                        getNews()
+                    } else {
+                        rp('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.APIkey + '&steamids=' + steam, async function (err, res, body) {
+
+                            temp3 = JSON.parse(body)
+                            let userInfo = temp3.response.players[0]
+                            const userSummary = await temp3
+                            // console.log(temp3.response.players[0].personaname + "USER DATA HERE")
+                            return (userInfo)
+                        }).then(function (userContent) {
+
+                            let friends = friendNames.map(userObj => userObj.get({ plain: true }))
+
+                            // console.log(res.locals.friendRequests);
+                            // console.log(res.locals.friends);
+
+                            res.render('dashboard',
+                                {
+                                    friends: res.locals.friends,
                                     friendRequests: res.locals.friendRequests,
                                     temp3,
                                     newsPerGame,
@@ -150,25 +152,25 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                                         profile_url: req.session.profile_url
                                     }
                                 })
-                            }
-                            )
                         }
-                    })
-                }
-                getNews()
-            })
-        } catch (err) {
-            console.log(err)
-            res.status(500).json(err)
-        }
+                        )
+                    }
+                })
+            }
+            getNews()
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 })
 
 router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
 
-        try {
-            res.render('search',
-            {   
-                
+    try {
+        res.render('search',
+            {
+
                 friends: res.locals.friends,
                 friendRequests: res.locals.friendRequests,
                 search: true,
@@ -180,10 +182,10 @@ router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, re
                     profile_url: req.session.profile_url
                 }
             })
-        } catch (err) {
-            console.log(err)
-            res.status(500).json(err)
-        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 
 })
 
@@ -197,7 +199,7 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
     const gamesData = JSON.parse(ownedGamesRawData);
-    if(gamesData.response.length == undefined && !gamesData.response.games){
+    if (gamesData.response.length == undefined && !gamesData.response.games) {
         res.redirect("404")
     }
     const ownedGamesDataUnsorted = gamesData.response.games
@@ -232,7 +234,7 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
         const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
         const gamesData = JSON.parse(ownedGamesRawData);
-        if(gamesData.response.length == undefined && !gamesData.response.games){
+        if (gamesData.response.length == undefined && !gamesData.response.games) {
             res.redirect("404")
         }
         const ownedGamesDataUnsorted = gamesData.response.games
@@ -240,7 +242,7 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
         const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
             return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
         });
-    
+
         ownedGamesData = ownedGamesDataSorted
     }
 
@@ -250,80 +252,80 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
     //http://localhost:3001/friends/2/stats/834910
 
     rp(gameStatsAPIURL)
-    .then((rawGameStatsData) => {
-        console.log(rawGameStatsData);
-        const gameStatsData = JSON.parse(rawGameStatsData);
+        .then((rawGameStatsData) => {
+            console.log(rawGameStatsData);
+            const gameStatsData = JSON.parse(rawGameStatsData);
 
-        let achievementMap;
-        let gameStats;
-    
-        if (gameStatsData.playerstats) {
-            console.log("RESPONSE");
-    
-            if (gameStatsData.playerstats.achievements) {
-                achievementMap = gameStatsData.playerstats.achievements.map(achievement => {
-                    const newAchievement = achievement;
-                    newAchievement.value = achievement.achieved;
-    
-                    return newAchievement;
-                });
-            } else {
-                achievementMap = [];
-            }
-    
-            /* For when the response nugget doesn't contain an array called 'stats, only 'achievements'' */
-            let rawGameStats;
-            if (!gameStatsData.playerstats.stats) {
-                rawGameStats = [];
-            } else {
-                rawGameStats = gameStatsData.playerstats.stats;
-            }
-    
-            //console.log(achievementMap);
-            gameStats = {
-                name: gameStatsData.playerstats.gameName,
-                stats: [...rawGameStats, ...achievementMap]
-            };
-        } else {
-            console.log("NO RESPONSE");
-        }
+            let achievementMap;
+            let gameStats;
 
-        res.render('friend-stats', {
-            friends: res.locals.friends,
-            friendRequests: res.locals.friendRequests,
-            friendData: res.locals.friendData,
-            ownedGames: ownedGamesData,
-            hasStats: true,
-            gameStats,
-            user: {
-                loggedIn: req.session.loggedIn,
-                username: req.session.username,
-                steam_username: req.session.steam_username,
-                steam_avatar_full: req.session.steam_avatar_full,
-                profile_url: req.session.profile_url
+            if (gameStatsData.playerstats) {
+                console.log("RESPONSE");
+
+                if (gameStatsData.playerstats.achievements) {
+                    achievementMap = gameStatsData.playerstats.achievements.map(achievement => {
+                        const newAchievement = achievement;
+                        newAchievement.value = achievement.achieved;
+
+                        return newAchievement;
+                    });
+                } else {
+                    achievementMap = [];
+                }
+
+                /* For when the response nugget doesn't contain an array called 'stats, only 'achievements'' */
+                let rawGameStats;
+                if (!gameStatsData.playerstats.stats) {
+                    rawGameStats = [];
+                } else {
+                    rawGameStats = gameStatsData.playerstats.stats;
+                }
+
+                //console.log(achievementMap);
+                gameStats = {
+                    name: gameStatsData.playerstats.gameName,
+                    stats: [...rawGameStats, ...achievementMap]
+                };
+            } else {
+                console.log("NO RESPONSE");
             }
+
+            res.render('friend-stats', {
+                friends: res.locals.friends,
+                friendRequests: res.locals.friendRequests,
+                friendData: res.locals.friendData,
+                ownedGames: ownedGamesData,
+                hasStats: true,
+                gameStats,
+                user: {
+                    loggedIn: req.session.loggedIn,
+                    username: req.session.username,
+                    steam_username: req.session.steam_username,
+                    steam_avatar_full: req.session.steam_avatar_full,
+                    profile_url: req.session.profile_url
+                }
+            });
+        })
+        .catch((error) => {
+            res.render('friend-stats', {
+                friends: res.locals.friends,
+                friendRequests: res.locals.friendRequests,
+                friendData: res.locals.friendData,
+                ownedGames: ownedGamesData,
+                hasStats: false,
+                gameStats: {
+                    name: "",
+                    stats: []
+                },
+                user: {
+                    loggedIn: req.session.loggedIn,
+                    username: req.session.username,
+                    steam_username: req.session.steam_username,
+                    steam_avatar_full: req.session.steam_avatar_full,
+                    profile_url: req.session.profile_url
+                }
+            });
         });
-    })
-    .catch((error) => {
-        res.render('friend-stats', {
-            friends: res.locals.friends,
-            friendRequests: res.locals.friendRequests,
-            friendData: res.locals.friendData,
-            ownedGames: ownedGamesData,
-            hasStats: false,
-            gameStats: {
-                name: "",
-                stats: []
-            },
-            user: {
-                loggedIn: req.session.loggedIn,
-                username: req.session.username,
-                steam_username: req.session.steam_username,
-                steam_avatar_full: req.session.steam_avatar_full,
-                profile_url: req.session.profile_url
-            }
-        });
-    });
 });
 
 // router.get('/search/results', async (req, res) => {

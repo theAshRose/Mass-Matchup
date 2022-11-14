@@ -5,7 +5,9 @@ const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
 const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
+const { json } = require("express");
 let goodData = true;
+
 
 
 router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
@@ -27,14 +29,14 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
             }).then(function (Data1) {
                 let Data2 = JSON.parse(Data1)
                 console.log(Data2.response, "POTATOE")
-                if(Data2.response.length == undefined && !Data2.response.games){
+                if (Data2.response.length == undefined && !Data2.response.games) {
                     res.redirect("404")
                 }
                 let temp20 = (Data2.response.games)
                 const Data = temp20.sort(function (a, b) {
                     return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
                 });
-                
+
                 res.render('user-stats',
                     {
                         friends: res.locals.friends,
@@ -131,14 +133,19 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             console.log(req.session.appid, "why are you bug?")
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
             rp(url, async function (err, res, body) {
-                if (res.statusCode > 400) {
-                    res.redirect('/user-search/')
-                    alert("Search did not yield fruit. Pluck again")
-                }
+            //     try{ const userData = await User.findByPk(req.session.user, {
+            //         // where: {
+            //         //     id: req.params.id
+            //         // }
+            //     })
+            
+            
+            // }
+            //     catch(err) {}
                 if (!err && res.statusCode < 400) {
-                    console.log(body, "naraka")
+                    console.log(body)
 
-                    let elparso = JSON.parse(body)
+                    let elparso = await JSON.parse(body, "TATER")
                     // console.log(elparso + "elparso")
                     let temp1 = Object.keys(elparso)
                     let no = "elparso." + temp1[0]
@@ -150,7 +157,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     let temp4 = eval(no2)
                     console.log(temp4, "temp4")
                     let iAmAwesome = []
-
+                    
                     if (temp4) {
                         goodData = true
                         for (i = 0; i < temp4.length; i++) {
@@ -163,12 +170,15 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                         }
                     } else {
                         goodData = false
+                        
                     }
 
                     // console.log(iAmAwesome, "IM TEMP 4")
-                    return iAmAwesome
-                }
+                      return iAmAwesome
+                } 
+                
             }).then(async function (data1) {
+                
                 let elparso = JSON.parse(data1)
                 let temp1 = Object.keys(elparso)
                 let no = "elparso." + temp1[0]
@@ -189,6 +199,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     }
                 } else {
                     goodData = false
+                    
                 }
 
                 // console.log(iAmAwesome)
@@ -215,7 +226,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     });
                     console.log(iAmAwesome, "i am the best")
                     res.render('user-stats',
-                        {   
+                        {
                             goodData,
                             iAmAwesome,
                             friends: res.locals.friends,

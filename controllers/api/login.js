@@ -47,11 +47,12 @@ router.post("/login", async (req, res) => {
 
       req.session.save(() => {
         req.session.loggedIn = true;
+        req.session.privateProfile = playerData.communityvisibilitystate;
         req.session.username = dbUserData.username;
         req.session.steam_username = playerData.personaname;
         req.session.steam_avatar_full = playerData.avatarfull;
         req.session.profile_url = playerData.profileurl
-
+        console.log(req.session.privateProfile, "HERE1")
         res
           .status(200)
           .json({ user: dbUserData, message: "You are now logged in!" });
@@ -84,11 +85,13 @@ router.post("/signup", async (req, res) => {
         req.session.user = dbUserData.id;
         req.session.save(() => {
           req.session.loggedIn = true;
+          req.session.privateProfile = response.players[0].communityvisibilitystate;
+          console.log(req.session.privateProfile, "HERE2")
           req.session.username = dbUserData.username;
           req.session.steam_username = dbUserData.steam_username;
           req.session.steam_avatar_full = dbUserData.steam_avatar_full;
           req.session.profile_url = dbUserData.profile_url;
-
+          
           res.status(200).json(dbUserData);
       });
       })
