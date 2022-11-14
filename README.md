@@ -1,7 +1,7 @@
-# project2group12
+# Mass Matchup
 
 ## Description
-
+Mass matchup is a Steam based stats comparison platform. It links accounts to their users steam data and allows you to view and compare with other users on our website.
 ## Usage
 
 ## Languages and Tools Used
@@ -16,5 +16,9 @@
 * ![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
 
 ## Credits
+* Dominic Conradson
+* Mason Davis
+* Adam Ferro
+* Pengteda Cheng
 
 https://docs.google.com/document/d/1W_pNLU-kfZEp_vOx4Ei3IMMwLpfrLRorjeLP2dLdJ3A/edit#heading=h.1zoy6hvhnyf
