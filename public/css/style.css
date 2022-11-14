@@ -65,6 +65,7 @@ body {
 /*overflow-y: scroll; */
 /*dashboard styling*/
 
+
 .dash-title {
     text-shadow:
     0 0 5px #aa00ff, 0 0 10px #aa00ff,
@@ -131,10 +132,9 @@ a[href^="https"]:hover {
     
 }
 
-.game-title {
-    border: 1.5px solid #580084;
-    box-shadow: 0 0 20px #003841;
-    border-radius: 0.375rem;
+.card-title {
+    text-shadow:
+    0 0 5px #00dcff, 0 0 10px #00dcff;
 }
 
 /*recently played*/
