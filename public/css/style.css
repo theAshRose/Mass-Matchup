@@ -4,6 +4,8 @@
     --tertiary: slateblue;
     --sunset-yellow: #ffd319;
     --sunset-orange: #ff901f;
+    --neon-red: #FF3131;
+    --neon-green: #0FFF50;
 }
 
 header {
@@ -26,9 +28,16 @@ body {
 .card {
     background-color: transparent;
     border: 1px solid #9B00E8;
-  box-shadow: 0 0 20px #9B00E8;
+    box-shadow: 0 0 20px #9B00E8;
 }
 
+.user-card {
+    box-shadow: 0 0 20px #04d9ff !important;
+}
+
+.compare-user-card {
+    box-shadow: 0 0 20px var(--neon-red) !important;
+}
 
 /*Login animation*/ 
 @keyframes flicker {
@@ -273,7 +282,6 @@ a[href^="https"]:hover {
 
 .red-glow-btn:active:hover {
     background: #FF3131;
-    border: #FF3131;
     color: white;
     box-shadow: 0 0 5px #FF3131, 0 0 25px #FF3131, 0 0 50px #FF3131, 0 0 150px #FF3131;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
@@ -281,7 +289,6 @@ a[href^="https"]:hover {
 
 .red-glow-btn:active:focus:hover {
     background: #FF3131;
-    border: #FF3131;
     color: white;
     box-shadow: 0 0 5px #FF3131, 0 0 25px #FF3131, 0 0 50px #FF3131, 0 0 150px #FF3131;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
@@ -296,7 +303,7 @@ a[href^="https"]:hover {
     border: 1px solid #FF3131;
 }
 
-.green-glow-btn {
+.green-glow-btn, .green-glow-btn:active:focus {
     position: relative;
     color: #0FFF50;
     background-color: black;
@@ -305,36 +312,11 @@ a[href^="https"]:hover {
     border: solid 1px #0FFF50;
 }
   
-.green-glow-btn:hover {
+.green-glow-btn:hover, .green-glow-btn:active:hover, .green-glow-btn:active:focus:hover {
     background: #0FFF50;
     color: #050801;
     box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
-}
-
-.green-glow-btn:active:hover {
-    background: #0FFF50;
-    border: #0FFF50;
-    color: #050801;
-    box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
-    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
-}
-
-.green-glow-btn:active:focus:hover {
-    background: #0FFF50;
-    border: #0FFF50;
-    color: #050801;
-    box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
-    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
-}
-
-.green-glow-btn:active:focus {
-    position: relative;
-    color: #0FFF50;
-    background-color: black;
-    transition: 0.3s;
-    overflow: hidden;
-    border: solid 1px #0FFF50;
 }
 
 .blue-glow-btn {
@@ -355,7 +337,6 @@ a[href^="https"]:hover {
 
 .blue-glow-btn:active:hover {
     background: #04d9ff;
-    border: #04d9ff;
     color: #050801;
     box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
@@ -363,7 +344,6 @@ a[href^="https"]:hover {
 
 .blue-glow-btn:active:focus:hover {
     background: #04d9ff;
-    border: #04d9ff;
     color: #050801;
     box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
@@ -423,7 +403,23 @@ a[href^="https"]:hover {
     background-color: rgba(0,0,0,0);
 }
 
-.yellow-glow-btn {
+.transparent-green-glow-btn, .transparent-green-glow-btn:active:focus {
+    position: relative;
+    color: var(--neon-green);
+    background-color: rgba(0,0,0,0);
+    transition: 0.3s;
+    overflow: hidden;
+    border: solid 1px var(--neon-green);
+}
+
+.transparent-green-glow-btn:hover, .transparent-green-glow-btn:active:hover, .transparent-green-glow-btn:active:focus:hover {
+    background: var(--neon-green);
+    color: black;
+    box-shadow: 0 0 5px var(--neon-green), 0 0 25px var(--neon-green), 0 0 50px var(--neon-green), 0 0 200px var(--neon-green) !important;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.yellow-glow-btn, .yellow-glow-btn:active:focus {
     position: relative;
     color: #ccff15;
     background-color: rgba(0,0,0,0);
@@ -432,7 +428,7 @@ a[href^="https"]:hover {
     border: solid 1px #ccff15;
 }
   
-.yellow-glow-btn:hover {
+.yellow-glow-btn:hover, .yellow-glow-btn:active:focus:hover {
     background: #ccff15;
     color: #050801;
     box-shadow: 0 0 5px #ccff15, 0 0 25px #ccff15, 0 0 50px #ccff15, 0 0 200px #ccff15 !important;

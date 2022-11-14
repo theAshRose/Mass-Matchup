@@ -29,26 +29,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             {{#each userResults}}
-                            <div class="col-lg-6 col-xl-4 mb-3">
-                                <div class="card shadow-lg d-flex flex-row" dataUserId="{{id}}">
-                                    <button class="btn yellow-glow-btn btn-sm position-absolute bottom-0 end-0 m-1 addFriendBtn">Add friend</button>
-                                    <img src="{{steam_avatar_full}}" class="img-fluid user-search-image rounded" alt="...">
-                                    <div class="card-body p-2">
-                                        <p class="card-text mb-0">Username:</p>
-                                        <p class="card-text">{{username}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            {{!-- <div class="col-lg-6 col-xl-4 mb-3">
-                                <div class="card shadow-lg d-flex flex-row" dataUserId="{{id}}">
-                                    <img src="" class="img-fluid user-search-image rounded" alt="..." />
-                                    <div class="card-body p-2">
-                                        <p class="card-text mb-0">Username:</p>
-                                        <p class="card-text">{{username}}</p>
-                                    </div>
-                                    <button class="addFriendBtn" >Add Friend</button>
-                                </div>
-                            </div> --}}
+                            {{> (whichUser ../this)}}
                             {{/each}}
 
                         </div>
