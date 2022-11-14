@@ -120,7 +120,9 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                         getNews()
                     } else {
                         rp('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.APIkey + '&steamids=' + steam, async function (err, res, body) {
-
+                            if (!body){
+                                res.redirect('404')
+                            }
                             temp3 = JSON.parse(body)
                             let userInfo = temp3.response.players[0]
                             const userSummary = await temp3
@@ -195,9 +197,9 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
     const gamesData = JSON.parse(ownedGamesRawData);
-    // if (gamesData.response.length == undefined && !gamesData.response.games) {
-    //     res.redirect("404")
-    // }
+    if (gamesData.response.length == undefined && !gamesData.response.games) {
+        res.redirect("404")
+    }
     const ownedGamesDataUnsorted = gamesData.response.games
     // Dom's sort function.
     const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
@@ -230,9 +232,9 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
         const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
         const gamesData = JSON.parse(ownedGamesRawData);
-        // if (gamesData.response.length == undefined && !gamesData.response.games) {
-        //     res.redirect("404")
-        // }
+        if (gamesData.response.length == undefined && !gamesData.response.games) {
+            res.redirect("404")
+        }
         const ownedGamesDataUnsorted = gamesData.response.games
         // Dom's sort function.
         const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {

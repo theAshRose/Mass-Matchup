@@ -32,6 +32,7 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
             // req.session.friend = 4
             const userData = await User.findByPk(req.session.user, {})
             const friendData = await User.findByPk(req.session.friend, {})
+            console.log(friendData, "friendDataGET")
             const user = userData.get({ plain: true });
             const friendProfile = friendData.get({ plain: true });
             const steam = user.steam_id
