@@ -9,6 +9,7 @@ const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middlew
 const { Op } = require("sequelize");
 
 router.post("/results", async (req, res) => {
+  
   if (!req.session.loggedIn) {
     res.redirect("/login");
   } else {
@@ -89,8 +90,9 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
       /* End Adam's work. */
 
       //console.log(userResults,"here");
-
+      
       res.render("search", {
+        
         friends: res.locals.friends,
         friendRequests: res.locals.friendRequests,
         userResults: nonFriendNonUserResults,
