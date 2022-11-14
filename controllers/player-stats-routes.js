@@ -26,8 +26,8 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                 }
             }).then(function (Data1) {
                 let Data2 = JSON.parse(Data1)
-                console.log(Data2, "POTATOE")
-                if(!Data2.response.length){
+                console.log(Data2.response, "POTATOE")
+                if(Data2.response.length <1 || !Data2.response.length){
                     res.redirect("404")
                 }
                 let temp20 = (Data2.response.games)
