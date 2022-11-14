@@ -64,7 +64,7 @@ async function friendRequestAcceptButtonOnClick(event) {
 </button>
 <div class="collapse" id="sidebar-user-id-${friendID}" data-friend-id="${friendRelationshipID}">
     <div class="card-body p-1 pt-2 d-flex justify-content-between">
-        <button type="button" class="btn blue-glow-btn btn-sm">See stats</button>
+        <button type="button" class="btn blue-glow-btn btn-sm see-stats-button">See stats</button>
         <button type="button" class="btn green-glow-btn btn-sm compare-stats-button">Compare stats</button>
         <button type="button" class="btn red-glow-btn btn-sm remove-friend-button">Remove Friend</button>
     </div>
@@ -83,9 +83,13 @@ async function friendRequestAcceptButtonOnClick(event) {
     const createdFriendElement = $(`#friend-element-${friendRelationshipID}`);
     const removeFriendButton = createdFriendElement.find(`.remove-friend-button`);
     const createdCompareStatsButton = createdFriendElement.find(`.compare-stats-button`);
+    const createdSeeStatsButton = createdFriendElement.find(`.see-stats-button`);
+
+    console.log(createdSeeStatsButton);
 
     removeFriendButton.on('click', removeFriendButtonOnClick);
     createdCompareStatsButton.on('click', compareStats);
+    createdSeeStatsButton.on('click', seeStatsButtonOnClick);
 }
 
 /* 
@@ -122,6 +126,22 @@ async function friendRequestDenyButtonOnClick(event) {
         const friendRequestsHeader = $('#friend-requests-header');
         friendRequestsHeader.remove();
     }
+}
+
+/*
+ *  Holds the logic button for the friend button on click. 
+ *  On click, the friend button must:
+ *      1. Get the user ID of the friend.
+ *      2. Redirect the user to the proper page using the ID.
+ */
+function seeStatsButtonOnClick(event) {
+    /* 1. Get the user ID of the friend. */
+    const seeStatsButton = event.target;
+    const collapseElement = seeStatsButton.closest(".collapse");
+    const friendID = parseInt(collapseElement.getAttribute('id').match(/\d+/g)[0]);
+
+    /* 2. Redirect the user to the proper page using the ID. */
+    document.location.replace(`/friends/${friendID}/stats`);
 }
 
 /*
@@ -185,7 +205,7 @@ const compareStats = async (event) => {
 
 ///////////////////end doms work//
 $(".compare-stats-button").on("click", compareStats)
-
+$(".see-stats-button").on('click', seeStatsButtonOnClick);;
 
 
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);

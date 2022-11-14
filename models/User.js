@@ -30,6 +30,9 @@ User.init(
     steam_id: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isNumeric: true
+      }
     },
     steam_avatar_full: {
       type: DataTypes.STRING,
