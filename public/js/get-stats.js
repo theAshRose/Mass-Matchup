@@ -1,7 +1,16 @@
 const getOwnedGameStats = async (event) => {
     event.preventDefault();
-    let clickedBtn = $(event.target)
-    const appId = clickedBtn.attr("ownedGameAppId")
+
+    let button;
+    let clickedElement = event.target;
+
+    if (!clickedElement.matches("button")) {
+        button = clickedElement.closest('button');
+    } else {
+        button = clickedElement;
+    }
+
+    const appId = button.getAttribute("ownedGameAppId");
     console.log(appId);
     if (!appId) {
         alert("please try again")
