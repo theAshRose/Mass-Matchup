@@ -38,6 +38,49 @@ router.post("/results", async (req, res) => {
     }
   }
 });
+
+/* Route for searching for all the users. */
+router.get('/search/all', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
+    const rawAllUserData = await User.findAll();
+
+    const userResults = rawAllUserData.map(rawUserData => rawUserData.get({ plain: true }));
+
+    const friendUsernames = res.locals.friends.map(friend => friend.username);
+
+    const friendRequestUsernames = res.locals.friendRequests.map(friend => friend.username);
+
+    const nonFriendRequestUsers = userResults.filter((user) => {
+      return !friendRequestUsernames.includes(user.username);
+    });
+
+    /* 2. Filter out the returned results based on that list. */
+    const nonFriendUsers = nonFriendRequestUsers.filter((user) => {
+        return !friendUsernames.includes(user.username);
+    });
+
+    const nonFriendNonUserResults = nonFriendUsers.filter((user) => {
+      return user.username != req.session.username;
+    });
+
+    console.log(nonFriendNonUserResults);
+
+    res.render('search', {
+      friends: res.locals.friends,
+      friendRequests: res.locals.friendRequests,
+      userResults: nonFriendNonUserResults,
+      loggedIn: req.session.loggedIn,
+      searchResults: true,
+      search: true,
+      user: {
+        loggedIn: req.session.loggedIn,
+        username: req.session.username,
+        steam_username: req.session.steam_username,
+        steam_avatar_full: req.session.steam_avatar_full,
+        profile_url: req.session.profile_url
+      }
+    });
+});
+
 // router.get("/content", async (req, res) => {
 //   if (!req.session.loggedIn) {
 //     res.redirect("/login");
@@ -55,9 +98,6 @@ router.post("/results", async (req, res) => {
 //   }
 // });
 router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect("/login");
-  } else {
     try {
       console.log(req.session.search + "string");
       const dataVal = await User.findAll({
@@ -92,7 +132,6 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
       //console.log(userResults,"here");
       
       res.render("search", {
-        
         friends: res.locals.friends,
         friendRequests: res.locals.friendRequests,
         userResults: nonFriendNonUserResults,
@@ -105,12 +144,11 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
           steam_username: req.session.steam_username,
           steam_avatar_full: req.session.steam_avatar_full,
           profile_url: req.session.profile_url
-      }
+        }
       });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
-  }
 });
 module.exports = router;
