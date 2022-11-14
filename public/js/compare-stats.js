@@ -5,9 +5,18 @@ let myChart;
 
 const doubleStats = async (event) => {
      event.preventDefault();
-     event.preventDefault();
-     let clickedBtn = $(event.target)
-     const appId = clickedBtn.attr("sharedGameAppId")
+
+     let button;
+     let clickedElement = event.target;
+ 
+     if (!clickedElement.matches("button")) {
+         button = clickedElement.closest('button');
+     } else {
+         button = clickedElement;
+     }
+
+     const appId = button.getAttribute("sharedGameAppId");
+
      console.log(appId);
      if (!appId) {
          alert("please try again")
