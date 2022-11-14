@@ -70,7 +70,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
             rp(url, async function (err, res, body) {
                 if (!err && res.statusCode < 400) {
                     temp1 = JSON.parse(body)
-                    //  res.send(temp1)
+                    //  console.log(temp1, "recentlyplayed")
                     const userRecentlyPlayed = await temp1
                     return temp1
                 }
@@ -90,7 +90,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                     rp('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=' + parsedData.response.games[start].appid + '&count=3&maxlength=300&format=json)', async function (err, res, body) {
                         if (!err && res.statusCode < 400) {
                             temp2 = JSON.parse(body)
-                            
+                            // console.log(temp2, "news")
                             const recentlyPlayedNews = await temp2
                             
                             newsArray = [];

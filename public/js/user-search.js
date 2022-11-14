@@ -40,6 +40,7 @@ const addFriend = async (event) => {
         });
         console.log(response+"victory 2");
         if (response.ok) {
+          friendId.text("Friend added!");
           //document.location.replace("/user/content");
         } else {
           alert("No results found");
