@@ -77,15 +77,11 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
             }
         }).then(function (playedData) {
             let parsedData = JSON.parse(playedData)
-            // console.log(parsedData.response.games[0].appid + "first.then HERE");
             games = parsedData.response.games
-
+            //Contingency if results are not found, this is needed to stop server crash.
             if (parsedData.response.total_count === 0) {
                 res.redirect('user-stats')
             }
-
-            // console.log(JSON.stringify(games[0])+"line 49")
-            // var url = ;
 
             function getNews() {
                 rp('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=' + parsedData.response.games[start].appid + '&count=3&maxlength=300&format=json)', async function (err, res, body) {
@@ -199,9 +195,9 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
     const gamesData = JSON.parse(ownedGamesRawData);
-    if (gamesData.response.length == undefined && !gamesData.response.games) {
-        res.redirect("404")
-    }
+    // if (gamesData.response.length == undefined && !gamesData.response.games) {
+    //     res.redirect("404")
+    // }
     const ownedGamesDataUnsorted = gamesData.response.games
     // Dom's sort function.
     const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
@@ -234,9 +230,9 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
         const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
         const gamesData = JSON.parse(ownedGamesRawData);
-        if (gamesData.response.length == undefined && !gamesData.response.games) {
-            res.redirect("404")
-        }
+        // if (gamesData.response.length == undefined && !gamesData.response.games) {
+        //     res.redirect("404")
+        // }
         const ownedGamesDataUnsorted = gamesData.response.games
         // Dom's sort function.
         const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
@@ -307,6 +303,7 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
             });
         })
         .catch((error) => {
+            console.log(error, "I AM ERROR")
             res.render('friend-stats', {
                 friends: res.locals.friends,
                 friendRequests: res.locals.friendRequests,
