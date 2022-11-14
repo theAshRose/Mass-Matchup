@@ -161,6 +161,30 @@ a[href^="https"]:hover {
     box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
 }
 
+.violet-glow-btn:active:focus {
+    position: relative;
+    color: #ab04ff;
+    background-color: rgba(0,0,0,0);
+    transition: 0.2s;
+    overflow: hidden;
+    border: 1px solid #ab04ff;
+    z-index: 500;
+}
+
+.violet-glow-btn:active:hover {
+    background: #ab04ff;
+    border-color: #ab04ff;
+    color: white;
+    box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
+}
+
+.violet-glow-btn:active:focus:hover {
+    background: #ab04ff;
+    border-color: #ab04ff;
+    color: white;
+    box-shadow: 0 0 5px #ab04ff, 0 0 25px #ab04ff, 0 0 50px #ab04ff, 0 0 200px #ab04ff !important;
+}
+
 /* .profile-button:focus {
     background: #04d9ff;
     border: none;
@@ -229,6 +253,31 @@ a[href^="https"]:hover {
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
 }
 
+.red-glow-btn:active:hover {
+    background: #FF3131;
+    border: #FF3131;
+    color: white;
+    box-shadow: 0 0 5px #FF3131, 0 0 25px #FF3131, 0 0 50px #FF3131, 0 0 150px #FF3131;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.red-glow-btn:active:focus:hover {
+    background: #FF3131;
+    border: #FF3131;
+    color: white;
+    box-shadow: 0 0 5px #FF3131, 0 0 25px #FF3131, 0 0 50px #FF3131, 0 0 150px #FF3131;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.red-glow-btn:active:focus {
+    position: relative;
+    color: #FF3131;
+    background-color: black;
+    transition: 0.3s;
+    overflow: hidden;
+    border: 1px solid #FF3131;
+}
+
 .green-glow-btn {
     position: relative;
     color: #0FFF50;
@@ -243,6 +292,31 @@ a[href^="https"]:hover {
     color: #050801;
     box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.green-glow-btn:active:hover {
+    background: #0FFF50;
+    border: #0FFF50;
+    color: #050801;
+    box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.green-glow-btn:active:focus:hover {
+    background: #0FFF50;
+    border: #0FFF50;
+    color: #050801;
+    box-shadow: 0 0 5px #0FFF50, 0 0 25px #0FFF50, 0 0 50px #0FFF50, 0 0 200px #0FFF50;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.green-glow-btn:active:focus {
+    position: relative;
+    color: #0FFF50;
+    background-color: black;
+    transition: 0.3s;
+    overflow: hidden;
+    border: solid 1px #0FFF50;
 }
 
 .blue-glow-btn {
@@ -261,6 +335,31 @@ a[href^="https"]:hover {
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
 }
 
+.blue-glow-btn:active:hover {
+    background: #04d9ff;
+    border: #04d9ff;
+    color: #050801;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.blue-glow-btn:active:focus:hover {
+    background: #04d9ff;
+    border: #04d9ff;
+    color: #050801;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.blue-glow-btn:active:focus {
+    position: relative;
+    color: #04d9ff;
+    background-color: black;
+    transition: 0.3s;
+    overflow: hidden;
+    border: solid 1px #04d9ff;
+}
+
 .transparent-blue-glow-btn {
     position: relative;
     color: #04d9ff;
@@ -275,6 +374,31 @@ a[href^="https"]:hover {
     color: black;
     box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.transparent-blue-glow-btn:active:hover {
+    background: #04d9ff;
+    border: #04d9ff;
+    color: black;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.transparent-blue-glow-btn:active:focus:hover {
+    background: #04d9ff;
+    border: #04d9ff;
+    color: black;
+    box-shadow: 0 0 5px #04d9ff, 0 0 25px #04d9ff, 0 0 50px #04d9ff, 0 0 200px #04d9ff !important;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
+.transparent-blue-glow-btn:active:focus {
+    position: relative;
+    color: #04d9ff;
+    background-color: rgba(0,0,0,0);
+    transition: 0.2s;
+    overflow: hidden;
+    border: solid 1px #04d9ff;
 }
 
 .transparent {
