@@ -63,6 +63,46 @@ const UserData = [{
   steam_avatar_full: "https://avatars.akamai.steamstatic.com/14c9c3484d8df9255e977e3f95f0cb620bb2d26b_full.jpg",
   steam_username: 'Chairman Miao',
   profile_url: "https://steamcommunity.com/profiles/76561197972449074/"
+},
+{
+  username: "robin",
+  password: "thedude",
+  steam_id: "76561197960435530",
+  steam_avatar_full: "https://avatars.akamai.steamstatic.com/f1dd60a188883caf82d0cbfccfe6aba0af1732d4_full.jpg",
+  steam_username: 'Robin',
+  profile_url: "https://steamcommunity.com/id/robinwalker/"
+},
+{
+  username: "carnage",
+  password: "carnage",
+  steam_id: "76561198085816445",
+  steam_avatar_full: "https://avatars.akamai.steamstatic.com/28668f762c53edd89115c90d49443b983fc86389_full.jpg",
+  steam_username: 'CARNAGE',
+  profile_url: "https://steamcommunity.com/profiles/76561198085816445/"
+},
+{
+  username: "roda",
+  password: "extrathicc",
+  steam_id: "76561198216156851",
+  steam_avatar_full: "https://avatars.akamai.steamstatic.com/7b58968bc4bac5edf9ce016150879e0c1539d8e2_full.jpg",
+  steam_username: 'Payday',
+  profile_url: "https://steamcommunity.com/profiles/76561198216156851/"
+},
+{
+  username: "andrew",
+  password: "farleybaconchicken",
+  steam_id: "76561198153468156",
+  steam_avatar_full: "https://avatars.akamai.steamstatic.com/ecfdbb7c31116c2cad7dfa1a8bf0f8a2abff018a_full.jpg",
+  steam_username: 'Hex: Le GOOSE',
+  profile_url: "https://steamcommunity.com/profiles/76561198153468156/"
+},
+{
+  username: "teda",
+  password: "tooshort",
+  steam_id: "76561198195868989",
+  steam_avatar_full: "https://avatars.akamai.steamstatic.com/c4a818da21ea23595d82759dc2f905204b1ea35d_full.jpg",
+  steam_username: 'TedaToo$hort',
+  profile_url: "https://steamcommunity.com/id/TedaTooShort/"
 }
 ]
 

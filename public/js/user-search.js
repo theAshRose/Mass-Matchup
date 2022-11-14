@@ -1,6 +1,14 @@
 ///// /user/results
 const usernameInputForm = document.getElementById('username-input-form');
 
+/* 
+ *  Holds logic for the accept friend button on the user search page on click. 
+ *  When the accept friend request button is hit we must.
+ */
+function acceptFriendRequest(event) {
+  console.log('TEST');
+}
+
 const searchUsers = async (event) => {
   event.preventDefault();
     
@@ -57,5 +65,6 @@ const addFriend = async (event) => {
   $("#search-user-button").on("click", searchUsers);
   $("#search-all-users-button").on("click", searchAllUsers);
   $(".addFriendBtn").on("click", addFriend);
-  $('username-input-form').on('submit', searchUsers);
+  $('#username-input-form').on('submit', searchUsers);
+  $('.acceptFriendRequestBtn').on('click', acceptFriendRequest);
   
