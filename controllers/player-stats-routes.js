@@ -28,7 +28,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                 let Data2 = JSON.parse(Data1)
                 console.log(Data2, "POTATOE")
                 if(!Data2.response.length){
-                    res.redirect("search")
+                    res.redirect("404")
                 }
                 let temp20 = (Data2.response.games)
                 const Data = temp20.sort(function (a, b) {
