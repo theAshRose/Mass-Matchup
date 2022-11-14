@@ -64,7 +64,7 @@ async function friendRequestAcceptButtonOnClick(event) {
 </button>
 <div class="collapse" id="sidebar-user-id-${friendID}" data-friend-id="${friendRelationshipID}">
     <div class="card-body p-1 pt-2 d-flex justify-content-between">
-        <button type="button" class="btn blue-glow-btn btn-sm">See stats</button>
+        <button type="button" class="btn blue-glow-btn btn-sm see-stats-button">See stats</button>
         <button type="button" class="btn green-glow-btn btn-sm compare-stats-button">Compare stats</button>
         <button type="button" class="btn red-glow-btn btn-sm remove-friend-button">Remove Friend</button>
     </div>
@@ -83,9 +83,13 @@ async function friendRequestAcceptButtonOnClick(event) {
     const createdFriendElement = $(`#friend-element-${friendRelationshipID}`);
     const removeFriendButton = createdFriendElement.find(`.remove-friend-button`);
     const createdCompareStatsButton = createdFriendElement.find(`.compare-stats-button`);
+    const createdSeeStatsButton = createdFriendElement.find(`.see-stats-button`);
+
+    console.log(createdSeeStatsButton);
 
     removeFriendButton.on('click', removeFriendButtonOnClick);
     createdCompareStatsButton.on('click', compareStats);
+    createdSeeStatsButton.on('click', seeStatsButtonOnClick);
 }
 
 /* 
@@ -135,7 +139,6 @@ function seeStatsButtonOnClick(event) {
     const seeStatsButton = event.target;
     const collapseElement = seeStatsButton.closest(".collapse");
     const friendID = parseInt(collapseElement.getAttribute('id').match(/\d+/g)[0]);
-    console.log(friendID);
 
     /* 2. Redirect the user to the proper page using the ID. */
     document.location.replace(`/friends/${friendID}/stats`);

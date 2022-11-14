@@ -33,18 +33,16 @@
                                 <input type="text" class="form-control" id="manual-search-input"
                                     placeholder="Manual search">
                             </div> --}}
-                            <h4 class="dash-title col-auto text-center">Results: </h4>
+                            <h4 class="dash-title col-auto text-center">Results for {{gameStats.name}}: </h4>
                         </div>
                     </div>
                     <ul class="list-group col-12 col-xl-10 col-xxl-8 mt-3">
-                        {{#if goodData}}
-                        {{#each iAmAwesome}}
+                        {{#each gameStats.stats}}
                         <li class="list-group-item user-stat-list-group-item d-flex justify-content-between p-1 pb-2">
                             <p class="m-0">{{name}}</p>
-                            <p class="m-0">{{score}}</p>
+                            <p class="m-0">{{value}}</p>
                         </li>
                         {{/each}}
-                        {{/if}}
                     </ul>
                 </div>
             </div>

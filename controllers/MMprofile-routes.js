@@ -4,7 +4,9 @@ require('dotenv').config();
 const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
-const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
+const { getFriendsAndFriendRequests, authorizeUser, getFriendData } = require('../utils/middleware');
+
+let ownedGamesData;
 
 let temp1;
 let temp2;
@@ -186,13 +188,9 @@ router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, re
 })
 
 /* Route to go to a friend's see stats page. */
-router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
+router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, getFriendData, async (req, res) => {
     /* We need to get information about the friend. */
-    const rawFriendData = await User.findByPk(req.params.id);
-
-    const friendData = rawFriendData.get({ plain: true });
-
-    const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${friendData.steam_id}&format=json&include_appinfo=true`;
+    const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}&format=json&include_appinfo=true`;
 
     //console.log(ownedGamesSteamAPIURL);
 
@@ -205,12 +203,12 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, asy
         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
     });
 
-    console.log(ownedGamesDataSorted);
+    ownedGamesData = ownedGamesDataSorted
 
     res.render('friend-stats', {
         friends: res.locals.friends,
         friendRequests: res.locals.friendRequests,
-        friendData: friendData,
+        friendData: res.locals.friendData,
         ownedGames: ownedGamesDataSorted,
         user: {
             loggedIn: req.session.loggedIn,
@@ -223,16 +221,63 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, asy
 });
 
 /* Route to see the stats on the friend's stats page after clicking on a button. */
-router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendRequests, (req, res) => {
+router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendRequests, getFriendData, async (req, res) => {
 
-    console.log(req.params.id, req.params.appid);
+    if (!ownedGamesData) {
+        console.log('TEST');
+        const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}&format=json&include_appinfo=true`;
+
+        const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
+
+        const ownedGamesDataUnsorted = JSON.parse(ownedGamesRawData).response.games;
+    
+        // Dom's sort function.
+        const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
+            return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
+        });
+    
+        ownedGamesData = ownedGamesDataSorted
+    }
+
+    const gameStatsAPIURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=${req.params.appid}&key=${process.env.APIKey}&steamid=${res.locals.friendData.steam_id}`;
+
+    console.log(gameStatsAPIURL);
+
+    const rawGameStatsData = await rp(gameStatsAPIURL);
+    const gameStatsData = JSON.parse(rawGameStatsData);
+    const acheivementMap = gameStatsData.playerstats.achievements.map(achievement => {
+        const newAchievement = achievement;
+        newAchievement.value = achievement.achieved;
+
+        return newAchievement;
+    });
+    //console.log(gameStatsData.playerstats.achievements);
+    //console.log(gameStatsData.playerstats.stats);
+    //console.log(acheivementMap);
+
+    /* For when the response nugget doesn't contain an array called 'stats, only 'achievements'' */
+    let rawGameStats;
+    if (!gameStatsData.playerstats.stats) {
+        rawGameStats = [];
+    } else {
+        rawGameStats = gameStatsData.playerstats.stats;
+    }
+
+    console.log(acheivementMap);
+    const gameStats = {
+        name: gameStatsData.playerstats.gameName,
+        stats: [...rawGameStats, ...acheivementMap]
+    };
+
+    console.log(gameStats.stats);
 
     res.render('friend-stats', {
         friends: res.locals.friends,
         friendRequests: res.locals.friendRequests,
-        //friendData: friendData,
-        ownedGames: ownedGamesDataSorted,
+        friendData: res.locals.friendData,
+        ownedGames: ownedGamesData,
         hasStats: true,
+        gameStats,
         user: {
             loggedIn: req.session.loggedIn,
             username: req.session.username,

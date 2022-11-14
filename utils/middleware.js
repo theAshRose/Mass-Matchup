@@ -8,6 +8,16 @@ function authorizeUser(req, res, next) {
     }
 }
 
+async function getFriendData(req, res, next) {
+    const rawFriendData = await User.findByPk(req.params.id);
+
+    const friendData = rawFriendData.get({ plain: true });
+
+    res.locals.friendData = friendData;
+
+    next();
+}
+
 async function getFriendsAndFriendRequests(req, res, next) {
     //console.log("TEST");
 
@@ -46,4 +56,4 @@ async function getFriendsAndFriendRequests(req, res, next) {
     next();
 }
 
-module.exports = { getFriendsAndFriendRequests, authorizeUser};
+module.exports = { getFriendsAndFriendRequests, authorizeUser, getFriendData};
