@@ -241,9 +241,7 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
 
         ownedGamesData = ownedGamesDataSorted
     }
-
-    const gameStatsAPIURL = `https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=${req.params.appid}&key='${process.env.APIKey}'&steamid=${res.locals.friendData.steam_id}`;
-
+    const gameStatsAPIURL = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=${req.params.appid}&key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}`; 
     //console.log(gameStatsAPIURL);
     //http://localhost:3001/friends/2/stats/834910
 
@@ -303,7 +301,7 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
             });
         })
         .catch((error) => {
-            console.log(error, "I AM ERROR")
+            // console.log(error, "I AM ERROR")
             res.render('friend-stats', {
                 friends: res.locals.friends,
                 friendRequests: res.locals.friendRequests,
