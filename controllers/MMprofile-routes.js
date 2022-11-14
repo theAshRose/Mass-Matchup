@@ -196,8 +196,11 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
 
     const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
-    const ownedGamesDataUnsorted = JSON.parse(ownedGamesRawData).response.games;
-
+    const gamesData = JSON.parse(ownedGamesRawData);
+    if(gamesData.response.length == undefined && !gamesData.response.games){
+        res.redirect("404")
+    }
+    const ownedGamesDataUnsorted = gamesData.response.games
     // Dom's sort function.
     const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
@@ -229,8 +232,11 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
 
         const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
-        const ownedGamesDataUnsorted = JSON.parse(ownedGamesRawData).response.games;
-    
+        const gamesData = JSON.parse(ownedGamesRawData);
+        if(gamesData.response.length == undefined && !gamesData.response.games){
+            res.redirect("404")
+        }
+        const ownedGamesDataUnsorted = gamesData.response.games
         // Dom's sort function.
         const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
             return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);

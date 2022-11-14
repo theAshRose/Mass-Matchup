@@ -15,9 +15,16 @@
     <title>Mass Matchup</title>
 </head>
 <body>
+    {{#unless user.loggedIn}}
     <header class="d-flex justify-content-center align-items-center">
         <h1 class="text-primary">Welcome to Mass Matchup</h1>
     </header>
+    {{/unless}}
+    {{#if user.loggedIn}}
+    <header class="d-flex justify-content-center align-items-center">
+        <h1 class="text-primary">Mass Matchup</h1>
+    </header>
+    {{/if}}
     {{#if user.loggedIn}}
     <div class="container-fluid">
         <div class="row d-flex flex-row-reverse">
