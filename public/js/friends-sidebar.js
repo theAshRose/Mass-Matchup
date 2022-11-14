@@ -125,6 +125,23 @@ async function friendRequestDenyButtonOnClick(event) {
 }
 
 /*
+ *  Holds the logic button for the friend button on click. 
+ *  On click, the friend button must:
+ *      1. Get the user ID of the friend.
+ *      2. Redirect the user to the proper page using the ID.
+ */
+function seeStatsButtonOnClick(event) {
+    /* 1. Get the user ID of the friend. */
+    const seeStatsButton = event.target;
+    const collapseElement = seeStatsButton.closest(".collapse");
+    const friendID = parseInt(collapseElement.getAttribute('id').match(/\d+/g)[0]);
+    console.log(friendID);
+
+    /* 2. Redirect the user to the proper page using the ID. */
+    document.location.replace(`/friends/${friendID}/stats`);
+}
+
+/*
  *  Holds the logic for the remove friend button on click.
  *  When the remove friend button is clicked we must:
  *      1.  Get the ID of the friend relationship we want to remove.
@@ -185,7 +202,7 @@ const compareStats = async (event) => {
 
 ///////////////////end doms work//
 $(".compare-stats-button").on("click", compareStats)
-
+$(".see-stats-button").on('click', seeStatsButtonOnClick);;
 
 
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);

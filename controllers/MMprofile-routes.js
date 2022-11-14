@@ -179,6 +179,64 @@ router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, re
 
 })
 
+/* Route to go to a friend's see stats page. */
+router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
+    /* We need to get information about the friend. */
+    const rawFriendData = await User.findByPk(req.params.id);
+
+    const friendData = rawFriendData.get({ plain: true });
+
+    const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${friendData.steam_id}&format=json&include_appinfo=true`;
+
+    //console.log(ownedGamesSteamAPIURL);
+
+    const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
+
+    const ownedGamesDataUnsorted = JSON.parse(ownedGamesRawData).response.games;
+
+    // Dom's sort function.
+    const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
+        return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
+    });
+
+    console.log(ownedGamesDataSorted);
+
+    res.render('friend-stats', {
+        friends: res.locals.friends,
+        friendRequests: res.locals.friendRequests,
+        friendData: friendData,
+        ownedGames: ownedGamesDataSorted,
+        user: {
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+            steam_username: req.session.steam_username,
+            steam_avatar_full: req.session.steam_avatar_full,
+            profile_url: req.session.profile_url
+        }
+    });
+});
+
+/* Route to see the stats on the friend's stats page after clicking on a button. */
+router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendRequests, (req, res) => {
+
+    console.log(req.params.id, req.params.appid);
+
+    res.render('friend-stats', {
+        friends: res.locals.friends,
+        friendRequests: res.locals.friendRequests,
+        //friendData: friendData,
+        ownedGames: ownedGamesDataSorted,
+        hasStats: true,
+        user: {
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+            steam_username: req.session.steam_username,
+            steam_avatar_full: req.session.steam_avatar_full,
+            profile_url: req.session.profile_url
+        }
+    });
+});
+
 // router.get('/search/results', async (req, res) => {
 //     if (!req.session.loggedIn) {
 //         res.redirect("/login");

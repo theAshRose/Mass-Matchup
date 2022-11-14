@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
+            <div class="card shadow-lg p-0 d-flex flex-column mb-2">
+                <div class="d-flex flex-row">
+                    <img src="{{friendData.steam_avatar_full}}" class="img-fluid steam-user-image rounded" alt="...">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <p class="card-text mb-1">Username:</p>
+                            <p class="card-text">{{friendData.steam_username}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-lg">
+                <div class="card-header">
+                    <h4 class="card-title dash-title m-0">Owned Games: </h4>
+                </div>
+                <div class="card-body">
+                    {{#each ownedGames}}
+                    {{>ownedGamesS}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
+            {{#if hasStats}}
+            <div class="card shadow-lg" id="stat-results-display-box">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row d-flex flex-row justify-content-between">
+                            {{!-- <div class="col-xl-4 mb-3 m-xl-0 p-0">
+                                <input type="text" class="form-control" id="manual-search-input"
+                                    placeholder="Manual search">
+                            </div> --}}
+                            <h4 class="dash-title col-auto text-center">Results: </h4>
+                        </div>
+                    </div>
+                    <ul class="list-group col-12 col-xl-10 col-xxl-8 mt-3">
+                        {{#if goodData}}
+                        {{#each iAmAwesome}}
+                        <li class="list-group-item user-stat-list-group-item d-flex justify-content-between p-1 pb-2">
+                            <p class="m-0">{{name}}</p>
+                            <p class="m-0">{{score}}</p>
+                        </li>
+                        {{/each}}
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<script src="/js/friends-stats.js"></script>
