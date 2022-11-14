@@ -62,6 +62,24 @@ body {
     -webkit-background-clip: text;
 }
 
+/*sign up page*/
+.steam-title{
+    font-family: 'Press Start 2P';
+    text-decoration: none;
+    color: white;
+    font-size: smaller;
+}
+
+.steam-title:hover {
+    color:#F7E745;
+}
+
+.fool {
+    font-family: 'Press Start 2P';
+    color: white;
+    text-shadow:
+    0 0 5px #aa00ff, 0 0 10px #aa00ff;
+}
 /*overflow-y: scroll; */
 /*dashboard styling*/
 
