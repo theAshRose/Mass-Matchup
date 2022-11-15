@@ -46,11 +46,11 @@ const doubleStats = async (event) => {
              label: 'You',
              data: [0],
              backgroundColor: [
-                 'rgba(54, 162, 235, 0.2)',
+                 'rgba(4, 217, 255, .7)',
                  //'rgba(255, 99, 132, 0.2)',
              ],
              borderColor: [
-                 'rgba(54, 162, 235, 1)',
+                 'rgba(4, 217, 255, .7)',
                  //'rgba(255, 99, 132, 1)',
              ],
              borderWidth: 1,
@@ -61,11 +61,11 @@ const doubleStats = async (event) => {
              data: [0],
              backgroundColor: [
                  //'rgba(54, 162, 235, 0.2)',
-                 'rgba(255, 99, 132, 0.2)',
+                 'rgba(255, 49, 49, .7)',
              ],
              borderColor: [
                  //'rgba(54, 162, 235, 1)',
-                 'rgba(255, 99, 132, 1)',
+                 'rgba(255, 49, 49, .7)',
              ],
              borderWidth: 1,
              maxBarThickness: 150
@@ -77,6 +77,9 @@ const doubleStats = async (event) => {
          },
          scales: {
              x: {
+                ticks: {
+                    color: 'yellow'
+                },
                  grid: {
                      display: false
                  }
