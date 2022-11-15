@@ -4,7 +4,7 @@ require('dotenv').config();
 const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
-const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
+const { getFriendsAndFriendRequests, authorizeUser, desperateMeasures } = require('../utils/middleware');
 // let userGames
 let freshData = [];
 let finalStats = []
@@ -232,8 +232,7 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
             ///////////////////////////////////////////////MESS 2 starts here
             rp(friendUrl, async function (err, res, body1) {
                 if (res.statusCode > 400) {
-                    res.redirect('/user-search')
-                    alert("Search did not yield fruit. Pluck again")
+                    
                 }
                 if (!err && res.statusCode < 400) {
                     // console.log(body, "naraka")
