@@ -136,6 +136,8 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                             // console.log(res.locals.friendRequests);
                             // console.log(res.locals.friends);
 
+                            console.log(games);
+
                             res.render('dashboard',
                                 {
                                     friends: res.locals.friends,
