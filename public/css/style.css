@@ -419,6 +419,22 @@ a[href^="https"]:hover {
     /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
 }
 
+.transparent-red-glow-btn, .transparent-red-glow-btn:active:focus {
+    position: relative;
+    color: var(--neon-red);
+    background-color: rgba(0,0,0,0);
+    transition: 0.3s;
+    overflow: hidden;
+    border: solid 1px var(--neon-red);
+}
+
+.transparent-red-glow-btn:hover, .transparent-red-glow-btn:active:hover, .transparent-red-glow-btn:active:focus:hover {
+    background: var(--neon-red);
+    color: white;
+    box-shadow: 0 0 5px var(--neon-red), 0 0 25px var(--neon-red), 0 0 50px var(--neon-red), 0 0 200px var(--neon-red) !important;
+    /* -webkit-box-reflect: below 1px linear-gradient(transparent, #0005); */
+}
+
 .yellow-glow-btn, .yellow-glow-btn:active:focus {
     position: relative;
     color: #ccff15;

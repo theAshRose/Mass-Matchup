@@ -92,6 +92,21 @@ const doubleStats = async (event) => {
  });
 }
 
+/* 
+ *  Logic for the see stats button on click. 
+ *  When the see stats button is clicked we must:
+ *      1. Get the id of the user we want to see the stats for.
+ *      2. Redirect to the appropriate page.
+ */
+function seeStats(event) {
+    const buttonClicked = event.target;
+
+    /* 1. Get the id of the user we want to see the stats for. */
+    const friendID = parseInt(buttonClicked.getAttribute("data-friend-id"));
+    
+    /* 2. Redirect to the appropriate page. */
+    document.location.replace(`/friends/${friendID}/stats`);
+}
 
  function updateChartData(event) {
     event.preventDefault()
@@ -121,3 +136,4 @@ const doubleStats = async (event) => {
 
 $(".comparedStat").on("click", updateChartData)
 $(".sharedGameBtn").on("click", doubleStats)
+$("#see-stats-button").on('click', seeStats);

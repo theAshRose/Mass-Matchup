@@ -108,6 +108,17 @@ router.get("/content", authorizeUser, getFriendsAndFriendRequests, async (req, r
         where: {
             username:{ [Op.startsWith]: `${req.session.search}` },
         },
+        include: [
+          {
+              model: User,
+              as: "friend_id_req",
+              through: {
+                where: {
+                  friend_id_req: req.session.user
+                }
+              }
+          },
+        ]
       });
       
       let userResults = dataVal.map(userObj=> userObj.get({plain : true}))

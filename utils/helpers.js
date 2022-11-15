@@ -55,7 +55,7 @@ const withAuth = (req, res, next) => {
       //console.log('NO FRIEND REQUESTS');
       return 'user-search-result';
     } else if (friendRequestsRecievedUsernames.includes(this.username)) {
-      console.log(this);
+      //console.log(this);
       return 'user-search-result-friend-request-recieved'
     } else {
       //console.log("FRIEND REQUEST SENT");
