@@ -7,7 +7,7 @@ const { parse } = require("handlebars");
 const { getFriendsAndFriendRequests, authorizeUser } = require('../utils/middleware');
 const { json } = require("express");
 let goodData = true;
-
+let Data;
 
 
 router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
@@ -64,11 +64,11 @@ router.post('/ownedGameStats', async (req, res) => {
         res.redirect("/login");
     } else {
         try {
-            console.log(req.body.appId);
+            //console.log(req.body.appId);
             req.session.appid = req.body.appId
-            console.log(req.session.appid);
-            console.log(req.session.appid, "when i lost session")
-            console.log(req.body.appId, "when i lost body")
+            //console.log(req.session.appid);
+            //console.log(req.session.appid, "when i lost session")
+            //console.log(req.body.appId, "when i lost body")
             res.send('yes')
             // const userData = await User.findByPk(req.session.user, {
             //     where: {
@@ -117,9 +117,6 @@ router.post('/ownedGameStats', async (req, res) => {
 });
 
 router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect("/login");
-    } else {
         try {
             const userData = await User.findByPk(req.session.user, {
                 // where: {
@@ -133,9 +130,9 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             const steam = user.steam_id
 
             // console.log(steam, "steam key")
-            console.log(req.session.appid, "why are you bug?")
+            //console.log(req.session.appid, "why are you bug?")
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
-            console.log(url);
+            //console.log(url);
             rp(url, async function (err, res, body) {
                 if (!err && res.statusCode < 400) {
                     
@@ -143,6 +140,39 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             }).then(async function (data1) {
                 
                 let elparso = JSON.parse(data1)
+                let stats = [];
+
+                //console.log(elparso);
+
+                if (elparso.playerstats) {
+                    if (elparso.playerstats.achievements) {
+                        let rawAchievements = elparso.playerstats.achievements;
+                        let achievements = rawAchievements.map((achievement) => {
+                            const newAchievement = { };
+                            newAchievement.name = achievement.name;
+                            newAchievement.score = achievement.achieved;
+
+                            return newAchievement;
+                        });
+
+                        stats = [...achievements];
+                    }
+                    if (elparso.playerstats.stats) {
+                        let rawStats = elparso.playerstats.stats;
+                        const newStats = rawStats.map((rawStat) => {
+                            const newStat = {};
+                            newStat.name = rawStat.name;
+                            newStat.score = rawStat.value;
+
+                            return newStat;
+                        });
+
+                        stats = [...stats, ...newStats]
+                    }
+
+                    //console.log(stats);
+                }
+
                 let temp1 = Object.keys(elparso)
                 let no = "elparso." + temp1[0]
                 let temp2 = eval(no)
@@ -150,6 +180,8 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                 let no2 = 'temp2.' + temp3[2]
                 let temp4 = eval(no2)
                 let iAmAwesome = []
+
+                /*
                 if (temp4) {
                     goodData = true
                     for (i = 0; i < temp4.length; i++) {
@@ -163,6 +195,13 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                 } else {
                     goodData = false
                     
+                } */
+
+                if (stats) {
+                    goodData = true;
+                    iAmAwesome = stats;
+                } else {
+                    goodData = false;
                 }
 
                 // console.log(iAmAwesome)
@@ -178,16 +217,21 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                 // console.log(userData, "i Am the data")
 
                 var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json&include_appinfo=true'
+                //console.log(url);
                 rp(url, async function (err, res, body) {
                     if (!err && res.statusCode < 400) {
                     }
                 }).then(function (Data1) {
                     let Data2 = JSON.parse(Data1)
                     let temp20 = (Data2.response.games)
-                    const Data = temp20.sort(function (a, b) {
+                    let Data;
+                    if (temp20) {
+                    Data = temp20.sort(function (a, b) {
                         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
                     });
+                    }
                     // console.log(Data, "i am the best")
+                    console.log(elparso);
 
                     res.render('user-stats',
                         {
@@ -208,6 +252,43 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                             }
                         })
                 })
+            })
+            .catch((error) => {
+                var url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=' + process.env.APIkey + '&steamid=' + steam + '&format=json&include_appinfo=true';
+                rp(url, async function (err, res, body) {
+                    if (!err && res.statusCode < 400) {
+                    }
+                }).then(function (Data1) {
+                    let Data2 = JSON.parse(Data1)
+                    let temp20 = (Data2.response.games)
+                    let Data;
+                    if (temp20) {
+                    Data = temp20.sort(function (a, b) {
+                        return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
+                    });
+                    }
+                    // console.log(Data, "i am the best")
+                    //console.log(elparso);
+
+                    res.render('user-stats',
+                        {
+                            goodData: false,
+                            iAmAwesome: [],
+                            friends: res.locals.friends,
+                            friendRequests: res.locals.friendRequests,
+                            Data,
+                            gameName: '',
+                            stats: true,
+                            statResults: true,
+                            user: {
+                                loggedIn: req.session.loggedIn,
+                                username: req.session.username,
+                                steam_username: req.session.steam_username,
+                                steam_avatar_full: req.session.steam_avatar_full,
+                                profile_url: req.session.profile_url
+                            }
+                        })
+                })
             });
 
 
@@ -215,7 +296,6 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             console.log(err, "yes of course")
             res.status(500).json(err)
         }
-    }
 });
 
 
