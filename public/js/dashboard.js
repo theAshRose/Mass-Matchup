@@ -18,7 +18,7 @@ async function recentGameButtonOnClick(event) {
 
     /* 2. Get the appid of the game that was clicked. */
     const appID = parseInt(button.getAttribute('app-id'));
-    
+
     /* 3. Use Dom's function in get-stats.js to get the owned game stats because I can't easily determine how he set it up at a quick glance. */
     if (!appID) {
         alert("please try again")
@@ -28,18 +28,19 @@ async function recentGameButtonOnClick(event) {
             body: JSON.stringify({ appId: appID }),
             headers: { 'Content-Type': 'application/json' },
         })
-        .then((response) => {
-            if (response.ok) {
-                document.location.replace('/user-stats/ownedGameStats');
-            } else {
-                alert("response was not okay");
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+            .then((response) => {
+                if (response.ok) {
+                    document.location.replace('/user-stats/ownedGameStats');
+                } else {
+                    alert("response was not okay");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
 }
+
 
 $('.recent-game-button').on('click', recentGameButtonOnClick);

@@ -170,10 +170,10 @@ async function removeFriendButtonOnClick(event) {
 const compareStats = async (event) => {
     event.preventDefault();
     let clickedBtn = $(event.target)
-    const splitMe = clickedBtn.parents().eq(1).attr("id").split("") 
-    const flipMe = splitMe.reverse()
-    const finishMe = flipMe.join("") 
-    let goAgain = parseInt(finishMe)
+    const split = clickedBtn.parents().eq(1).attr("id").split("") 
+    const flip = split.reverse()
+    const finish = flip.join("") 
+    let goAgain = parseInt(finish)
     const stringUp = goAgain.toString()
     const splitAgain = stringUp.split("")
     const flipAgain = splitAgain.reverse()

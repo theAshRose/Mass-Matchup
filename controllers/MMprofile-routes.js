@@ -6,6 +6,7 @@ var rp = require('request-promise');
 const { parse } = require("handlebars");
 const controller = new AbortController();
 const { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures } = require('../utils/middleware');
+const { newsCleanUp } = require('../utils/helpers')
 
 let ownedGamesData;
 
@@ -93,15 +94,21 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
 
                         newsArray = [];
                         newsTemp = []
+                        newsTemp2 = []
                         newsArray.push(recentlyPlayedNews)
                         let parsedArray = JSON.stringify(newsArray)
 
 
                         for (i = 0; i < 3; i++) {
                             newsTemp.push(newsArray[0].appnews.newsitems[i])
-
-
                         }
+                        console.log(newsTemp, "NEWS1")
+
+                        // for (x=0; x <3; x++){
+                        // newsCleanUp(newsTemp[i].contents)
+                        // }
+                        
+
                         let gameNews = {
                             name: games[start].name,
                             news: newsTemp
@@ -136,7 +143,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                             // console.log(res.locals.friendRequests);
                             // console.log(res.locals.friends);
 
-                            console.log(games);
+                            console.log(newsPerGame, "THANGS");
 
                             res.render('dashboard',
                                 {
@@ -192,9 +199,9 @@ router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, re
 
 /* Route to go to a friend's see stats page. */
 router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, getFriendData, async (req, res) => {
-    /* We need to get information about the friend. */
-    
+    /* We need to get information about the friend. */    
     try{
+
     const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}&format=json&include_appinfo=true`;
 
     //console.log(ownedGamesSteamAPIURL);
