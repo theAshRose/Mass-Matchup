@@ -64,7 +64,9 @@ router.post('/ownedGameStats', async (req, res) => {
         res.redirect("/login");
     } else {
         try {
+            console.log(req.body.appId);
             req.session.appid = req.body.appId
+            console.log(req.session.appid);
             console.log(req.session.appid, "when i lost session")
             console.log(req.body.appId, "when i lost body")
             res.send('yes')
@@ -129,6 +131,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             // console.log(req.session.appid)
             const user = await userData.get({ plain: true });
             const steam = user.steam_id
+
             // console.log(steam, "steam key")
             console.log(req.session.appid, "why are you bug?")
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
