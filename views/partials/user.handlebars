@@ -1,9 +1,9 @@
-<div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-1">
-    <div class="card shadow-lg p-0 d-flex flex-row user-card">
+<div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-0">
+    <div class="card shadow-lg p-0 d-flex flex-row user-card m-2">
         <img src="{{steam_avatar_full}}" class="img-fluid steam-user-image rounded" alt="...">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
-                <p class="card-text user ">{{steam_username}}</p>
+                <p class="card-text user">{{steam_username}}</p>
                 <a href="{{profile_url}}" target="_blank">Steam Profile</a>
             </div>
             <div class="dropdown">
@@ -11,7 +11,7 @@
                     Profile
                 </button>
                 <ul class="blue-dropdown-menu dropdown-menu">
-                    <li><a class="dropdown-item blue-dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item blue-dropdown-item" href="/">Home</a></li>
                     <li><a class="dropdown-item blue-dropdown-item" data-bs-toggle="offcanvas" href="#friendsSidebar" role="button" aria-controls="friendsSidebar">Friends</a></li>
                     <li><a class="dropdown-item blue-dropdown-item" href="/search">User search</a></li>
                     <li><a class="dropdown-item blue-dropdown-item" href="/user-stats">Stats</a></li>
