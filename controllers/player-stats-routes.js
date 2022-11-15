@@ -135,6 +135,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             // console.log(steam, "steam key")
             console.log(req.session.appid, "why are you bug?")
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
+            console.log(url);
             rp(url, async function (err, res, body) {
                 if (!err && res.statusCode < 400) {
                     
@@ -186,7 +187,8 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     const Data = temp20.sort(function (a, b) {
                         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
                     });
-                    console.log(iAmAwesome, "i am the best")
+                    // console.log(Data, "i am the best")
+
                     res.render('user-stats',
                         {
                             goodData,
@@ -194,7 +196,9 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                             friends: res.locals.friends,
                             friendRequests: res.locals.friendRequests,
                             Data,
+                            gameName: elparso.playerstats.gameName,
                             stats: true,
+                            statResults: true,
                             user: {
                                 loggedIn: req.session.loggedIn,
                                 username: req.session.username,

@@ -110,6 +110,19 @@ body {
     font-family: 'Press Start 2P'
 }
 
+.yellow-glow-title {
+    color:#ffffff;
+    text-shadow:
+    0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
+    font-family: 'Press Start 2P';
+}
+
+.red-glow-title {
+    color:#ffffff;
+    text-shadow:
+    0 0 5px var(--neon-red), 0 0 10px var(--neon-red);
+    font-family: 'Press Start 2P';
+}
 
 .card-text {
     color:white;
@@ -152,7 +165,38 @@ a[href^="https"]:hover {
     --bs-link-hover-color:white;
 }
 
+.neon-yellow-link {
+    --bs-link-color: var(--neon-yellow) !important;
+    text-decoration: none;
+}
 
+.neon-yellow-link:hover {
+    text-shadow:
+    0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
+    --bs-link-hover-color:white;
+}
+
+.neon-blue-link {
+    --bs-link-color: var(--neon-blue) !important;
+    text-decoration: none;
+}
+
+.neon-blue-link:hover {
+    text-shadow:
+    0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+    --bs-link-hover-color:white;
+}
+
+.neon-red-link {
+    --bs-link-color: var(--neon-red) !important;
+    text-decoration: none;
+}
+
+.neon-red-link:hover {
+    text-shadow:
+    0 0 5px var(--neon-red), 0 0 10px var(--neon-red);
+    --bs-link-hover-color:white;
+}
 
 .user-search-image {
     height: 100px;
