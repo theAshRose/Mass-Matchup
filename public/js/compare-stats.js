@@ -85,6 +85,9 @@ const doubleStats = async (event) => {
                  }
              },
              y: {
+                ticks: {
+                    color: 'yellow'
+                },
                  beginAtZero: true,
                  grid: {
                      display: false
