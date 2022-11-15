@@ -6,6 +6,8 @@
     --sunset-orange: #ff901f;
     --neon-red: #FF3131;
     --neon-green: #0FFF50;
+    --neon-blue: #04d9ff;
+    --neon-yellow: #ccff15;
 }
 
 header {
@@ -28,15 +30,22 @@ body {
 .card {
     background-color: transparent;
     border: 1px solid #9B00E8;
-    box-shadow: 0 0 20px #9B00E8;
+    box-shadow: 0 0 20px #9B00E8 !important;
 }
 
 .user-card {
-    box-shadow: 0 0 20px #04d9ff !important;
+    box-shadow: 0 0 20px var(--neon-blue) !important;
+    border: 1px solid var(--neon-blue);
 }
 
 .compare-user-card {
     box-shadow: 0 0 20px var(--neon-red) !important;
+    border: 1px solid var(--neon-red);
+}
+
+.stats-user-card {
+    box-shadow: 0 0 20px var(--neon-yellow) !important;
+    border: 1px solid var(--neon-yellow);
 }
 
 /*Login animation*/ 
