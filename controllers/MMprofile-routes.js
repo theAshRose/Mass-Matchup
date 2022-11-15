@@ -73,7 +73,6 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
         rp(url, async function (err, res, body) {
             if (!err && res.statusCode < 400) {
                 temp1 = JSON.parse(body)
-                //  console.log(temp1, "recentlyplayed")
                 const userRecentlyPlayed = await temp1
                 return temp1
             }
@@ -89,7 +88,6 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                 rp('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=' + parsedData.response.games[start].appid + '&count=3&maxlength=300&format=json)', async function (err, res, body) {
                     if (!err && res.statusCode < 400) {
                         temp2 = JSON.parse(body)
-                        // console.log(temp2, "news")
                         const recentlyPlayedNews = await temp2
 
                         newsArray = [];
@@ -102,7 +100,6 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                         for (i = 0; i < 3; i++) {
                             newsTemp.push(newsArray[0].appnews.newsitems[i])
                         }
-                        console.log(newsTemp, "NEWS1")
 
                         // for (x=0; x <3; x++){
                         // newsCleanUp(newsTemp[i].contents)
@@ -116,12 +113,9 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                         newsPerGame.push(gameNews)
 
 
-                        // console.log("START!!!" + newsPerGame + "END!!!!")
-                        // console.log(games.length)
                         return newsPerGame
                     }
                 }).then(function (content) {
-                    // console.log(start)
                     start = start + 1
                     if (start < games.length) {
 
@@ -134,16 +128,11 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                             temp3 = JSON.parse(body)
                             let userInfo = temp3.response.players[0]
                             const userSummary = await temp3
-                            // console.log(temp3.response.players[0].personaname + "USER DATA HERE")
+
                             return (userInfo)
                         }).then(function (userContent) {
 
                             let friends = friendNames.map(userObj => userObj.get({ plain: true }))
-
-                            // console.log(res.locals.friendRequests);
-                            // console.log(res.locals.friends);
-
-                            console.log(newsPerGame, "THANGS");
 
                             res.render('dashboard',
                                 {
@@ -204,7 +193,6 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
 
     const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}&format=json&include_appinfo=true`;
 
-    //console.log(ownedGamesSteamAPIURL);
 
     const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
@@ -213,7 +201,6 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     //     res.redirect("404")
     // }
     const ownedGamesDataUnsorted = await gamesData.response.games
-    console.log(ownedGamesDataUnsorted, "ripe")
                     // if (ownedGamesDataUnsorted == undefined) {                        
                     //     return;                      
                     // }
@@ -275,14 +262,13 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
 
     rp(gameStatsAPIURL)
         .then((rawGameStatsData) => {
-            console.log(rawGameStatsData);
             const gameStatsData = JSON.parse(rawGameStatsData);
 
             let achievementMap;
             let gameStats;
 
             if (gameStatsData.playerstats) {
-                console.log("RESPONSE");
+                //console.log("RESPONSE");
 
                 if (gameStatsData.playerstats.achievements) {
                     achievementMap = gameStatsData.playerstats.achievements.map(achievement => {
@@ -303,7 +289,6 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
                     rawGameStats = gameStatsData.playerstats.stats;
                 }
 
-                //console.log(achievementMap);
                 gameStats = {
                     name: gameStatsData.playerstats.gameName,
                     stats: [...rawGameStats, ...achievementMap]
@@ -329,7 +314,6 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
             });
         })
         .catch((error) => {
-            // console.log(error, "I AM ERROR")
             res.render('friend-stats', {
                 friends: res.locals.friends,
                 friendRequests: res.locals.friendRequests,

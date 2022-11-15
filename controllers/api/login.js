@@ -28,12 +28,12 @@ router.post("/login", async (req, res) => {
     }
 
     const fetchURL = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.APIkey}&steamids=${dbUserData.steam_id}`;
-    console.log(fetchURL);
+    //console.log(fetchURL);
     rp(fetchURL)
     .then(async (body) => {
       const playerData = JSON.parse(body).response.players[0];
 
-      console.log(playerData);
+      //console.log(playerData);
 
       await User.update({
         steam_avatar_full: playerData.avatarfull,
@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
         req.session.steam_username = playerData.personaname;
         req.session.steam_avatar_full = playerData.avatarfull;
         req.session.profile_url = playerData.profileurl
-        console.log(req.session.privateProfile, "HERE1")
+        //console.log(req.session.privateProfile, "HERE1")
         res
           .status(200)
           .json({ user: dbUserData, message: "You are now logged in!" });
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
 router.post("/signup", async (req, res) => {
   try {
       const fetchURL = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.APIkey}&steamids=${req.body.steam_id}`;
-      console.log(fetchURL);
+      //console.log(fetchURL);
       rp(fetchURL)
       .then(async (body) => {
         const response = JSON.parse(body).response;

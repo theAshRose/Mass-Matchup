@@ -172,13 +172,19 @@ a[href^="https"]:hover {
 
 .neon-yellow-link:hover {
     text-shadow:
-    0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow);
+    0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow) !important;
     --bs-link-hover-color:white;
 }
 
 .neon-blue-link {
     --bs-link-color: var(--neon-blue) !important;
     text-decoration: none;
+}
+
+.neon-blue-link:hover {
+    text-shadow:
+    0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue) !important;
+    --bs-link-hover-color:white;
 }
 
 .neon-blue-link:hover {
@@ -194,7 +200,7 @@ a[href^="https"]:hover {
 
 .neon-red-link:hover {
     text-shadow:
-    0 0 5px var(--neon-red), 0 0 10px var(--neon-red);
+    0 0 5px var(--neon-red), 0 0 10px var(--neon-red) !important;
     --bs-link-hover-color:white;
 }
 
@@ -678,6 +684,10 @@ a[href^="https"]:hover {
     0 0 5px #ccff15, 0 0 10px #ccff15;
     background-color: rgba(0,0,0,0);
     border: none;
+}
+
+#navbar {
+    list-style-type: none;
 }
 
 @media (max-width: 992px) {
