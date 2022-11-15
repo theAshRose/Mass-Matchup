@@ -4,7 +4,8 @@ require('dotenv').config();
 const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
-const { getFriendsAndFriendRequests, authorizeUser, getFriendData } = require('../utils/middleware');
+const controller = new AbortController();
+const { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures } = require('../utils/middleware');
 
 let ownedGamesData;
 
@@ -197,10 +198,14 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     const ownedGamesRawData = await rp(ownedGamesSteamAPIURL);
 
     const gamesData = JSON.parse(ownedGamesRawData);
-    if (gamesData.response.length == undefined && !gamesData.response.games) {
-        res.redirect("404")
-    }
-    const ownedGamesDataUnsorted = gamesData.response.games
+    // if (gamesData.response.length == undefined && !gamesData.response.games) {
+    //     res.redirect("404")
+    // }
+    const ownedGamesDataUnsorted = await gamesData.response.games
+    console.log(ownedGamesDataUnsorted, "ripe")
+                    if (ownedGamesDataUnsorted == undefined) {                        
+                        return;                    
+                    }
     // Dom's sort function.
     const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
