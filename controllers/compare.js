@@ -32,7 +32,7 @@ router.get('/sharedGames', authorizeUser, getFriendsAndFriendRequests, async (re
             // req.session.friend = 4
             const userData = await User.findByPk(req.session.user, {})
             const friendData = await User.findByPk(req.session.friend, {})
-            console.log(friendData, "friendDataGET")
+            
             const user = userData.get({ plain: true });
             const friendProfile = friendData.get({ plain: true });
             const steam = user.steam_id
@@ -162,8 +162,8 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
 
         rp(userUrl, async function (err, res, body) {
             if (res.statusCode > 400) {
-                res.redirect('/user-search/')
-                alert("Search did not yield fruit. Pluck again")
+                
+                
             }
             if (!err && res.statusCode < 400) {
                 // console.log(body, "naraka")

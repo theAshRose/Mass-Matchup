@@ -30,7 +30,8 @@ const doubleStats = async (event) => {
             console.log("response OK")
               window.location.replace(`/compare/sharedGames/${appId}`)
          } else {
-             alert('Search failed! Twy again UwU');
+            window.location.replace('/')
+             alert('Something is wrong');
          }
      }
  };
@@ -119,10 +120,4 @@ const doubleStats = async (event) => {
 
 
 $(".comparedStat").on("click", updateChartData)
-
-
-
-
-
-
 $(".sharedGameBtn").on("click", doubleStats)
