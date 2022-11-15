@@ -85,8 +85,6 @@ async function friendRequestAcceptButtonOnClick(event) {
     const createdCompareStatsButton = createdFriendElement.find(`.compare-stats-button`);
     const createdSeeStatsButton = createdFriendElement.find(`.see-stats-button`);
 
-    console.log(createdSeeStatsButton);
-
     removeFriendButton.on('click', removeFriendButtonOnClick);
     createdCompareStatsButton.on('click', compareStats);
     createdSeeStatsButton.on('click', seeStatsButtonOnClick);
@@ -211,3 +209,5 @@ $(".see-stats-button").on('click', seeStatsButtonOnClick);;
 $('.friend-request-accept-button').on('click', friendRequestAcceptButtonOnClick);
 $('.friend-request-deny-button').on('click ', friendRequestDenyButtonOnClick);
 $('.remove-friend-button').on('click', removeFriendButtonOnClick);
+
+export { removeFriendButtonOnClick, seeStatsButtonOnClick, compareStats }

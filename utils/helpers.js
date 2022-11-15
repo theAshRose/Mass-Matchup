@@ -40,7 +40,7 @@ const withAuth = (req, res, next) => {
    */
   function whichUser (context) {
     //console.log(context);
-    console.log(this);
+    //console.log(this);
 
     const friendRequestRecievedAndSent = [...context.friendRequests, ...context.friendRequestsSent];
     //console.log(friendRequestRecievedAndSent);
@@ -52,13 +52,13 @@ const withAuth = (req, res, next) => {
     //console.log(friendRequestsSentUsernames);
 
     if (!friendRequestRecievedAndSentUsernames.includes(this.username)) {
-      console.log('NO FRIEND REQUESTS');
+      //console.log('NO FRIEND REQUESTS');
       return 'user-search-result';
     } else if (friendRequestsRecievedUsernames.includes(this.username)) {
-      console.log("FRIEND REQUEST RECIEVED");
+      console.log(this);
       return 'user-search-result-friend-request-recieved'
     } else {
-      console.log("FRIEND REQUEST SENT");
+      //console.log("FRIEND REQUEST SENT");
       return 'user-search-result-friend-request-sent';
     }
   }

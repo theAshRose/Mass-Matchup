@@ -41,7 +41,19 @@ router.post("/results", async (req, res) => {
 
 /* Route for searching for all the users. */
 router.get('/search/all', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
-    const rawAllUserData = await User.findAll();
+    const rawAllUserData = await User.findAll({
+      include: [
+        {
+            model: User,
+            as: "friend_id_req",
+            through: {
+              where: {
+                friend_id_req: req.session.user
+              }
+            }
+        },
+    ]
+    });
 
     const userResults = rawAllUserData.map(rawUserData => rawUserData.get({ plain: true }));
 

@@ -1,5 +1,7 @@
 <div class="col-lg-6 col-xl-4 mb-3">
-    <div class="card shadow-lg d-flex flex-row" dataUserId="{{id}}">
+    {{#each friend_id_req}}
+    <div class="card shadow-lg d-flex flex-row" friend-req-id="{{friendReq.id}}" data-user-id="{{../id}}">
+    {{/each}}
         <button class="btn transparent-green-glow-btn btn-sm position-absolute bottom-0 end-0 m-1 acceptFriendRequestBtn transparent">Accept Friend Request</button>
         <img src="{{steam_avatar_full}}" class="img-fluid user-search-image rounded" alt="...">
         <div class="card-body p-2">
