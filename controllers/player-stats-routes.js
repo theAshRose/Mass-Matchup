@@ -28,7 +28,7 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
                 }
             }).then(function (Data1) {
                 let Data2 = JSON.parse(Data1)
-                console.log(Data2.response, "POTATOE")
+                //console.log(Data2.response, "POTATOE")
                 if (Data2.response.length == undefined && !Data2.response.games) {
                     res.redirect("404")
                 }
@@ -231,7 +231,7 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
                     });
                     }
                     // console.log(Data, "i am the best")
-                    console.log(elparso);
+                    //console.log(elparso);
 
                     res.render('user-stats',
                         {

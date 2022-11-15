@@ -29,6 +29,14 @@ async function getFriendData(req, res, next) {
     next();
 }
 
+async function redirectIfSteamProfileIsPrivate(req, res, next) {
+    if (req.session.privateProfile == 3) {
+        next();
+    } else {
+        res.redirect('/403');
+    }
+}
+
 async function getFriendsAndFriendRequests(req, res, next) {
     //console.log("TEST");
 
@@ -75,4 +83,4 @@ async function getFriendsAndFriendRequests(req, res, next) {
     next();
 }
 
-module.exports = { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures};
+module.exports = { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures, redirectIfSteamProfileIsPrivate};
