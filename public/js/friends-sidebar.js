@@ -170,11 +170,17 @@ async function removeFriendButtonOnClick(event) {
 const compareStats = async (event) => {
     event.preventDefault();
     let clickedBtn = $(event.target)
-    const splitMe = clickedBtn.parents().eq(1).attr("id").split("")
+    const splitMe = clickedBtn.parents().eq(1).attr("id").split("") 
     const flipMe = splitMe.reverse()
-    const finishMe = flipMe.join("")
-    let friend = parseInt(finishMe)
-   console.log(friend);
+    const finishMe = flipMe.join("") 
+    let goAgain = parseInt(finishMe)
+    const stringUp = goAgain.toString()
+    const splitAgain = stringUp.split("")
+    const flipAgain = splitAgain.reverse()
+    const onceMoreWithFeeling = flipAgain.join("")
+    const friend = parseInt(onceMoreWithFeeling) 
+    ///This must be flipped twice in the case that the target user-id is greater than 1 integer. Otherwise we get a crash.
+//    console.log(friend, "line 185 extracted value");
    if (!friend) {
        alert("please try again")
    } else {
