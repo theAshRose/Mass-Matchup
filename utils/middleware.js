@@ -1,4 +1,5 @@
 const { app } = require("express");
+const { Exception } = require("handlebars");
 const router = require("express").Router();
 const { User, Friend, FriendReq } = require("../models");
 
@@ -10,14 +11,12 @@ function authorizeUser(req, res, next) {
     }
 }
 
-async function desperateMeasures(req, res, next){  
-    if (res.statusCode >= 400){
+async function desperateMeasures(){  
+    
         router.get('/', function(req, res){
-            res.redirect('/403')
-        })
-        
-    }
-   
+            res.redirect('/')
+        })       
+    
 }
 
 async function getFriendData(req, res, next) {

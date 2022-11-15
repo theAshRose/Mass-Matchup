@@ -31,7 +31,7 @@ const doubleStats = async (event) => {
               window.location.replace(`/compare/sharedGames/${appId}`)
          } else {
             window.location.replace('/')
-             alert('Something is wrong');
+             alert("Someones account is either private or under maintenance!!");
          }
      }
  };

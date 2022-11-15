@@ -133,50 +133,9 @@ router.get('/ownedGameStats', authorizeUser, getFriendsAndFriendRequests, async 
             console.log(req.session.appid, "why are you bug?")
             var url = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + req.session.appid + '&key=' + process.env.APIkey + '&steamid=' + steam
             rp(url, async function (err, res, body) {
-            //     try{ const userData = await User.findByPk(req.session.user, {
-            //         // where: {
-            //         //     id: req.params.id
-            //         // }
-            //     })
-            
-            
-            // }
-            //     catch(err) {}
                 if (!err && res.statusCode < 400) {
-                    console.log(body)
-
-                    let elparso = await JSON.parse(body, "TATER")
-                    // console.log(elparso + "elparso")
-                    let temp1 = Object.keys(elparso)
-                    let no = "elparso." + temp1[0]
-                    let temp2 = eval(no)
-                    // console.log(temp2, "temp2")
-                    let temp3 = Object.keys(temp2)
-                    console.log(temp3, "temp3")
-                    let no2 = 'temp2.' + temp3[2]
-                    let temp4 = eval(no2)
-                    console.log(temp4, "temp4")
-                    let iAmAwesome = []
                     
-                    if (temp4) {
-                        goodData = true
-                        for (i = 0; i < temp4.length; i++) {
-                            let noYeah = Object.values(temp4[i])
-                            let temp69 = {
-                                name: noYeah[0],
-                                score: Math.trunc(noYeah[1])
-                            }
-                            iAmAwesome.push(temp69)
-                        }
-                    } else {
-                        goodData = false
-                        
-                    }
-
-                    // console.log(iAmAwesome, "IM TEMP 4")
-                      return iAmAwesome
-                } 
-                
+                }
             }).then(async function (data1) {
                 
                 let elparso = JSON.parse(data1)
