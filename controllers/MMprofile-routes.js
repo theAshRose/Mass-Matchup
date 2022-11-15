@@ -8,8 +8,7 @@ const controller = new AbortController();
 const { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures } = require('../utils/middleware');
 
 let ownedGamesData;
-// let ownedGamesDataUnsorted;
-let ownedGamesDataSorted;
+
 let temp1;
 let temp2;
 let temp3
@@ -203,17 +202,16 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     //     res.redirect("404")
     // }
     const ownedGamesDataUnsorted = await gamesData.response.games
-    // console.log(ownedGamesDataUnsorted, "ripe")
+    console.log(ownedGamesDataUnsorted, "ripe")
                     // if (ownedGamesDataUnsorted == undefined) {                        
-                    //     return;                    
+                    //     return;                      
                     // }
     // Dom's sort function.
-                    
-    if (ownedGamesDataUnsorted) {
+    
     const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
-        return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);       
-    }); return ownedGamesDataSorted
-    }  
+        return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
+    }); 
+   
     ownedGamesData = ownedGamesDataSorted;
 
     res.render('friend-stats', {
@@ -244,13 +242,11 @@ router.get('/friends/:id/stats/:appid', authorizeUser, getFriendsAndFriendReques
         //     res.redirect("404")
         // }
         const ownedGamesDataUnsorted = gamesData.response.games
-        
         // Dom's sort function.
-        if (ownedGamesDataUnsorted) {
-            const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
-                return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);       
-            }); return ownedGamesDataSorted
-            }  
+        const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
+            return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
+        });
+
         ownedGamesData = ownedGamesDataSorted
     }
     const gameStatsAPIURL = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=${req.params.appid}&key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}`; 
