@@ -65,14 +65,6 @@ const UserData = [{
   profile_url: "https://steamcommunity.com/profiles/76561197972449074/"
 },
 {
-  username: "robin",
-  password: "thedude",
-  steam_id: "76561197960435530",
-  steam_avatar_full: "https://avatars.akamai.steamstatic.com/f1dd60a188883caf82d0cbfccfe6aba0af1732d4_full.jpg",
-  steam_username: 'Robin',
-  profile_url: "https://steamcommunity.com/id/robinwalker/"
-},
-{
   username: "roda",
   password: "extrathicc",
   steam_id: "76561198216156851",
@@ -95,7 +87,15 @@ const UserData = [{
   steam_avatar_full: "https://avatars.akamai.steamstatic.com/c4a818da21ea23595d82759dc2f905204b1ea35d_full.jpg",
   steam_username: 'TedaToo$hort',
   profile_url: "https://steamcommunity.com/id/TedaTooShort/"
-}
+},
+{
+  username: "pharce",
+  password: "pharcyde",
+  steam_id: "76561197976402774",
+  steam_avatar_full: "https://avatars.akamai.steamstatic.com/a51d41ae22e8d24839f62981cc22fa158581b642_full.jpg",
+  steam_username: 'Pharce',
+  profile_url: "https://steamcommunity.com/profiles/76561197976402774/"
+},
 ]
 
 const seedUsers = () => User.bulkCreate(UserData);

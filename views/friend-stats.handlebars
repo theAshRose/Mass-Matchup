@@ -10,8 +10,8 @@
                         class="img-fluid steam-user-image rounded" alt="...">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
-                            <p class="card-text user">{{friendData.steam_username}}</p>
-                            <a href="{{friendData.profile_url}}" target="_blank">Steam Profile</a>
+                            <p class="card-text yellow-glow-title">{{friendData.steam_username}}</p>
+                            <a href="{{friendData.profile_url}}" target="_blank" class="neon-yellow-link">Steam Profile</a>
                         </div>
                     </div>
                 </div>
@@ -27,9 +27,9 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="card shadow-lg mt-2 m-2">
-                <div class="card-header">
-                    <h4 class="card-title dash-title m-0">Owned Games: </h4>
+            <div class="card shadow-lg mt-3 m-2">
+                <div class="card-header pb-0">
+                    <h4 class="card-title dash-title m-1">Owned Games: </h4>
                 </div>
                 <div class="card-body">
                     {{#each ownedGames}}
@@ -39,19 +39,21 @@
             </div>
         </div>
         <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-1">
-            {{#if hasStats}}
             <div class="card shadow-lg" id="stat-results-display-box">
                 <div class="card-body">
                     <div class="container-fluid">
-                        <div class="row d-flex flex-row justify-content-between">
-                            {{!-- <div class="col-xl-4 mb-3 m-xl-0 p-0">
-                                <input type="text" class="form-control" id="manual-search-input"
-                                    placeholder="Manual search">
-                            </div> --}}
-                            <h4 class="dash-title col-auto text-center">Results for {{gameStats.name}}: </h4>
+                        {{#if hasStats}}
+                        <div class="row d-flex flex-row">
+                            <h4 class="card-title col-auto text-center m-2 p-0">Results for {{gameStats.name}}: </h4>
                         </div>
+                        {{else}}
+                        <div class="row d-flex flex-row justify-content-center align-items-center">
+                            <h4 class="card-title dash-title col-auto text-center m-0">Click on a game to see stats</h4>
+                        </div>
+                        {{/if}}
                     </div>
-                    <ul class="list-group col-12 col-xl-10 col-xxl-8 mt-3">
+                    {{#if hasStats}}
+                    <ul class="list-group col-12 col-xl-10 col-xxl-8 p-1">
                         {{#each gameStats.stats}}
                         <li class="list-group-item user-stat-list-group-item d-flex justify-content-between p-1 pb-2">
                             <p class="m-0">{{name}}</p>
@@ -59,9 +61,9 @@
                         </li>
                         {{/each}}
                     </ul>
+                    {{/if}}
                 </div>
             </div>
-            {{/if}}
         </div>
     </div>
 </div>
