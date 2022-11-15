@@ -184,25 +184,25 @@ const compareStats = async (event) => {
    if (!friend) {
        alert("please try again")
    } else {
-       const response = await fetch('/compare', {
-           method: 'POST',
-           body: JSON.stringify({ friend }),
-           headers: { 'Content-Type': 'application/json' },
-       });
-       console.log(response)
-       if (response.ok) {
-           const response = await fetch('/compare/sharedGames', {
-               method: 'GET',
-               headers: { 'Content-Type': 'application/json' },
-           });
-           if (response.ok) {
-               window.location.replace('/compare/sharedGames')
-               // alert("am i the working?")
-           }
-       } else {
+    const response = await fetch('/compare', {
+        method: 'POST',
+        body: JSON.stringify({ friend }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+    console.log(response)
+    if (response.ok) {
+        const response = await fetch('/compare/sharedGames', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+        if (response.ok) {
+            window.location.replace('/compare/sharedGames')
+            // alert("am i the working?")
+        }
+    } else {
 
-           alert('Try again or try something else');
-       }
+        alert('Search failed! Twy again UwU');
+    }
    }
 };
 

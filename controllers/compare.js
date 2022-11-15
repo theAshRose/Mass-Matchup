@@ -160,6 +160,8 @@ router.get('/sharedGames/:appId', authorizeUser, getFriendsAndFriendRequests, as
         const friendUrl = 'http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=' + sharedAppId + '&key=' + process.env.APIkey + '&steamid=' + steamFriend
         /////////MESS STARTS HERE
 
+        //console.log(userUrl);
+
         rp(userUrl, async function (err, res, body) {
             if (res.statusCode > 400) {
                 
