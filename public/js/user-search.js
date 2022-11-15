@@ -81,7 +81,6 @@ async function acceptFriendRequest(event) {
   /* 8. Remove the friend request in the sidebar from the DOM. */
   const friendRequestElement = $(`#friend-request-element-${friendReqID}`);
   friendRequestElement.remove();
-  console.log(friendRequestElement);
 
   /* 9. If there's no more friend requests, remove the header. */
   const friendRequests = $('.friend-request-element');
@@ -99,6 +98,44 @@ async function acceptFriendRequest(event) {
   removeFriendButton.on('click', removeFriendButtonOnClick);
   createdCompareStatsButton.on('click', compareStats);
   createdSeeStatsButton.on('click', seeStatsButtonOnClick);
+}
+
+
+/* 
+ *  Logic for the deny friend request button on click. 
+ *  When the deny friend request button is clicked we must:
+ *    1. Get the friend request ID of the request to deny.
+ *    2. Remove the element from the user search page.
+ *    3. Remove the request from the friends sidebar.
+ *    4. If there are no more friend requests, remove the header.
+ *    5. Send a DELETE request to the server to delete the friend request.
+ */
+async function denyFriendRequest(event) {
+  const buttonClicked = $(event.target);
+
+  /* 1. Get the friend request ID of the request to deny. */
+  const friendRequestID = parseInt(buttonClicked.parent().attr('friend-req-id'));
+  console.log(friendRequestID);
+
+  /* 2. Remove the element from the user search page. */
+  buttonClicked.parent().parent().remove();
+
+  /* 3. Remove the request from the friends sidebar. */
+  const friendRequestElement = $(`#friend-request-element-${friendRequestID}`);
+  friendRequestElement.remove();
+
+  /* 4. If there are no more friend requests, remove the header. */
+  const friendRequests = $('.friend-request-element');
+  if (!friendRequests.length) {
+      const friendRequestsHeader = $('#friend-requests-header');
+      friendRequestsHeader.remove();
+  }
+
+  /* 5. Send a DELETE request to the server to delete the friend request. */
+  const response = await fetch(`/friends/request/${friendRequestID}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  });
 }
 
 const searchUsers = async (event) => {
@@ -159,4 +196,5 @@ const addFriend = async (event) => {
   $(".addFriendBtn").on("click", addFriend);
   $('#username-input-form').on('submit', searchUsers);
   $('.acceptFriendRequestBtn').on('click', acceptFriendRequest);
+  $('.denyFriendRequestBtn').on('click', denyFriendRequest);
   
