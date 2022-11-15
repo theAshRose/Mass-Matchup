@@ -31,11 +31,14 @@ const getOwnedGameStats = async (event) => {
                 // alert("am i the working?")
             }
         } else {
-            window.location.replace('/403')
-            alert('Search failed! Twy again UwU');
+            window.location.replace('/')
+            alert("Someones account is either private or under maintenance!!");
         }
     }
 };
+
+
+
 
 
 $(".ownedGameBtn").on("click", getOwnedGameStats)

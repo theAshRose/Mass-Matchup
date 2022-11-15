@@ -14,10 +14,8 @@ async function desperateMeasures(req, res, next){
     if (res.statusCode >= 400){
         router.get('/', function(req, res){
             res.redirect('/403')
-        })
-        
-    }
-   
+        })       
+    }  
 }
 
 async function getFriendData(req, res, next) {
