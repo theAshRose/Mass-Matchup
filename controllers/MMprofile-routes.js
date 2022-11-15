@@ -193,6 +193,8 @@ router.get('/search', authorizeUser, getFriendsAndFriendRequests, async (req, re
 /* Route to go to a friend's see stats page. */
 router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, getFriendData, async (req, res) => {
     /* We need to get information about the friend. */
+    
+    try{
     const ownedGamesSteamAPIURL = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.APIkey}&steamid=${res.locals.friendData.steam_id}&format=json&include_appinfo=true`;
 
     //console.log(ownedGamesSteamAPIURL);
@@ -213,6 +215,11 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
     const ownedGamesDataSorted = ownedGamesDataUnsorted.sort(function (a, b) {
         return parseFloat(b.playtime_forever) - parseFloat(a.playtime_forever);
     }); 
+
+
+
+
+
    
     ownedGamesData = ownedGamesDataSorted;
 
@@ -228,7 +235,11 @@ router.get('/friends/:id/stats', authorizeUser, getFriendsAndFriendRequests, get
             steam_avatar_full: req.session.steam_avatar_full,
             profile_url: req.session.profile_url
         }
-    });
+    });} catch (err) {
+      
+        res.redirect('/')
+        
+    }
 });
 
 /* Route to see the stats on the friend's stats page after clicking on a button. */

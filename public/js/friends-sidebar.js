@@ -201,7 +201,7 @@ const compareStats = async (event) => {
            }
        } else {
 
-           alert('Search failed! Twy again UwU');
+           alert('Try again or try something else');
        }
    }
 };
