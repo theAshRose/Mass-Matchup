@@ -5,7 +5,7 @@ const request = require('request');
 var rp = require('request-promise');
 const { parse } = require("handlebars");
 const controller = new AbortController();
-const { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures } = require('../utils/middleware');
+const { getFriendsAndFriendRequests, authorizeUser, getFriendData, desperateMeasures, redirectIfSteamProfileIsPrivate } = require('../utils/middleware');
 const { newsCleanUp } = require('../utils/helpers')
 
 let ownedGamesData;
@@ -17,16 +17,16 @@ let newsArray = [];
 let newsPerGame = []
 let start;
 let games
-router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => {
+router.get('/', authorizeUser, redirectIfSteamProfileIsPrivate, getFriendsAndFriendRequests, async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user, {
             where: {
                 id: req.params.id
             }
         })
-        if (req.session.privateProfile == 1) {
-            res.redirect('403')
-        }
+        // if (req.session.privateProfile == 1) {
+        //     res.redirect('/403')
+        // }
         const dbfriendData1 = await Friend.findAll({
             where: {
                 friend_id: req.session.user,
@@ -82,6 +82,12 @@ router.get('/', authorizeUser, getFriendsAndFriendRequests, async (req, res) => 
             //Contingency if results are not found, this is needed to stop server crash.
             if (parsedData.response.total_count === 0) {
                 res.redirect('user-stats')
+            }
+
+            //console.log(Object.keys(parsedData.response).length);
+            if  (!Object.keys(parsedData.response).length) {
+                res.redirect('/403');
+                return;
             }
 
             function getNews() {

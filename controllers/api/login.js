@@ -53,6 +53,9 @@ router.post("/login", async (req, res) => {
         req.session.steam_avatar_full = playerData.avatarfull;
         req.session.profile_url = playerData.profileurl
         //console.log(req.session.privateProfile, "HERE1")
+
+        //console.log(req.session.privateProfile);
+
         res
           .status(200)
           .json({ user: dbUserData, message: "You are now logged in!" });

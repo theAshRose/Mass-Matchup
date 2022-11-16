@@ -85,7 +85,7 @@ body {
     font-family: 'Press Start 2P';
     text-decoration: none;
     color: white;
-    font-size: smaller;
+    /* font-size: smaller; */
 }
 
 .steam-title:hover {
