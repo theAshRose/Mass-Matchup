@@ -100,7 +100,7 @@ On the player stats route, we make an API call to the Steam Web API to get all t
 
 #### User Story in Action
 
-![User stats demo](/assets/images/compare-stats-demo.gif)
+![User stats demo](/assets/images/user-stats-demo.gif)
 
 ### Compare Stats
 
@@ -112,7 +112,7 @@ When the user clicks the compare stats button on a friend, we query the Steam We
 
 #### User Story in Action
 
-![Compare stats demo](/assets/images/user-stats-demo.gif)
+![Compare stats demo](/assets/images/compare-stats-demo.gif)
 
 ### Friends Stats
 
