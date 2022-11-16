@@ -64,12 +64,16 @@ function whichUser(context) {
 }
 
 function newsCleanUp(noNews) {
+  if(!noNews){
+    return noNews
+  } else {
+  console.log(noNews)
   if (noNews.indexOf('{') == 0) {
     badNews = noNews.split(/(?<=^\S+)\s/)
     goodNews = badNews.splice(1, 1)
     //console.log(goodNews)
     return goodNews
-  }  
+  }  }
   return noNews
 }
 
