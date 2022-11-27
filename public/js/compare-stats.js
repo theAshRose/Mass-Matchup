@@ -4,98 +4,84 @@ const ctx = document.getElementById('graph-box');
 let myChart;
 
 const doubleStats = async (event) => {
-     event.preventDefault();
+    event.preventDefault();
 
-     let button;
-     let clickedElement = event.target;
- 
-     if (!clickedElement.matches("button")) {
-         button = clickedElement.closest('button');
-     } else {
-         button = clickedElement;
-     }
+    let button;
+    let clickedElement = event.target;
 
-     const appId = button.getAttribute("sharedGameAppId");
+    if (!clickedElement.matches("button")) {
+        button = clickedElement.closest('button');
+    } else {
+        button = clickedElement;
+    }
 
-     console.log(appId);
-     if (!appId) {
-         alert("please try again")
-     } else {
-         const response = await fetch(`/compare/sharedGames/${appId}`, {
-             method: 'GET',
-             headers: { 'Content-Type': 'application/json' },
-         });
-         console.log(response)
-         if (response.ok) {
-            console.log("response OK")
-              window.location.replace(`/compare/sharedGames/${appId}`)
-         } else {
-            window.location.replace('/')
-             alert("Someones account is either private or under maintenance!!");
-         }
-     }
- };
+    const appID = button.getAttribute("sharedGameAppId");
 
- if (ctx !== null) {
+    const friendID = parseInt(document.querySelector('.compare-user-card').getAttribute('friend-id'));
+
+    document.location.replace(`/compare/${friendID}/stats/${appID}`);
+};
+
+if (ctx !== null) {
     myChart = new Chart(ctx, {
-     type: 'bar',
-     data: {
-         labels: [' '],
-         datasets: [
-         {
-             label: 'You',
-             data: [0],
-             backgroundColor: [
-                 'rgba(4, 217, 255, .5)',
-                 //'rgba(255, 99, 132, 0.2)',
-             ],
-             borderColor: [
-                 'rgba(4, 217, 255, .5)',
-                 //'rgba(255, 99, 132, 1)',
-             ],
-             borderWidth: 1,
-             maxBarThickness: 150
-         },
-         {
-             label: 'Your Friend',
-             data: [0],
-             backgroundColor: [
-                 //'rgba(54, 162, 235, 0.2)',
-                 'rgba(255, 49, 49, .5)',
-             ],
-             borderColor: [
-                 //'rgba(54, 162, 235, 1)',
-                 'rgba(255, 49, 49, .5)',
-             ],
-             borderWidth: 1,
-             maxBarThickness: 150
-         }]
-     },
-     options: {
-         plugins: {
- 
-         },
-         scales: {
-             x: {
-                ticks: {
-                    color: 'yellow'
+        type: 'bar',
+        data: {
+            labels: [' '],
+            datasets: [
+                {
+                    label: 'You',
+                    data: [0],
+                    backgroundColor: [
+                        'rgba(4, 217, 255, .5)',
+                        //'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(4, 217, 255, .5)',
+                        //'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1,
+                    maxBarThickness: 150
                 },
-                 grid: {
-                     display: false
-                 }
-             },
-             y: {
-                ticks: {
-                    color: 'yellow'
+                {
+                    label: 'Your Friend',
+                    data: [0],
+                    backgroundColor: [
+                        //'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 49, 49, .5)',
+                    ],
+                    borderColor: [
+                        //'rgba(54, 162, 235, 1)',
+                        'rgba(255, 49, 49, .5)',
+                    ],
+                    borderWidth: 1,
+                    maxBarThickness: 150
+                }]
+        },
+        options: {
+            plugins: {
+
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'yellow'
+                    },
+                    grid: {
+                        display: false
+                    }
                 },
-                 beginAtZero: true,
-                 grid: {
-                     display: false
-                 }
-             }
-         }
-     }
- });
+                y: {
+                    ticks: {
+                        color: 'yellow'
+                    },
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
 }
 
 /* 
@@ -109,12 +95,28 @@ function seeStats(event) {
 
     /* 1. Get the id of the user we want to see the stats for. */
     const friendID = parseInt(buttonClicked.getAttribute("data-friend-id"));
-    
+
     /* 2. Redirect to the appropriate page. */
-    document.location.replace(`/friends/${friendID}/stats`);
+    fetch(`/api/games`, {
+        method: 'POST',
+        body: JSON.stringify({ id: friendID }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then((response) => {
+            if (response.ok) {
+                document.location.replace(`/friends/${friendID}/stats`);
+            } else if (response.status === 403) {
+                alert("This user's game data is private");
+            } else {
+                alert("Unknown error occured");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        })
 }
 
- function updateChartData(event) {
+function updateChartData(event) {
     event.preventDefault()
     console.log('we in')
     let clickedBtn = $(event.target);

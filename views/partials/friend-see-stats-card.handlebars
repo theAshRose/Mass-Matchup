@@ -1,0 +1,15 @@
+<div class="card shadow-lg p-0 d-flex flex-column stats-user-card m-2 mb-3">
+    <button class="btn yellow-glow-btn position-absolute bottom-0 end-0 m-3" data-friend-id="{{_locals.friendData.id}}" type="button" id="compare-stats-button">
+        Compare stats
+    </button>
+    <div class="d-flex flex-row">
+        <img src="{{_locals.friendData.steam_avatar_full}}"
+        class="img-fluid steam-user-image rounded" alt="...">
+        <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+                <p class="card-text yellow-glow-title">{{_locals.friendData.steam_username}}</p>
+                <a href="{{_locals.friendData.profile_url}}" target="_blank" class="neon-yellow-link">Steam Profile</a>
+            </div>
+        </div>
+    </div>
+</div>

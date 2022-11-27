@@ -1,0 +1,12 @@
+<div class="card-header m-2">
+    <h4 class="card-title dash-title m-0">Results for {{queryTerm}}:</h4>
+</div>
+<div class="card-body">
+    <div class="container-fluid">
+        <div class="row">
+            {{#each userResults}}
+            {{> (whichUser ../this)}}
+            {{/each}}
+        </div>
+    </div>
+</div>

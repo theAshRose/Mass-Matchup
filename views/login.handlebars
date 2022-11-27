@@ -1,24 +1,47 @@
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="row d-flex justify-content-center">
-        <div class="card shadow-lg p-0 col-8 col-lg-6">
-            <div class="card-header">
-                <h2 class="card-title login">Login</h2>
+        <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+            <div class="card shadow-lg p-0">
+                <div class="card-header pb-0">
+                    <h2 class="card-title login m-0 mt-3">Login</h2>
+                </div>
+                <div class="card-body">
+                    <form id="username-email-input-form" class="py-2 px-1">
+                        <label for="username-email-input" class="form-label card-text login-text">Username:</label>
+                        <input type="text" class="form-control shadow" id="username-input">
+                    </form>
+                    <form id="password-input-form" class="py-2 px-1">
+                        <label for="password-input" class="form-label card-text login-text">Password:</label>
+                        <input type="password" class="form-control shadow" id="password-input">
+                    </form>
+                    <div class="container-fluid p-3 mt-1">
+                        <div class="row d-flex justify-content-between">
+                            <button class="btn transparent-blue-glow-btn shadow col-6" id="posting-login-button">Log
+                                In</button>
+                            <button class="btn violet-glow-btn shadow col-4 col-sm-4 col-xl-2"
+                                id="reroute-signup-button">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        <div class="card-body">
-        <form id="username-email-input-form" class="p-2">
-            <label for="username-email-input" class="form-label card-text login-text">Username or email address:</label>
-            <input type="text" class="form-control shadow" id="username-input">
-        </form>
-        <form id="password-input-form" class="p-2">
-            <label for="password-input" class="form-label card-text login-text">Password:</label>
-            <input type="password" class="form-control shadow" id="password-input">
-        </form>
-        <div class="container-fluid p-3 mt-1">
-            <div class="row d-flex justify-content-between">
-                <button class="btn transparent-blue-glow-btn shadow col-6"
-                    id="posting-login-button">Log In</button>
-                <button class="btn violet-glow-btn shadow col-4 col-sm-4 col-xl-2"
-                    id="reroute-signup-button">Sign Up</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Access DENIED!</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" id="modal-close-icon">
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="modal-close-button">Close</button>
             </div>
         </div>
     </div>

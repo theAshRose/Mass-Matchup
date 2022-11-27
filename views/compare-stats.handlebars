@@ -1,101 +1,78 @@
 <div class="container-fluid">
-<div class="row">
-    <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-0">
-            <div class="card shadow-lg p-0 d-flex flex-column compare-user-card m-2">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-0">
+            <div class="card shadow-lg p-0 d-flex flex-column compare-user-card m-2"
+                friend-id="{{_locals.friendData.id}}">
                 <div class="d-flex flex-row">
-                    <button class="btn transparent-red-glow-btn position-absolute bottom-0 end-0 m-3" data-friend-id="{{friendData.id}}" type="button" id="see-stats-button">
+                    <button class="btn transparent-red-glow-btn position-absolute bottom-0 end-0 m-3"
+                        data-friend-id="{{_locals.friendData.id}}" type="button" id="see-stats-button">
                         See stats
                     </button>
-                    <img src="{{friendData.steam_avatar_full}}"
-                        class="img-fluid steam-user-image rounded" alt="...">
+                    <img src="{{_locals.friendData.steam_avatar_full}}" class="img-fluid steam-user-image rounded"
+                        alt="...">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
-                            <p class="card-text red-glow-title">{{friendData.steam_username}}</p>
-                            <a href="{{friendData.profile_url}}" target="_blank" class="neon-red-link">Steam Profile</a>
+                            <p class="card-text red-glow-title">{{_locals.friendData.steam_username}}</p>
+                            <a href="{{_locals.friendData.profile_url}}" target="_blank" class="neon-red-link">Steam
+                                Profile</a>
                         </div>
                     </div>
                 </div>
             </div>
-        <div class="container-fluid">
-            <div class="row d-flex flex-row justify-content-between">
-
-                {{!-- <div class="card-header">
-                    <h4 class="card-title dash-title m-0">Owned Games: </h4>
-                </div> --}}
-
-                <div class="col-12 p-0">
-                    <div class="card shadow-lg mt-0 m-2 mt-2">
-                        <div class="card-header">
-                            <h4 class="dash-title m-0 mt-2">Owned Games:</h4>
-                            <h5 class="dash-title m-0 mt-3">
-                                <sm><i>(click to compare)</i></sm>
-                            </h5>
-
-                        </div>
-                        <div class="card-body">
-                            {{#each sharedGames}}
-                            <button sharedGameAppId="{{appid}}"
-                                class="sharedGameBtn btn violet-glow-btn btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
-                                <div class="d-flex align-items-center">
-                                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{appid}}/{{img_icon_url}}.jpg"
-                                        class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
-                                    <p class="card-text">{{name}}</p>
-                                </div>
-                                <p class="card-text me-2"></p>
-                            </button>
-                            {{/each}}
+            <div class="container-fluid">
+                <div class="row d-flex flex-row justify-content-between">
+                    <div class="col-12 p-0">
+                        <div class="card shadow-lg mt-0 m-2 mt-2 friend-owned-games-card">
+                            <div class="card-header">
+                                <h4 class="dash-title m-0 mt-2">Shared Games:</h4>
+                                {{!-- <h5 class="dash-title m-0 mt-3">
+                                    <sm><i>(click to compare)</i></sm>
+                                </h5> --}}
+                            </div>
+                            <div class="card-body">
+                                {{#each _locals.sharedGames}}
+                                <button sharedGameAppId="{{app_id}}"
+                                    class="sharedGameBtn btn violet-glow-btn btn-game d-flex flex-row justify-content-between align-items-center w-100 mb-1 p-0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{app_id}}/{{img_icon_url}}.jpg"
+                                            class="img-fluid steam-game-thumbnail rounded p-0 me-3" alt="...">
+                                        <p class="card-text">{{name}}</p>
+                                    </div>
+                                    <p class="card-text mx-2 text-end text-nowrap">{{to_hours playtime_forever}} h
+                                    </p>
+                                </button>
+                                {{/each}}
+                            </div>
                         </div>
                     </div>
                 </div>
-                {{!-- <div class="col-8 col-sm-7 col-md-8 p-0">
-                    <div class="card shadow mt-2">
-                        <input type="text" class="form-control form-control-sm" placeholder="Search game"
-                            aria-label="Search game">
-                    </div>
-                </div> --}}
             </div>
         </div>
-        {{!-- <div class="card shadow-lg mt-2">
-            <div class="card-header">
-                <h3 class="card-title text-dark mb-1">Search results</h3>
-                <h5 class="card-subtitle text-muted">for Team Fortress 2</h5>
+        <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-0">
+            <div class="card shadow-lg m-2 p-3">
+                {{#if private}}
+                <div class="card-header d-flex justify-content-center align-items-center">
+                    <h4 class="card-title dash-title m-0 my-2 lh-base mb-0">
+                        {{{_locals.friendData.steam_username}}}'s steam game data is private!
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-2">Have them navigate to their Steam <a
+                            href="https://help.steampowered.com/en/faqs/view/588C-C67D-0251-C276"
+                            target="_blank">profile privacy</a> page and make sure it looks like this:</p>
+                    <img src="/images/make-profile-public.png" class="figure-img img-fluid rounded modal-img"
+                        alt="Make profile public">
+                </div>
+                {{else}}
+                {{> (whichCompareStatDisplay)}}
+                {{/if}}
             </div>
-            <div class="card-body">
-                <p class="card-text mb-2">Reverend Richard Wayne Gary Wayne has more kills than Chairman Miao!</p>
-                <p class="card-text">Chairman Miao has more teabags than Reverend Richard Wayne Gary Wayne!</p>
-            </div>
-        </div> --}}
-    </div>
-    <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-0">
-        <div class="card shadow-lg m-2">
-            {{#if goodData}}
-            <div class="dropdown position-absolute m-2" id="stat-dropdown">
-                <button class="btn yellow-glow-btn yellow-glow-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Select statistic
-                </button>
-                <ul class="dropdown-menu yellow-dropdown-menu">
-                    {{#each finalStats}}
-                        <li><a comparedStatsData="{{score}}-{{score2}}" class="comparedStat dropdown-item yellow-dropdown-item" href="#">{{name}}</a></li>
-                    {{/each}}
-                </ul>
-            </div>
-            <div class="card-header d-flex justify-content-center">
-                <h2 class="card-title text-dark"></h2>
-            </div>
-            <div class="card-body d-flex justify-content-center align-items-center">
-                <canvas id="graph-box"></canvas>
-            </div>
-            {{else}}
-            <div class="card-header d-flex justify-content-center align-tems-center">
-                <h4 class="card-title dash-title m-2">Click on a game to compare stats</h4>
-            </div>
-            {{/if}}
         </div>
     </div>
 </div>
-</div>
 
 
 
-{{!-- <script src="../node_modules/chart.js/dist/chart.js"></script> --}}
+{{!--
+<script src="../node_modules/chart.js/dist/chart.js"></script> --}}
 <script src="/js/compare-stats.js"></script>

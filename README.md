@@ -19,11 +19,12 @@
 
 ## Description
 
-Mass matchup is a Steam based stats comparison platform. It links accounts to their users steam data and allows you to view news about recently played games, view your personal game stats, and compare stats with other users on the website.
+Mass matchup is a [Steam](https://store.steampowered.com/)-based stats comparison platform. It links accounts to their users steam data and allows you to view news about recently played games, view your personal game stats, and compare stats with other users on the website.
 
 ## Usage
 
-Navigate to [https://mass-matchup.herokuapp.com/](https://mass-matchup.herokuapp.com/). Either enter the login information with an existing account, or create a new one using your SteamID.
+Navigate to [https://mass-matchup.herokuapp.com/](https://mass-matchup.herokuapp.com/).  
+Either enter the login information of an existing account, or create a new one using your [Steam ID](https://help.steampowered.com/en/faqs/view/2816-BE67-5B69-0FEC).
 
 If you want to use a dummy account to see the site, use:
 
@@ -32,10 +33,12 @@ username: davinchi
 password: davinchi
 ```
 
-Otherwise, if you want to sign up, get your SteamID and make everything public in your profile settings. See the [signup](https://mass-matchup.herokuapp.com/login/signup) page for details of how to your SteamID and how to edit your profile privicy settings.
+Otherwise, if you want to sign up, get your [Steam ID](https://help.steampowered.com/en/faqs/view/2816-BE67-5B69-0FEC) and make everything public in your [profile privacy settings page](https://steamcommunity.com/my/edit/settings?snr=). Enter a username, a password greater than 6 characters and a valid Steam ID with a public profile and public game data, and you can sign up.
 
-If you dont properly make your profile public, you won't be allowed access to the site and you will be redirected to a 403 forbidden message:  
-![403 Forbidden Page](/assets/images/403-forbidden-error.png)
+If you dont properly make your profile public, you won't be allowed access to the site and a modal dialog will pop up instructing you on how to make your profile public:  
+![Private information modal dialog](/assets/images/private-information-modal-dialog.png)
+
+Once you log in, you can click on any one of your friends in the friends sidebar and you have the option to either view their stats or compare your stats against theirs. You can also view your own stats as well. Don't have any friends? No problem! Click on 'user search' and you search for users to send friend requests to. If they accept, you can compare your stats against theirs.
 
 ## User Stories
 
@@ -43,7 +46,7 @@ If you dont properly make your profile public, you won't be allowed access to th
 <a href="#signup">Signup</a> •
 <a href="#game-news">Game News</a> •
 <a href="#user-stats">User Stats</a> •
-<a href="#compare-stats">Coompare Stats</a> •
+<a href="#compare-stats">Compare Stats</a> •
 <a href="#friends-stats">Friends Stats</a> •
 <a href="#user-search">User Search</a> •
 <a href="#friends-sidebar">Friends Sidebar</a>
@@ -124,7 +127,7 @@ In the friends stats route, we first query the Steam Web API for a list of owned
 
 #### User Story in Action
 
-![Friends stats demo](/assets/images/friends-stats-demo.gif)
+![Friends stats demo](/assets/images/friend-stats-demo.gif)
 
 ### User Search
 

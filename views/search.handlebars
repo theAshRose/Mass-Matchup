@@ -2,24 +2,28 @@
     <div class="row">
         <div class="col-12 col-sm-6 col-lg-5 col-xl-4 p-0">
             <div class="card shadow-lg m-2">
-                <div class="card-header text-dark">
-                    <h4 class="dash-title">User Search</h4>
+                <div class="card-header p-4 pb-0">
+                    <h4 class="dash-title m-0">User Search</h4>
                 </div>
                 <div class="card-body">
                     <form id="username-input-form" class="p-2">
                         <label for="username-input" class="form-label card-text">Username: </label>
                         <input type="text" class="form-control shadow" id="username-input">
                         <div id="button-row" class="d-flex justify-content-between">
-                            <button class="btn violet-glow-btn shadow mt-3"
-                                id="search-user-button">Search </button>
-                            <button class="btn violet-glow-btn shadow mt-3"
-                                id="search-all-users-button" type="button">Search All</button>
+                            <button class="btn violet-glow-btn shadow mt-3" id="search-user-button">Search </button>
+                            <button class="btn violet-glow-btn shadow mt-3" id="search-all-users-button"
+                                type="button">Search All</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        {{#if searchResults}}
+        <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-0">
+            <div class="card shadow-lg m-2">
+                {{> (whichUserSearchResultDisplay)}}
+            </div>
+        </div>
+        {{!-- {{#if searchResults}}
         <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-0">
             <div class="card shadow-lg m-2">
                 <div class="card-header">
@@ -37,10 +41,10 @@
                 </div>
             </div>
         </div>
-        {{/if}}
+        {{/if}} --}}
     </div>
 </div>
 
 
-   
+
 <script type='module' src="/js/user-search.js"></script>
