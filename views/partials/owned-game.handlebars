@@ -1,0 +1,10 @@
+<button ownedGameAppId="{{app_id}}"
+    class="ownedGameBtn btn violet-glow-btn btn-game d-flex flex-row justify-content-between align-items-center mb-1 p-0">
+    <div class="d-flex flex-row align-items-center p-0">
+        <img src="https://media.steampowered.com/steamcommunity/public/images/apps/{{app_id}}/{{img_icon_url}}.jpg"
+            class="img-fluid steam-game-thumbnail rounded p-0 me-2" alt="...">
+        <p class="card-text text-nowrap">{{name}}</p>
+    </div>
+    <p class="card-text p-0 px-2 text-end text-nowrap">{{to_hours user_game.playtime_forever}} h
+    </p>
+</button>

@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link href="/css/normalize.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="/css/style.css" rel="stylesheet" />
 
     <title>Mass Matchup</title>
 </head>
+
 <body>
     {{#unless user.loggedIn}}
     <header class="d-flex justify-content-center align-items-center">
-        <h1 class="text-primary">Welcome to Mass Matchup</h1>
+        <h1 class="text-primary text-center lh-base">Welcome to Mass Matchup</h1>
     </header>
     {{/unless}}
     {{#if user.loggedIn}}
     <header class="d-flex justify-content-center align-items-center">
-        <h1 class="text-primary">Mass Matchup</h1>
+        <h1 class="text-primary text-center lh-base">Mass Matchup</h1>
     </header>
     {{/if}}
     {{#if user.loggedIn}}
@@ -35,18 +37,16 @@
     {{/if}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    
+
     <main>
         {{{body}}}
     </main>
 
     {{#if user.loggedIn}}
-    <div class="offcanvas offcanvas-start" tabindex="-1" 
-        id="friendsSidebar" aria-labelledby="friendsSidebarLabel">
-        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2" 
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="friendsSidebar" aria-labelledby="friendsSidebarLabel">
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2"
             data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        {{#if (has_friend_requests friendRequests)}}
+        {{#if (has_friend_requests _locals.friendRequests)}}
         {{>friend-requests}}
         {{/if}}
         <div class="offcanvas-header pb-1">
@@ -54,15 +54,49 @@
         </div>
         <div class="container-fluid mt-0 pt-1">
             <div class="row" id="sidebar-friends-list">
-                {{#each friends }}
+                {{#each _locals.friends }}
                 {{>friends}}
                 {{/each}}
             </div>
         </div>
     </div>
     {{/if}}
+
     {{#if user.loggedIn}}
-        <script type='module' src="/js/friends-sidebar.js"></script>
+    <div class="modal fade" id="friendModal" tabindex="-1" role="dialog" aria-labelledby="friendModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="friendModalLabel">Access DENIED!</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"
+                        id="modal-close-icon">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-2">This user's game data is private!</p>
+                    <p class="mb-2">Have them navigate to their Steam <a
+                            href="https://help.steampowered.com/en/faqs/view/588C-C67D-0251-C276" target="_blank"
+                            class="regular-link">profile privacy</a> page and make sure it looks like this:</p>
+                    <img src="/images/make-profile-public.png" class="figure-img img-fluid rounded modal-img"
+                        alt="Make profile public">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="modal-close-button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     {{/if}}
+
+    {{#if user.loggedIn}}
+    <script type='module' src="/js/home.js"></script>
+    {{/if}}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

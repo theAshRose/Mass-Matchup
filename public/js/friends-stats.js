@@ -12,29 +12,23 @@ async function compareStatsButtonOnClick(event) {
     const friendID = parseInt(clickedButton.getAttribute('data-friend-id'));
 
     /* 2. Redirect to the compare stats page. */
-    if (!friendID) {
-        alert("please try again")
-    } else {
-        const response = await fetch('/compare', {
-            method: 'POST',
-            body: JSON.stringify({ friend: friendID }),
-            headers: { 'Content-Type': 'application/json' },
-        });
-        console.log(response)
-        if (response.ok) {
-            const response = await fetch('/compare/sharedGames', {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            });
+    fetch(`/api/games`, {
+        method: 'POST',
+        body: JSON.stringify({ id: friendID }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then((response) => {
             if (response.ok) {
-                window.location.replace('/compare/sharedGames')
-                // alert("am i the working?")
+                document.location.replace(`/compare/${friendID}`);
+            } else if (response.status === 403) {
+                alert("This user's game data is private");
+            } else {
+                alert("Unknown error occured");
             }
-        } else {
- 
-            alert('Search failed! Twy again UwU');
-        }
-    }
+        })
+        .catch((error) => {
+            console.error(error);
+        })
 }
 
 /*
@@ -61,7 +55,7 @@ function ownedGameButtonOnClick(event) {
 
     /* 3. Get the friend ID of the friend whose stats we are viewing. */
     const friendID = parseInt(document.location.pathname.match(/\d+/g));
-    
+
     /* 4. Redirect the user to the stats page. */
     document.location.replace(`/friends/${friendID}/stats/${appid}`);
 }

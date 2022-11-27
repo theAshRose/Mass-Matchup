@@ -6,22 +6,22 @@
                     <h3 class="dash-title m-0 mt-2">Recently Played Games</h3>
                 </div>
                 <div class="card-body ">
-                    {{#each games}}
-                    {{>recentGames}}
+                    {{#each recentGames}}
+                    {{>recentGame}}
                     {{/each}}
-                            
+
                 </div>
             </div>
         </div>
         <div class="col-12 col-sm-6 col-lg-7 col-xl-8 p-0">
-            <div class="card shadow-lg m-2">
+            <div class="card shadow-lg m-2 news-card">
                 <div class="card-header">
                     <h4 class=" dash-title m-0 mt-2">Game News</h4>
                 </div>
                 <div class="card-body">
                     {{#each newsPerGame}}
                     <div class="card shadow-lg mb-3">
-                         <div class="card-header">
+                        <div class="card-header">
                             <h5 class="card-title card-text m-0">{{name}}</h5>
                         </div>
                         <div class="card-body">

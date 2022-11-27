@@ -3,14 +3,18 @@
         <img src="/images/GIRTHCHECKER.png" class="img-fluid rounded" alt="..." id="logo-image">
         <nav>
             <ul class="p-0 m-0" id="navbar">
-                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/" >Home</a></li>
-                {{#unless stats}}
-                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/user-stats" >Stats</a></li>
+                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class"
+                        href="/">Home</a></li>
+                {{#unless statsPage}}
+                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class"
+                        href="/user-stats">Stats</a></li>
                 {{/unless}}
                 {{#unless search}}
-                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/search" >Search</a></li>
+                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class"
+                        href="/search">Search</a></li>
                 {{/unless}}
-                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start dash-line"><a class="nav-class" href = "/logout" >Logout</a></li>
+                <li class="m-2 me-3 m-lg-2 m-xl-4 d-lg-inline text-end text-lg-start"><button
+                        class="nav-class dash-line" id="logout-button">Logout</button></li>
             </ul>
         </nav>
     </div>

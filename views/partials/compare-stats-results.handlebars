@@ -1,0 +1,18 @@
+<div class="card-header d-flex p-1 justify-content-start w-75">
+    <h4 class="card-title dash-title lh-base mb-1">{{_locals.game.name}}</h4>
+</div>
+<div class="dropdown position-absolute top-0 end-0 m-3" id="stat-dropdown">
+    <button class="btn yellow-glow-btn yellow-glow-dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Select statistic
+    </button>
+    <ul class="dropdown-menu yellow-dropdown-menu dropdown-menu-end">
+        {{#each finalStats}}
+        <li><a comparedStatsData="{{score}}-{{score2}}" class="comparedStat dropdown-item yellow-dropdown-item"
+                href="#">{{name}}</a></li>
+        {{/each}}
+    </ul>
+</div>
+<div class="card-body d-flex justify-content-center align-items-center p-1">
+    <canvas id="graph-box"></canvas>
+</div>

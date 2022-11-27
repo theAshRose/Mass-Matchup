@@ -6,7 +6,7 @@ class User extends Model {
   checkPassword(givenpass) {
     return bcrypt.compareSync(givenpass, this.password);
   }
-} 
+}
 
 User.init(
   {
@@ -45,26 +45,38 @@ User.init(
     profile_url: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    owned_games_updated_at: {
+      type: DataTypes.DATE
+    },
+    communityvisibilitystate: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
   {
     hooks: {
       async beforeCreate(newUserData) {
-        newUserData.password = await bcrypt.hashSync(newUserData.password, 10);
+        //newUserData.owned_games_updated_at = new Date();
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+
         return newUserData;
       },
       async beforeBulkCreate(Users) {
         for (const user of Users) {
           const { password } = user;
-          user.password = await bcrypt.hashSync(password, 10);
+          user.password = await bcrypt.hash(password, 10);
+
+          //user.owned_games_updated_at = new Date();
         }
       },
     },
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: "user",
+    createdAt: "created_at",
+    updatedAt: "updated_at"
   }
 );
 

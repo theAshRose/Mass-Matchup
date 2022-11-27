@@ -7,7 +7,7 @@ router.post("/request", async (req, res) => {
         res.redirect("/login");
     } else {
         try {
-            console.log(req.body.friend, "it is here ")
+            //console.log(req.body.friend, "it is here ")
             const dbFriendData = await FriendReq.create({
                 link_id_req: req.session.user,
                 friend_id_req: req.body.friend,
@@ -39,10 +39,10 @@ router.post("/accept", async (req, res) => {
     }
 });
 
-router.get("/",async (req, res) => {
-          if (!req.session.loggedIn) {
-            res.redirect("/login");
-         } else {
+router.get("/", async (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+    } else {
         try {
             const dbfriendData1 = await Friend.findAll({
                 where: {
@@ -74,14 +74,14 @@ router.get("/",async (req, res) => {
                 const dbfriendUsername = await User.findByPk(friends[i]);
                 friendNames.push(dbfriendUsername);
             }
-            
+
             res.send(friendNames);
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
         }
     }
-    }
+}
 );
 
 /* Route to DELETE a friend request */
@@ -91,18 +91,18 @@ router.delete('/request/:id', authorizeUser, async (req, res) => {
             id: req.params.id
         }
     })
-    .then((numDestroyedRows) => {
-        /* If the number of destroyed rows is 0, there's a problem with the request. */
-        if (!numDestroyedRows) {
-            res.status(400).json({ message: "No requests deleted!" });
-        } else {
-            res.status(200).json(numDestroyedRows);
-        }
-    })
-    .catch((error) => {
-        console.log(error);
-        res.status.json(error);
-    });
+        .then((numDestroyedRows) => {
+            /* If the number of destroyed rows is 0, there's a problem with the request. */
+            if (!numDestroyedRows) {
+                res.status(400).json({ message: "No requests deleted!" });
+            } else {
+                res.status(200).json(numDestroyedRows);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json(error);
+        });
 });
 
 /* 
@@ -115,18 +115,18 @@ router.delete('/:id', authorizeUser, (req, res) => {
             id: req.params.id
         }
     })
-    .then((numDestroyedRows) => {
-        /* If the number of destroyed rows is 0, there's a problem with the request. */
-        if (!numDestroyedRows) {
-            res.status(400).json({ message: "No friends deleted!" });
-        } else {
-            res.status(200).json(numDestroyedRows);
-        }
-    })
-    .catch((error) => {
-        console.log(error);
-        res.status(500).json(error);
-    });
+        .then((numDestroyedRows) => {
+            /* If the number of destroyed rows is 0, there's a problem with the request. */
+            if (!numDestroyedRows) {
+                res.status(400).json({ message: "No friends deleted!" });
+            } else {
+                res.status(200).json(numDestroyedRows);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json(error);
+        });
 });
 
 module.exports = router;
